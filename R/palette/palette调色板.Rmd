@@ -1,0 +1,284 @@
+---
+title: "创建属于自己的调色板"
+author: "Yong-Xin Liu"
+date: "2018/9/21"
+output: html_document
+---
+
+参考资料：https://taoyan.netlify.com/ 创建属于自己的调色板
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 简介
+
+我们知道发表文章的时候不同杂志的配色方案是不同的，如果参加工作的话，不同公司的配色方案也是不一样的，每个人的色觉也是不一样的，所以如果可以创建属于自己的配色方案的话以后可视化就可以随心所欲了。
+
+方案
+
+接下来我将基于下面的几种颜色创建属于我自己的调色板
+
+
+
+主要有以下几个方面：
+```{r}
+
+```
+
+将颜色与其对应的十六进制矢量联系起来
+
+创建访问十六进制矢量的函数
+
+调色板命名
+
+访问调用调色板
+
+创建兼容ggplot2的尺度函数
+
+首先我们创建一个颜色变量
+
+```{r}
+library(ggplot2)
+
+theme_set(theme_minimal())
+
+my_colors <- c(
+
+`purple` = "#7b0099",
+
+`yellow` = "#ff9900",
+
+`black`  = "#221f1f",
+
+`white`  = "#f5f5f1",
+
+`red`    = "#e50914"
+
+)
+```
+
+后续如果需要对颜色进行修改或添加都可以在这个颜色变量中进行。
+下面创建一个可以从该变量中提取颜色对应的十六进制的函数
+
+```{r}
+#' Function to extract my_colors as hex codes
+
+#'
+
+#' @param ... Character names of my_colors
+
+#'
+
+my_cols <- function(...){
+
+cols <- c(...)
+
+if (is.null(cols))
+
+return(my_colors)
+
+my_colors[cols]
+
+}    
+```
+
+
+此时我们可以十分方便获取颜色的十六进制，下面演示一下：  
+
+```{r}
+my_cols()
+
+my_cols("purple")
+
+my_cols("purple","yellow")
+
+```
+
+此时我们可以在ggplot2中调用这些颜色
+
+```{r}
+#使用gapminder包中的数据集gapminder来演示
+
+library(gapminder)
+
+head(gapminder)
+
+ggplot(gapminder, aes(gdpPercap, lifeExp))+
+  geom_point(color=my_cols("purple"), size=2, alpha=0.8)+
+  scale_x_log10()
+```
+
+调色板就是一个颜色列表方便我们后面使用，将各种颜色组合搭配
+
+在这个颜色列表中实际上我们创建了好几种颜色组合，下面创建一个函数来访问并调用它们
+
+
+```{r}
+my_palettes <- list(
+
+`main`  = my_cols("purple","yellow","red"),
+
+`cool`  = my_cols("purple","yellow"),
+
+`hot`   = my_cols("yellow","black","red"),
+
+`mixed` = my_cols("purple","yellow","white","red"),
+
+`bw`    = my_cols("black","white")
+
+)
+
+#' Return function to interpolate a my_palettes
+
+#'
+
+#' @param palette Character name of palette in my_palettes
+
+#' @param reverse Boolean indicating whether the palette should be reversed
+
+#' @param ... Additional arguments to pass to colorRampPalette()
+
+#'
+
+my_pal <- function(palette="main", reverse=FALSE, ...){
+
+pal <- my_palettes[[palette]]
+
+if (reverse) pal <- rev(pal)
+
+colorRampPalette(pal, ...)
+
+}
+
+my_pal("cool")
+
+my_pal("cool")(10)
+
+
+```
+
+该函数通过不同颜色组合名称从列表中获取一个颜色组合（默认条件下是main），同时可以设置是否颠倒颜色顺序，之后传递给函数colorRampPaette()创建调色板。因此其返回的是一个函数。   
+
+通过这个函数可以基于调色板返回不同数目的颜色，进而可以在原始颜色之间创建多级颜色梯度   
+
+```{r}
+pie(rep(1,10), col = my_pal("cool")(10))
+```
+
+上图展示的10种颜色就是my_pal("cool")(10)返回的十六进制对应的颜色，这就为ggplot2中的尺度颜色函数创造了可能
+
+Scales for ggplot2
+
+ggplot2中颜色映射有color和fill即颜色和填充。
+
+```{r}
+#' Color scale constructor for my_colors
+
+#'
+
+#' @param palette Character name of palette in my_palettes
+
+#' @param discrete Boolean indicating whether color aesthetic is discrete or not
+
+#' @param reverse Boolean indicating whether the palette should be reversed
+
+#' @param ... Additional arguments passed to discrete_scale() or scale_color_gradientn(), used #' #' respectively when discrete is TRUE or FALSE
+
+#'
+
+scale_color_my <- function(palette="main", discrete=TRUE, reverse=FALSE, ...){
+
+pal <- my_pal(palette = palette, reverse = reverse)
+
+if (discrete){
+
+discrete_scale("colour", paste0("my_", palette), palette = pal, ...)
+
+}else{
+
+scale_color_gradientn(colours = pal(256), ...)
+
+}
+
+}
+
+#' Fill scale constructor for my_colors
+
+#'
+
+#' @param palette Character name of palette in my_palettes
+
+#' @param discrete Boolean indicating whether color aesthetic is discrete or not
+
+#' @param reverse Boolean indicating whether the palette should be reversed
+
+#' @param ... Additional arguments passed to discrete_scale() or scale_color_gradientn(), used #' #' respectively when discrete is TRUE or FALSE
+
+#'
+
+scale_fill_my <- function(palette="main", discrete=TRUE, reverse=FALSE, ...){
+
+pal <- my_pal(palette = palette, reverse = reverse)
+
+if (discrete){
+
+discrete_scale("fill",paste0("my_", palette), palette = pal, ...)
+
+}else{
+
+scale_fill_gradientn(colours = pal(256), ...)
+
+}
+
+}
+```
+
+上面每个函数都制定一个调色板（默认是main），调色板是基于离散变量或连续变量，以及是否颠倒颜色顺序，同时还传递给了相关的ggplot2函数。下面可以试试它们在绘图过程中的表现
+
+```{r}
+ggplot(gapminder,aes(gdpPercap, lifeExp, color=continent))+
+
+geom_point(size=2, alpha=0.8)+
+
+scale_x_log10()+
+
+scale_color_my()
+```
+
+我们可以更换调色板试试   
+
+```{r}
+ggplot(gapminder,aes(gdpPercap, lifeExp, color=continent))+
+
+geom_point(size=2, alpha=0.8)+
+
+scale_x_log10()+
+
+scale_color_my(palette = "hot")
+```
+
+如果是连续变量的话   
+
+```{r}
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Sepal.Length)) +
+
+geom_point(size = 4, alpha = .8) +
+
+scale_color_my(discrete = FALSE, palette = "bw", reverse = TRUE)
+```
+
+上面是颜色，下面试试填充
+
+```{r}
+ggplot(mpg, aes(manufacturer, fill = manufacturer)) +
+
+geom_bar() +
+
+theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+
+scale_fill_my(palette = "mixed", guide = "none")
+```
+
+
