@@ -1,0 +1,151 @@
+---
+title: "Rnotebook"
+author: "Yong-Xin Liu"
+date: "2018/12/8"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 聚类hclust
+
+```{r hclust}
+# 生成测试数据
+# 产生0-1之间均匀分布Uniform Distribution的数值
+x = runif(10)
+y = runif(10)
+# 得到2维的数组：按列合并
+S = cbind(x,y)
+# 赋予名称，便于识别分类：生成Name1-Name10的系列名赋予数组行名
+rownames(S) = paste("Name",1:10,"")
+
+# 数值计算距离
+out.dist=dist(S,method="euclidean")
+# 注释：在聚类中求两点的距离有：
+# 1，绝对距离：manhattan
+# 2，欧氏距离：euclidean 默认
+# 3，闵科夫斯基距离：minkowski
+# 4，切比雪夫距离：chebyshev
+# 5，马氏距离：mahalanobis
+# 6，蓝氏距离：canberra
+
+# 根据距离聚类
+out.hclust=hclust(out.dist,method="complete")
+# 注释：聚类中集合之间的距离：
+# 1，类平均法：average
+# 2，重心法：centroid
+# 3，中间距离法:median
+# 4，最长距离法：complete 默认
+# 5，最短距离法：single
+# 6，离差平方和法：ward
+# 7，密度估计法：density
+
+# 聚类结果绘图
+# plclust(out.hclust)
+plot(out.hclust)
+
+# 添加聚类分类矩形，如分为3类
+rect.hclust(out.hclust, k=3) 
+
+# 得到分为3类的数值
+out.id = cutree(out.hclust, k=3)
+out.id
+# 以矩阵的方式分辨名称对应的类
+table(out.id,paste("Name",1:10,""))           
+```
+
+
+
+## 正态分布norm
+
+norm是正态分布，前面加r表示生成随机正态分布的序列，其中rnorm(10)表示产生10个数；给定正太分布的均值和方差，
+
+- rnorm生成随机正态分布序列
+- pnorm可以输出正态分布的分布函数
+- dnorm可以输出正态分布的概率密度函数
+- qnorm给定分位数数正太分布
+
+使用格式如下：
+
+dnorm(x, mean = 0, sd = 1, log = FALSE)  
+pnorm(q, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)  
+qnorm(p, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)  
+rnorm(n, mean = 0, sd = 1)
+ 
+x, q  
+分位数向量vector of quantiles.
+ 
+p      
+概率向量vector of probabilities.
+
+n      
+表示产生几个数，length(n) > 1
+
+mean  
+向量均值 vector of means
+
+sd  
+向量的标准变异 	
+vector of standard deviations
+
+log, log.p  
+逻辑值 logical; 为真时概率取对数 if TRUE, probabilities p are given as log(p).
+ 
+lower.tail 
+逻辑值logical; 为真取小部分概率 if TRUE (default), probabilities are P[X ≤ x] otherwise, P[X > x].
+ 
+如果没有设置mean和sd的话，他们的默认值分别为0和1
+
+ 
+还有其他随机产生方式runif，rgamma：其总体随机数符合分别符合均匀分布uniform，gamma分布，而不是正态分布
+
+
+```{r norm}
+require(graphics)
+
+# 概率密度计算公式和原理
+dnorm(0) == 1/sqrt(2*pi)
+dnorm(1) == exp(-1/2)/sqrt(2*pi)
+dnorm(1) == 1/sqrt(2*pi*exp(1))
+
+## Using "log = TRUE" for an extended range :
+par(mfrow = c(2,1))
+# 绘制概率密度曲线
+plot(function(x) dnorm(x, log = TRUE), -60, 50,
+     main = "log { Normal density }")
+curve(log(dnorm(x)), add = TRUE, col = "red", lwd = 2)
+mtext("dnorm(x, log=TRUE)", adj = 0)
+mtext("log(dnorm(x))", col = "red", adj = 1)
+
+# 绘制分布函数
+plot(function(x) pnorm(x, log.p = TRUE), -50, 10,
+     main = "log { Normal Cumulative }")
+curve(log(pnorm(x)), add = TRUE, col = "red", lwd = 2)
+mtext("pnorm(x, log=TRUE)", adj = 0)
+mtext("log(pnorm(x))", col = "red", adj = 1)
+
+## if you want the so-called 'error function'
+erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
+## (see Abramowitz and Stegun 29.2.29)
+## and the so-called 'complementary error function'
+erfc <- function(x) 2 * pnorm(x * sqrt(2), lower = FALSE)
+## and the inverses
+erfinv <- function (x) qnorm((1 + x)/2)/sqrt(2)
+erfcinv <- function (x) qnorm(x/2, lower = FALSE)/sqrt(2)
+```
+
+## 匹配match
+
+```{r}
+# 匹配上且返回位置
+match(c(1, "TRUE"), c(T, 0, "1"))
+# 返回TRUE  TRUE FALSE
+c(1, "TRUE", F) %in% c(T, 0, "1")
+# 默认不允许重复使用table中元素，返回位置1 2 3
+pmatch(rep(1, 3), rep(1, 5))
+# 允许重复，返回位置1 1 1 
+pmatch(rep(1, 3), rep(1, 5), duplicates.ok = TRUE)
+```
+
