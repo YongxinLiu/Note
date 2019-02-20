@@ -57,8 +57,17 @@ while (<INPUT>) {
 foreach  (keys %seq) {
 	print OUTPUT "$_$seq{$_}\n";
 }
-close INPUT;
 close OUTPUT;
+
+open OUTPUT,">$opts{o}.tsv";
+foreach  (keys %seq) {
+	$id=$_;
+	chomp($id);
+	$id=~s/>//;
+	print OUTPUT "$id\t$seq{$_}\n";
+}
+close OUTPUT;
+
 
 ###############################################################################
 #Record the program running time!
