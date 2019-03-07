@@ -8,23 +8,105 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+`https://github.com/YongxinLiu/Note/tree/master/R/vegan/capscale.Rmd`
 
-## R Markdown
+```{r}
+rm(list=ls())
+##导入需要的R包
+library(vegan)
+library(ggplot2)
+library(ape)
+library(dplyr)
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+# 构建函数. 提取CCA中主要结果
+# Function1. get CCA main result
+variability_table = function(cca){
+  chi = c(cca$tot.chi, cca$CCA$tot.chi, cca$CA$tot.chi)
+  variability_table = cbind(chi, chi/chi[1])
+  colnames(variability_table) = c("inertia", "proportion")
+  rownames(variability_table) = c("total", "constrained", "unconstrained")
+  return(variability_table)
+}
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+#设置工作目录
+setwd("/mnt/bai/zhiwen/16s/GRF_merge/result/beta")
+#读入数据
+##读入mapping file
+grf.map <- read.table("/mnt/bai/zhiwen/16s/GRF_merge/doc/design.txt",header = T,sep = "\t", row.names = 1)
+##去掉Unifrac矩阵中没有的样品
+grf.map.temp <- grf.map[rownames(grf.map) != "NJ6NM73RsDB1R02",] 
+##选取重复
+grf.map.temp <- grf.map.temp[grf.map.temp$replicate=="R01" |grf.map.temp$replicate=="R02" |grf.map.temp$replicate=="R03",]
+head(grf.map.temp)
+##读入权重的和非全重的Unifrac距离矩阵
+wuf.grf.df <- read.table("/mnt/bai/zhiwen/16s/GRF_merge/result/beta/weighted_unifrac.txt", header = T,sep = "\t", row.names = 1)
+uuf.grf.df <- read.table("/mnt/bai/zhiwen/16s/GRF_merge/result/beta/unweighted_unifrac.txt", header = T,sep = "\t", row.names = 1)
+counts_tab <- read.table("/mnt/bai/zhiwen/16s/GRF_merge/result/otutab_norm.txt", header = T, row.names = 1,sep="\t",comment.char = "")
 
-```{r cars}
-summary(cars)
+#根据grf.map.temp筛选距离矩阵
+# wuf.grf.df <- wuf.grf.df[match(row.names(grf.map.temp),row.names(wuf.grf.df)),match(row.names(grf.map.temp),colnames(wuf.grf.df))]
+idx = match(row.names(grf.map.temp),row.names(wuf.grf.df))
+wuf.grf.df <- wuf.grf.df[idx,idx] 
+#进行cap分析，所以将其余因子都放在Condition里表示将他们作为协变量，在计算的总方差中减去协变量的方差
+wuf.cap.comp <- capscale(as.dist(wuf.grf.df) ~ condition+ Condition(compartment + genotype + batch), 
+                         data = grf.map.temp, add = T)
+
+var_tbl.gen = variability_table(wuf.cap.comp)
+eig = wuf.cap.comp$CCA$eig
+variance = var_tbl.gen["constrained","proportion"]
+perm_anova.gen <- anova.cca(wuf.cap.comp)
+p.val = perm_anova.gen[1, 4]
+#将mapping file和计算得到的scores(wuf.cap.comp)$sites合并成为数据框
+wuf.cap.comp.axes <- data.frame(cbind(grf.map.temp,scores(wuf.cap.comp)$sites)) ###在scores(wuf.cap.comp)结果里包括$sites
+wuf.cap.comp.axes$compartment <- factor(wuf.cap.comp.axes$compartment, levels = c("S", "Rs", "Rt"))
+percent_explained <- wuf.cap.comp$CCA$eig / sum(wuf.cap.comp$CCA$eig) * 100
+comp.col <- c("#E41A1C", "#984EA3", "#4DAF4A")
+ggplot(wuf.cap.comp.axes, aes(x = CAP1, y = CAP2, color = compartment, shape = condition)) +
+  # geom_vline(x = 0, alpha = 0.9) +
+  # geom_hline(y = 0, alpha = 0.9) +
+  geom_point(size = 9, alpha = 0.9) +
+  theme_classic() +
+  labs(x = "Constrained PCo1 (27.1%)", y = "Constrained PCo2 (13.9%)") +
+  scale_color_manual(values = comp.col) +
+  ggtitle(paste(format(100 * variance, digits=3), " % of variance; p=",format(p.val, digits=2),sep=""))+
+  theme(text = element_text(size = 20))
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
+### 参数变化对结果的影响
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+有无协变量的差异，看批次效应的影响
+
+```{r}
+ wuf.cap.comp <- capscale(as.dist(wuf.grf.df) ~ batch + Condition(condition + genotype + compartment), data = grf.map.temp, add = T)
+ var_tbl.gen = variability_table(wuf.cap.comp)
+ var_tbl.gen
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+wuf.cap.comp <- capscale(as.dist(wuf.grf.df) ~ batch , data = grf.map.temp, add = T)
+var_tbl.gen = variability_table(wuf.cap.comp)
+var_tbl.gen
+```
+
+不添加Condition后，限制性的方差变大了，但是也只是从0.01978507变化到0.03161842。
+
+
+比较有协变量，对compartment解析率的影响
+
+```{r}
+wuf.cap.comp <- capscale(as.dist(wuf.grf.df) ~ compartment + Condition(condition+batch+genotype), 
+                         data = grf.map.temp, add = T)
+var_tbl.gen = variability_table(wuf.cap.comp)
+var_tbl.gen
+```
+```{r}
+wuf.cap.comp <- capscale(as.dist(wuf.grf.df) ~ compartment, 
+                         data = grf.map.temp, add = T)
+var_tbl.gen = variability_table(wuf.cap.comp)
+var_tbl.gen
+```
+
+Compartment的解析训练法从0.047上升为0.057
+
+

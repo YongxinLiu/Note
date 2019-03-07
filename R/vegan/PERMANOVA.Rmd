@@ -1,0 +1,70 @@
+---
+title: "PERMANOVA"
+author: "Yong-Xin Liu"
+date: "2019/3/5"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+rm(list=ls())
+##导入需要的R包
+library(vegan)
+library(ggplot2)
+library(ape)
+library(dplyr)
+
+# 构建函数. 提取CCA中主要结果
+# Function1. get CCA main result
+variability_table = function(cca){
+  chi = c(cca$tot.chi, cca$CCA$tot.chi, cca$CA$tot.chi)
+  variability_table = cbind(chi, chi/chi[1])
+  colnames(variability_table) = c("inertia", "proportion")
+  rownames(variability_table) = c("total", "constrained", "unconstrained")
+  return(variability_table)
+}
+
+#设置工作目录
+setwd("/mnt/bai/zhiwen/16s/GRF_merge/result/beta")
+#读入数据
+##读入mapping file
+grf.map <- read.table("/mnt/bai/zhiwen/16s/GRF_merge/doc/design.txt",header = T,sep = "\t", row.names = 1)
+##去掉Unifrac矩阵中没有的样品
+grf.map.temp <- grf.map[rownames(grf.map) != "NJ6NM73RsDB1R02",] 
+##NJ6NM73RsDB1R02样品在weighted unifrac距离矩阵中没有，经过查看原始数据量，发现它的原始测序量不够。
+##选取重复
+grf.map.temp <- grf.map.temp[grf.map.temp$replicate=="R01" |grf.map.temp$replicate=="R02" |grf.map.temp$replicate=="R03",]
+##读入权重的和非全重的Unifrac距离矩阵
+wuf.grf.df <- read.table("/mnt/bai/zhiwen/16s/GRF_merge/result/beta/weighted_unifrac.txt", header = T,sep = "\t", row.names = 1)
+uuf.grf.df <- read.table("/mnt/bai/zhiwen/16s/GRF_merge/result/beta/unweighted_unifrac.txt", header = T,sep = "\t", row.names = 1)
+counts_tab <- read.table("/mnt/bai/zhiwen/16s/GRF_merge/result/otutab_norm.txt", header = T, row.names = 1,sep="\t",comment.char = "")
+
+#根据grf.map.temp筛选距离矩阵
+wuf.grf.df <- wuf.grf.df[match(row.names(grf.map.temp),row.names(wuf.grf.df)),match(row.names(grf.map.temp),colnames(wuf.grf.df))] 
+# 计各因素占方差的解析解析率和是否显著
+tem_adonis <- adonis (as.dist(wuf.grf.df) ~ compartment*condition*genotype*batch, data = grf.map.temp, by=NULL,parallel=30)
+tem_adonis$aov.tab
+```
+
+计算compartment条件是否显著影响群落结果
+
+```{r}
+tem_adonis <- adonis (as.dist(wuf.grf.df) ~ compartment, data = grf.map.temp, by=NULL,parallel=3)
+tem_adonis$aov.tab
+```
+
+计算genotype条件是否显著影响群落结果
+
+```{r}
+tem_adonis <- adonis (as.dist(wuf.grf.df) ~ genotype, data = grf.map.temp, by=NULL,parallel=3)
+tem_adonis$aov.tab
+```

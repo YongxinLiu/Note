@@ -1,0 +1,159 @@
+title	Metagenomic	
+title_font_size	12	
+total_plotted_degrees	350	
+start_rotation	270	
+branch_bracket_depth	0	
+branch_bracket_width	0	
+branch_color	k	
+branch_thickness	0.5	
+clade_separation	1	
+clade_marker_size	0.6	
+clade_marker_edge_width	0.35	
+class_legend_font_size	9	
+annotation_background_separation	-0.4	
+annotation_background_offset	-0.33	
+annotation_background_width	0.03	
+annotation_background_alpha	0.01	
+annotation_font_size	8	
+annotation_legend_font_size	9	
+ring_internal_separator_thickness	1	0.1
+ring_internal_separator_thickness	2	0.1
+ring_internal_separator_thickness	3	0.1
+ring_internal_separator_thickness	4	0.1
+ring_internal_separator_thickness	5	0.1
+ring_internal_separator_thickness	6	0.1
+ring_internal_separator_thickness	7	0.1
+ring_internal_separator_thickness	8	0.1
+ring_internal_separator_thickness	9	0.1
+ring_internal_separator_thickness	10	0.1
+ring_internal_separator_thickness	11	0.1
+ring_internal_separator_thickness	12	0.1
+ring_internal_separator_thickness	13	0.3
+ring_internal_separator_thickness	14	0.3
+ring_internal_separator_thickness	15	0.3
+ring_internal_separator_thickness	16	0.3
+ring_separator_color	1	y
+ring_separator_color	2	y
+ring_separator_color	3	b
+ring_separator_color	4	b
+ring_separator_color	5	b
+ring_separator_color	6	b
+ring_separator_color	7	b
+ring_separator_color	8	b
+ring_separator_color	9	b
+ring_separator_color	10	b
+ring_separator_color	11	b
+ring_separator_color	12	b
+ring_separator_color	13	r
+ring_separator_color	14	b
+ring_separator_color	15	r
+ring_separator_color	16	r
+ring_width	1	0.8
+ring_width	2	0.8
+ring_width	3	0.8
+ring_width	4	0.8
+ring_width	5	0.8
+ring_width	6	0.8
+ring_width	7	0.8
+ring_width	8	0.8
+ring_width	9	0.8
+ring_width	10	0.8
+ring_width	11	0.8
+ring_width	12	0.8
+ring_width	13	0.8
+ring_width	14	0.8
+ring_width	15	0.8
+ring_width	16	0.8
+ring_height	1	0.1
+ring_height	2	0.1
+ring_height	3	0.1
+ring_height	4	0.1
+ring_height	5	0.1
+ring_height	6	0.1
+ring_height	7	0.1
+ring_height	8	0.1
+ring_height	9	0.1
+ring_height	10	0.1
+ring_height	11	0.1
+ring_height	12	0.1
+ring_height	13	0.1
+ring_height	14	0.3
+ring_height	15	0.3
+ring_color	16	#D95F02
+Acidobacteria	clade_marker_color	#B0171F
+Proteobacteria	clade_marker_color	#D15FEE
+Others	clade_marker_color	#006400
+Acidobacteria	clade_marker_color	#B0171F
+Verrucomicrobia	clade_marker_color	#00CD00
+Cyanobacteria	clade_marker_color	#87CEFA
+Actinobacteria	clade_marker_color	#FEC80A
+Bacteroidetes	clade_marker_color	#EE6A50
+Chloroflexi	clade_marker_color	#7B68EE
+Gemmatimonadetes	clade_marker_color	#9ACD32
+Firmicutes	clade_marker_color	#8DEEEE
+Proteobacteria	clade_marker_size	45
+Acidobacteria	clade_marker_size	45
+Proteobacteria	clade_marker_size	45
+Others	clade_marker_size	45
+Acidobacteria	clade_marker_size	45
+Verrucomicrobia	clade_marker_size	45
+Cyanobacteria	clade_marker_size	45
+Actinobacteria	clade_marker_size	45
+Bacteroidetes	clade_marker_size	45
+Chloroflexi	clade_marker_size	45
+Gemmatimonadetes	clade_marker_size	45
+Firmicutes	clade_marker_size	45
+Proteobacteria	annotation	Proteobacteria
+Acidobacteria	annotation	Acidobacteria
+Proteobacteria	annotation	Proteobacteria
+Others	annotation	Others
+Acidobacteria	annotation	Acidobacteria
+Verrucomicrobia	annotation	Verrucomicrobia
+Cyanobacteria	annotation	Cyanobacteria
+Actinobacteria	annotation	Actinobacteria
+Bacteroidetes	annotation	Bacteroidetes
+Chloroflexi	annotation	Chloroflexi
+Gemmatimonadetes	annotation	Gemmatimonadetes
+Firmicutes	annotation	Firmicutes
+Proteobacteria	clade_marker_shape	*
+Acidobacteria	clade_marker_shape	o
+Proteobacteria	clade_marker_shape	*
+Others	clade_marker_shape	*
+Acidobacteria	clade_marker_shape	*
+Verrucomicrobia	clade_marker_shape	*
+Cyanobacteria	clade_marker_shape	*
+Actinobacteria	clade_marker_shape	*
+Bacteroidetes	clade_marker_shape	*
+Chloroflexi	clade_marker_shape	D
+Gemmatimonadetes	clade_marker_shape	*
+Firmicutes	clade_marker_shape	*
+ring_label	1	RSH
+ring_label	2	RSH
+ring_label	3	RSH
+ring_label	4	RSH
+ring_label	5	RSH
+ring_label	6	RSH
+ring_label	7	RSL
+ring_label	8	RSL
+ring_label	9	RSL
+ring_label	10	RSL
+ring_label	11	RSL
+ring_label	12	RSL
+ring_label	13	RSL
+ring_label	14	RSH
+ring_label	15	Desep
+ring_label_font_size	1	2
+ring_label_font_size	2	2
+ring_label_font_size	3	2
+ring_label_font_size	4	2
+ring_label_font_size	5	2
+ring_label_font_size	6	2
+ring_label_font_size	7	2
+ring_label_font_size	8	2
+ring_label_font_size	9	2
+ring_label_font_size	10	2
+ring_label_font_size	11	2
+ring_label_font_size	12	2
+ring_label_font_size	13	2
+ring_label_font_size	14	3
+ring_label_font_size	15	5

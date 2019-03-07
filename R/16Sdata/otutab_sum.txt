@@ -1,0 +1,9 @@
+OTU number:	2603
+Sample number:	18
+Total read counts:	654142
+Min.:	32938  
+1st Qu.:	34226  
+Median:	37100  
+Mean:	36341  
+3rd Qu.:	38419  
+Max.:	39475  

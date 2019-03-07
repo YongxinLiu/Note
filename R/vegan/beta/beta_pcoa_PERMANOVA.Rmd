@@ -1,0 +1,148 @@
+---
+title: "Beta多样性-主坐标轴分析PCoA"
+author: "Yong-Xin Liu"
+date: "2018年9月15日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1.1 设置输入输出文件和参数
+
+修改下面`default=`后面的文件和参数。
+
+输入文件有距离矩阵(bray_curtis/unifrac/unifrac_binary.txt)+分组信息(design.txt)
+
+输入文件"-i", "--input"，Input beta distance; 距离矩阵,默认beta目录下与t同名，可指定；
+
+分类级别"-t", "--type"，Distance type; 距离类型, 可选bray_curtis, bray_curtis_binary, euclidean, jaccard, jaccard_binary, manhatten, unifrac, unifrac_binary。
+
+实验设计"-d", "--design"，默认为上级目录`../design.txt`，可手动修改文件位置；
+
+分组列名"-n", "--group"，默认将design.txt中的group列作为分组信息，可修改为任意列名；
+
+输入文件前缀"-o", "--output"，默认为空时，输出为当前目录前缀为pcoa_bray_curtis.pdf/txt为图片和对应adonis统计，*_lable.pdf为包含样本标签的图片，方便搜索挑选异常样品。
+
+图片宽"-w", "--width"，默认6英寸，根据图像布局可适当增大或缩小
+
+图片高"-e", "--height"，默认4英寸，根据图像布局可适当增大或缩小
+
+## 1.2 解析命令行
+
+```{r parameter}
+# 设置清华源加速下载
+site="https://mirrors.tuna.tsinghua.edu.cn/CRAN"
+# 判断命令行解析是否安装，安装并加载
+if (!suppressWarnings(suppressMessages(require("optparse", character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)))) {
+  install.packages(p, repos=site)
+  require("optparse",character.only=T) 
+}
+# 解析命令行
+if (TRUE){
+  option_list = list(
+    make_option(c("-t", "--type"), type="character", default="unifrac",
+                help="Distance type; 距离类型, 可选bray_curtis, bray_curtis_binary, euclidean, jaccard, jaccard_binary, manhatten, unifrac, unifrac_binary [default %default]"),   
+    make_option(c("-i", "--input"), type="character", default="",
+                help="Input beta distance; 距离矩阵,默认beta目录下与t同名，可指定 [default %default]"),
+    make_option(c("-d", "--design"), type="character", default="../design.txt",
+                help="design file; 实验设计文件 [default %default]"),
+    make_option(c("-n", "--group"), type="character", default="group",
+                help="name of group type; 分组列名 [default %default]"),
+    make_option(c("-w", "--width"), type="numeric", default=4,
+                help="Width of figure; 图片宽 [default %default]"),
+    make_option(c("-e", "--height"), type="numeric", default=2.5,
+                help="Height of figure; 图片高 [default %default]"),
+    make_option(c("-o", "--output"), type="character", default="",
+                help="output directory or prefix; 输出文件前缀, 有txt和矢量图pdf [default %default]")
+  )
+  opts = parse_args(OptionParser(option_list=option_list))
+  
+  # 调置如果无调设置输出，根据其它参数设置默认输出
+  if (opts$input==""){opts$input=paste("",opts$type, ".txt", sep = "")}
+  if (opts$output==""){opts$output=paste("pcoa_",opts$type, sep = "")}
+  
+  # 显示输入输出确认是否正确
+  print(paste("The distance matrix file is ", opts$input,  sep = ""))
+  print(paste("Type of distance type is ", opts$type,  sep = ""))
+  print(paste("The design file is ", opts$design,  sep = ""))
+  print(paste("The group name is ", opts$group,  sep = ""))
+  print(paste("The output file prefix is ", opts$output, sep = ""))
+}
+```
+
+# 2. 依赖关系检查、安装和加载
+
+```{r library}
+# 2.1 安装CRAN来源常用包
+site="https://mirrors.tuna.tsinghua.edu.cn/CRAN"
+# 依赖包列表：参数解析、数据变换、绘图和开发包安装、安装依赖、ggplot主题
+package_list = c("reshape2","ggplot2","vegan")
+# 判断R包加载是否成功来决定是否安装后再加载
+for(p in package_list){
+  if(!suppressWarnings(suppressMessages(require(p, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)))){
+    install.packages(p, repos=site)
+    suppressWarnings(suppressMessages(library(p, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)))
+  }
+}
+
+# 2.2 安装bioconductor常用包
+package_list = c("digest","ggrepel")
+for(p in package_list){
+  if(!suppressWarnings(suppressMessages(require(p, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)))){
+    source("https://bioconductor.org/biocLite.R")
+    biocLite(p)
+    suppressWarnings(suppressMessages(library(p, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)))
+  }
+}
+
+# 2.3 安装Github常用包
+# 参数解析、数据变换、绘图和开发包安装
+package_list = c("kassambara/ggpubr")
+for(p in package_list){
+  q=unlist(strsplit(p,split = "/"))[2]
+  if(!suppressWarnings(suppressMessages(require(q, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)))){
+    install_github(p)
+    suppressWarnings(suppressMessages(library(q, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)))
+  }
+}
+```
+
+
+
+# 3. 读取输入文件
+
+```{r read}
+# 读取距离矩阵文件
+dis = read.table(opts$input, header=T, row.names= 1, sep="\t", comment.char="") 
+
+# 读取实验设计
+design = read.table(opts$design, header=T, row.names= 1, sep="\t", comment.char="") 
+
+# 数据筛选，筛选两文件中共有
+idx = rownames(design) %in% colnames(dis) # match design with alpha
+design = design[idx,]
+
+dis = dis[rownames(design),rownames(design)] 
+```
+
+
+# 4. 统计与绘图
+
+```{r plot}
+# 计各因素占方差的解析解析率和是否显著 
+# +限制条件
+# Barcodesequence和replicate作为条件下，genotype无法找到显著区别，是不合理的分组条件
+# 限制地点，看基因型
+tem_adonis <- adonis (as.dist(dis) ~ genotype*site, data = design, by=NULL,parallel=3)
+tem_adonis$aov.tab
+```
+
+
+If used this script, please cited:
+  Zhang, J., Zhang, N., Liu, Y.X., Zhang, X., Hu, B., Qin, Y., Xu, H., Wang, H., Guo, X., Qian, J., et al. (2018).
+Root microbiota shift in rice correlates with resident time in the field and developmental stage. Sci China Life Sci 61,
+https://doi.org/10.1007/s11427-018-9284-4
+
+Copyright 2016-2018 Yong-Xin Liu <metagenome@126.com>
