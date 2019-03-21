@@ -1,0 +1,255 @@
+---
+title: "Graphlan_annotation.Rmd"
+author: "Liu Yong-Xin"
+date: "2019年3月6日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# 读取OTU表
+otu = read.table("otu_table.txt", sep="\t",row.names= 1,header=T, check.names=F)
+head(otu)
+# 读入实验设计
+design = read.table("metadata.txt", header=T, row.names= 1, sep="\t") 
+head(design, n=12L)
+# 交叉筛选，保持实验设计和OTU中样本对应
+idx = rownames(design) %in% colnames(otu) 
+sub_design = design[idx,]
+# 过滤OTU表
+OTU = otu[,rownames(design)]
+head(OTU)
+OTU = as.matrix(OTU)
+
+# 原始reads count表标准化
+norm = t(t(OTU)/colSums(OTU,na=T)) #* 100 可 normalization to total 100
+# 转置并转换为数据框
+norm1 = norm %>% t() %>% as.data.frame()
+
+
+
+
+# 数据分组计算平均值
+iris.split <- split(norm1,as.factor(sub_design$SampleType_RS))
+
+iris.apply <- lapply(iris.split,function(x)colSums(x))
+# 组合结果
+norm2 <- do.call(rbind,iris.apply)%>% 
+                t() 
+
+OTU_all= cbind(as.data.frame(norm),norm2)
+head(OTU_all)
+
+tax = read.delim("E:/rep_seqs_tax.txt", sep="\t",row.names= 1,header=F, check.names=F)
+tax = tax[1:7]
+head(tax)
+colnames(tax) =c("kingdom","phylum","class","order","family","genus","species")
+
+index = merge(OTU_all,tax, by="row.names",all=F)
+head(index)
+row.names(index) = index$Row.names
+index$Row.names = NULL
+##设定颜色梯度
+colorg = colorRampPalette(c( "#D95F02", "white","#1B9E77"))(12)
+library("scales")
+show_col(colorg)
+
+c = data.frame(id = c(1:12),col = colorg)
+a = index[1:12]
+head(a)
+a
+##得到排序
+for(i in 1:nrow(a)){
+    a[i,1:12] = order(a[i,1:12])
+  }
+##填充颜色
+for(i in 1:nrow(a)){
+  aa = a[i,]
+  aa = as.data.frame(aa)
+  colnames(aa) = aa[1,]
+  ccc =t(c[colnames(aa),]) 
+  a[i,] = ccc[2,]
+  }
+head(a)
+out = cbind(index,a)
+head(out)
+##组比对映射形状
+HH = c(rep("A",nrow(out)))
+LL = c(rep("A",nrow(out)))
+for(i in 1:nrow(out)){
+  if(out[i,13] > out[i,14]){
+    HH[i] <-"v"
+    LL[i] <-" "
+  }else if(out[i,13] == out[i,14]){
+      HH[i] <-" "
+      LL[i] <-" "
+    }else if(out[i,13] < out[i,14]){
+      HH[i] <-" "
+      LL[i] <-"^"
+    }
+ }
+
+out2 = cbind(out,HH,LL)
+head(out2)
+###下一步添加差异分析结果
+library(DESeq2)
+library(limma)
+library(pasilla)
+library(DESeq)
+head(OTU )
+count = OTU
+count=as.matrix(count)
+#######首先比较发病和健康中的差异#############
+dds <- DESeqDataSetFromMatrix(countData = count,
+                              colData = sub_design,
+                              design = ~ SampleType_RS)
+
+dds2 <- DESeq(dds)  ##第二步,标准化
+resultsNames(dds2)
+# 将结果用results()函数来获取，赋值给res变量
+res <-  results(dds2, contrast=c("SampleType_RS","BL", "BH"),alpha=0.05)
+# summary一下，看一下结果的概要信息
+summary(res)
+res$level = as.factor(ifelse(res$padj < 0.05 & res$log2FoldChange > 1, "#D95F02",ifelse(res$padj < 0.05 & res$log2FoldChange < -1, "#1B9E77"," ")))
+head(res)
+res1 = as.data.frame(res[ncol(res)])
+OTU_TAX_all =  merge(out2,res1, by="row.names",all=F)
+head(OTU_TAX_all)
+dim(OTU_TAX_all)
+row.names(OTU_TAX_all) = OTU_TAX_all$Row.names
+OTU_TAX_all$Row.names = NULL
+```
+
+##### 构建三列注释文件，主要是节点注释
+
+```
+
+##构建进化树节点属性注释文件
+head(OTU_TAX_all)
+pcol = c(rep("A",nrow(OTU_TAX_all)))
+psha = c(rep("A",nrow(OTU_TAX_all)))
+for(i in 1:nrow(OTU_TAX_all)){
+  if(OTU_TAX_all[i,16] == "p__Acidobacteria"){
+    pcol[i] <-"#B0171F"
+    psha[i] <-"*"
+  }else if(OTU_TAX_all[i,16] == "p__Proteobacteria"){
+    pcol[i] <-"#D15FEE"
+    psha[i] <-"o"
+  }else if(OTU_TAX_all[i,16] == "p__Acidobacteria"){
+    pcol[i] <-"#B0171F"
+    psha[i] <-"*"
+  }else if(OTU_TAX_all[i,16] == "p__Verrucomicrobia"){
+    pcol[i] <-"#00CD00"
+    psha[i] <-"*"
+  }else if(OTU_TAX_all[i,16] == "p__Cyanobacteria"){
+    pcol[i] <-"#87CEFA"
+    psha[i] <-"*"
+  }else if(OTU_TAX_all[i,16] == "p__Actinobacteria"){
+    pcol[i] <-"#FEC80A"
+    psha[i] <-"*"
+  }else if(OTU_TAX_all[i,16] == "p__Bacteroidetes"){
+    pcol[i] <-"#EE6A50"
+    psha[i] <-"*"
+  }else if(OTU_TAX_all[i,16] == "p__Chloroflexi"){
+    pcol[i] <-"#7B68EE"
+    psha[i] <-"D"
+  }else if(OTU_TAX_all[i,16] == "p__Gemmatimonadetes"){
+    pcol[i] <-"#9ACD32"
+    psha[i] <-"*"
+  }else if(OTU_TAX_all[i,16] == "p__Firmicutes"){
+    pcol[i] <-"#8DEEEE"
+    psha[i] <-"*"
+  }else {
+    pcol[i] <-"#006400"
+    psha[i] <-"*"
+  }
+}
+ano4 = cbind(row.names(OTU_TAX_all),pcol,psha)
+head(ano4)
+ano4 = as.data.frame(ano4)
+
+#节点颜色映射
+ste1 = data.frame(a = ano4$V1,b = c(rep("clade_marker_color",nrow(OTU_TAX_all))),c = ano4$pcol)
+head(ste1)
+#节点形状映射
+ste2 = data.frame(a = ano4$V1,b = c(rep("clade_marker_shape",nrow(OTU_TAX_all))),c = ano4$psha)
+head(ste2)
+##节点阴影映射
+ste3 = data.frame(a = ano4$V1,b = c(rep("annotation_background_color",nrow(OTU_TAX_all))),c = ano4$pcol)
+head(ste3)
+#注释透明度
+ste4 = data.frame(a = ano4$V1,b = c(rep("annotation_background_alpha",nrow(OTU_TAX_all))),c = c(rep(0.1,nrow(OTU_TAX_all))))
+head(ste4)
+ste4$c = as.factor(ste4$c)
+##节点大小
+ste5 = data.frame(a = ano4$V1,b = c(rep("clade_marker_size",nrow(OTU_TAX_all))),c = c(rep(10,nrow(OTU_TAX_all))))
+head(ste5)
+ste5$c = as.factor(ste5$c)
+
+
+ste_all = rbind(ste1,ste2,ste3,ste4,ste5)
+head(ste_all)
+setwd("E:/")
+# 保存统计结果，有waring正常
+write.table(ste_all, "annon2.txt", append = T, quote = F, sep="\t", eol = "\n", na = "NA", dec = ".", row.names = F, col.names = F)
+```
+
+#### 构建四列注释文件，主要是环注释
+
+```
+###构建样品丰度衍射映射文件
+anno1 = OTU_TAX_all[22:33]
+head(anno1)
+colnames(anno1 ) = c(1:3,7:12,4:6)
+anno1$id = row.names(anno1)
+library("reshape2")
+anno11 = melt(anno1,id.vars = "id",variable.name = "ring",value.name = "color")
+anno11$ringcolor = c(rep("ring_color",nrow(anno11)))
+anno11 = select(anno11,id,ringcolor,everything())
+head(anno11)
+
+
+##构建平均丰度标志映射文件
+anno2 = data.frame(OTU_TAX_all$LL,OTU_TAX_all$HH,row.names = row.names(OTU_TAX_all))
+colnames(anno2 ) = c(13,14)
+anno2$id = row.names(anno2)
+library("reshape2")
+anno22 = melt(anno2,id.vars = "id",variable.name = "ring",value.name = "shape")
+anno22$ringshape = c(rep("ring_shape",nrow(anno22)))
+anno22 = select(anno22,id,ringshape,everything())
+anno222<- anno22[anno22$shape%in%c("^","v"),]
+head(anno222)
+
+
+##构建差异分析颜色标记文件
+anno3 = data.frame(id = row.names(OTU_TAX_all),
+                   ringcolor = c(rep("ring_color",nrow(OTU_TAX_all))),
+                   ring =c(rep(15,nrow(OTU_TAX_all))),color = OTU_TAX_all$level )
+anno3$ring = as.factor(anno3$ring)
+head(anno3)
+anno33<- anno3[anno3$color%in%c("#D95F02","#1B9E77"),]
+head(anno11);dim(anno11)
+ann_all = rbind(anno11,anno33)
+colnames(anno222) = colnames(ann_all)
+ann_all2 = rbind(ann_all,anno222)
+head(ann_all2)
+
+##添加物种丰度总体特征
+norm$mean=apply(norm,1,mean)
+head(norm)
+norm$mean = sqrt(norm$mean)
+norm$mean = sqrt(norm$mean)
+
+ste6 = data.frame(a = ano4$V1,b = c(rep("ring_height",nrow(OTU_TAX_all))),c = c(rep(16,nrow(OTU_TAX_all))),d = norm$mean)
+head(ste6)
+ste6$c = as.factor(ste6$c)
+colnames(ste6) = colnames(ann_all2)
+ann_all3 = rbind(ann_all2,ste6)
+head(ann_all3)
+setwd("E:/")
+write.table(ann_all3, "annon3.txt", append = T, quote = F, sep="\t", eol = "\n", na = "NA", dec = ".", row.names = F, col.names = F)
+
+```
