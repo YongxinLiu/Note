@@ -1,13 +1,17 @@
 ---
 title: "Graphlan_annotation.Rmd"
-author: "Liu Yong-Xin"
-date: "2019年3月6日"
+author: "Wen Tao, modified by Liu Yong-Xin"
+date: "2019年3月21日"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+## 准备需要展示的数据
+
+OTU表和实验设计的读取、交叉筛选和标准化
 
 ```{r}
 # 读取OTU表
@@ -27,45 +31,78 @@ OTU = as.matrix(OTU)
 # 原始reads count表标准化
 norm = t(t(OTU)/colSums(OTU,na=T)) #* 100 可 normalization to total 100
 # 转置并转换为数据框
+library(dplyr)
 norm1 = norm %>% t() %>% as.data.frame()
+norm1[1:3,1:3]
+```
 
+计算分组均值
 
-
-
+```{r}
 # 数据分组计算平均值
-iris.split <- split(norm1,as.factor(sub_design$SampleType_RS))
+otutab.split = split(norm1,as.factor(sub_design$SampleType_RS))
+otutab.apply = lapply(otutab.split,function(x)colSums(x))
+norm2 = do.call(rbind,otutab.apply) %>% t() 
 
-iris.apply <- lapply(iris.split,function(x)colSums(x))
-# 组合结果
-norm2 <- do.call(rbind,iris.apply)%>% 
-                t() 
-
+# OTU表后面添加分组均值
 OTU_all= cbind(as.data.frame(norm),norm2)
 head(OTU_all)
+```
 
-tax = read.delim("E:/rep_seqs_tax.txt", sep="\t",row.names= 1,header=F, check.names=F)
+追加物种注释
+
+```{r}
+# 读取OTU对应的物种注释
+# 9列，分别为ID，界门纲目科属种和置信度
+tax = read.delim("rep_seqs_tax.txt", sep="\t",row.names= 1,header=F, check.names=F)
+# 只保留物种7级分类
 tax = tax[1:7]
 head(tax)
+# 添加分类级列名：界门纲目科属种
 colnames(tax) =c("kingdom","phylum","class","order","family","genus","species")
 
+# OTU表再添加物种注释
 index = merge(OTU_all,tax, by="row.names",all=F)
-head(index)
 row.names(index) = index$Row.names
 index$Row.names = NULL
-##设定颜色梯度
+head(index)
+```
+
+上面，我们制作OTU对应丰度、平均丰度和物种注释的数据
+
+映射丰度至颜色
+
+```{r}
+# 设定颜色梯度，橙-白-绿三色过滤
 colorg = colorRampPalette(c( "#D95F02", "white","#1B9E77"))(12)
+# 通用绘图缩放方法 Generic plot scaling methods
 library("scales")
+# 显示颜色和对应16进制RGB代码
 show_col(colorg)
 
+# 建立12种颜色的数据框
 c = data.frame(id = c(1:12),col = colorg)
+# 提取前面OTU中12个样品的丰度部分
 a = index[1:12]
-head(a)
-a
-##得到排序
+
+# # 按行由小到大排序后的新顺序，如第一数为3代表原来第三位最小目前排第一
+# i=1
+# a[i,1:12]
+# sort(a[i,1:12])
+# order(a[i,1:12])
+# # 返回了排序后原始样品的编号，样本顺序被打乱，而不是样本的丰度顺序，如wt1丰度排序为第7，显示为wt5的位置3
+# # 我们想要的是原来样本排序后的顺序编号
+# a[i,1:12]
+# sort(a[i,1:12])
+# match(colnames(a[i,1:12]), colnames(sort(a[i,1:12])))
+# # 返回原始样本，在排序中的位置，为原样本的属性
+
 for(i in 1:nrow(a)){
-    a[i,1:12] = order(a[i,1:12])
+### 目前颜色与顺序不对应???
+    # a[i,1:12] = order(a[i,1:12])
+    a[i,1:12] = match(colnames(a[i,1:12]), colnames(sort(a[i,1:12])))
   }
-##填充颜色
+# 填充颜色:替换丰度顺序为对应的颜色 
 for(i in 1:nrow(a)){
   aa = a[i,]
   aa = as.data.frame(aa)
@@ -76,45 +113,71 @@ for(i in 1:nrow(a)){
 head(a)
 out = cbind(index,a)
 head(out)
+```
+
+映射分组为开关
+
+```{r}
 ##组比对映射形状
 HH = c(rep("A",nrow(out)))
 LL = c(rep("A",nrow(out)))
+# 两组比较，大的标为v，小的为空
 for(i in 1:nrow(out)){
   if(out[i,13] > out[i,14]){
-    HH[i] <-"v"
-    LL[i] <-" "
+    HH[i] ="v"
+    LL[i] =" "
   }else if(out[i,13] == out[i,14]){
-      HH[i] <-" "
-      LL[i] <-" "
+      HH[i] =" "
+      LL[i] =" "
     }else if(out[i,13] < out[i,14]){
-      HH[i] <-" "
-      LL[i] <-"^"
+      HH[i] =" "
+      LL[i] ="^"
     }
  }
-
+# 继续追加至表末
 out2 = cbind(out,HH,LL)
 head(out2)
+```
+
+
+差异分析
+
+```{r}
 ###下一步添加差异分析结果
+# 安装bioconductor包安装工具
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#     install.packages("BiocManager")
+# 安装差异比较包DESeq2
+# BiocManager::install("DESeq2", version = "3.8")
+# BiocManager::install("GenomeInfoDb", version = "3.8")
+# BiocManager::install("S4Vctors", version = "3.8")
 library(DESeq2)
 library(limma)
+# BiocManager::install("pasilla", version = "3.8")
 library(pasilla)
-library(DESeq)
+# library(DESeq)
 head(OTU )
 count = OTU
 count=as.matrix(count)
+
 #######首先比较发病和健康中的差异#############
-dds <- DESeqDataSetFromMatrix(countData = count,
+# 读入矩阵和实验设计，指定分类
+dds = DESeqDataSetFromMatrix(countData = count,
                               colData = sub_design,
                               design = ~ SampleType_RS)
 
-dds2 <- DESeq(dds)  ##第二步,标准化
+dds2 = DESeq(dds)  
+
+##第二步,标准化
 resultsNames(dds2)
 # 将结果用results()函数来获取，赋值给res变量
-res <-  results(dds2, contrast=c("SampleType_RS","BL", "BH"),alpha=0.05)
+res =  results(dds2, contrast=c("SampleType_RS","BL", "BH"),alpha=0.05)
 # summary一下，看一下结果的概要信息
 summary(res)
+# 按校正P值和差异倍数，添加颜色
 res$level = as.factor(ifelse(res$padj < 0.05 & res$log2FoldChange > 1, "#D95F02",ifelse(res$padj < 0.05 & res$log2FoldChange < -1, "#1B9E77"," ")))
 head(res)
+# 提取筛选的显著差异，添加至otu表
 res1 = as.data.frame(res[ncol(res)])
 OTU_TAX_all =  merge(out2,res1, by="row.names",all=F)
 head(OTU_TAX_all)
@@ -123,133 +186,160 @@ row.names(OTU_TAX_all) = OTU_TAX_all$Row.names
 OTU_TAX_all$Row.names = NULL
 ```
 
-##### 构建三列注释文件，主要是节点注释
+## 构建三列注释文件，主要是节点注释
 
-```
-
+```{r}
 ##构建进化树节点属性注释文件
-head(OTU_TAX_all)
+# head(OTU_TAX_all)
 pcol = c(rep("A",nrow(OTU_TAX_all)))
 psha = c(rep("A",nrow(OTU_TAX_all)))
+# 按门水平手动设置颜色和形状
 for(i in 1:nrow(OTU_TAX_all)){
   if(OTU_TAX_all[i,16] == "p__Acidobacteria"){
-    pcol[i] <-"#B0171F"
-    psha[i] <-"*"
+    pcol[i] ="#B0171F"
+    psha[i] ="*"
   }else if(OTU_TAX_all[i,16] == "p__Proteobacteria"){
-    pcol[i] <-"#D15FEE"
-    psha[i] <-"o"
+    pcol[i] ="#D15FEE"
+    psha[i] ="o"
   }else if(OTU_TAX_all[i,16] == "p__Acidobacteria"){
-    pcol[i] <-"#B0171F"
-    psha[i] <-"*"
+    pcol[i] ="#B0171F"
+    psha[i] ="*"
   }else if(OTU_TAX_all[i,16] == "p__Verrucomicrobia"){
-    pcol[i] <-"#00CD00"
-    psha[i] <-"*"
+    pcol[i] ="#00CD00"
+    psha[i] ="*"
   }else if(OTU_TAX_all[i,16] == "p__Cyanobacteria"){
-    pcol[i] <-"#87CEFA"
-    psha[i] <-"*"
+    pcol[i] ="#87CEFA"
+    psha[i] ="*"
   }else if(OTU_TAX_all[i,16] == "p__Actinobacteria"){
-    pcol[i] <-"#FEC80A"
-    psha[i] <-"*"
+    pcol[i] ="#FEC80A"
+    psha[i] ="*"
   }else if(OTU_TAX_all[i,16] == "p__Bacteroidetes"){
-    pcol[i] <-"#EE6A50"
-    psha[i] <-"*"
+    pcol[i] ="#EE6A50"
+    psha[i] ="*"
   }else if(OTU_TAX_all[i,16] == "p__Chloroflexi"){
-    pcol[i] <-"#7B68EE"
-    psha[i] <-"D"
+    pcol[i] ="#7B68EE"
+    psha[i] ="D"
   }else if(OTU_TAX_all[i,16] == "p__Gemmatimonadetes"){
-    pcol[i] <-"#9ACD32"
-    psha[i] <-"*"
+    pcol[i] ="#9ACD32"
+    psha[i] ="*"
   }else if(OTU_TAX_all[i,16] == "p__Firmicutes"){
-    pcol[i] <-"#8DEEEE"
-    psha[i] <-"*"
+    pcol[i] ="#8DEEEE"
+    psha[i] ="*"
   }else {
-    pcol[i] <-"#006400"
-    psha[i] <-"*"
+    pcol[i] ="#006400"
+    psha[i] ="*"
   }
 }
+# OTUID对应物种颜色形状数据框
 ano4 = cbind(row.names(OTU_TAX_all),pcol,psha)
-head(ano4)
+# head(ano4)
 ano4 = as.data.frame(ano4)
+```
 
-#节点颜色映射
+生成三列的graphlan要求结点注释文件
+
+```{r}
+# 节点颜色映射
 ste1 = data.frame(a = ano4$V1,b = c(rep("clade_marker_color",nrow(OTU_TAX_all))),c = ano4$pcol)
 head(ste1)
-#节点形状映射
+# 节点形状映射
 ste2 = data.frame(a = ano4$V1,b = c(rep("clade_marker_shape",nrow(OTU_TAX_all))),c = ano4$psha)
 head(ste2)
-##节点阴影映射
+# 节点阴影映射颜色，同节点颜色 
 ste3 = data.frame(a = ano4$V1,b = c(rep("annotation_background_color",nrow(OTU_TAX_all))),c = ano4$pcol)
 head(ste3)
-#注释透明度
+# 注释透明度，淡色，如0.1透明
 ste4 = data.frame(a = ano4$V1,b = c(rep("annotation_background_alpha",nrow(OTU_TAX_all))),c = c(rep(0.1,nrow(OTU_TAX_all))))
 head(ste4)
 ste4$c = as.factor(ste4$c)
-##节点大小
+# 节点大小，这里统一写10，LEfSe中按丰度大小变化 
 ste5 = data.frame(a = ano4$V1,b = c(rep("clade_marker_size",nrow(OTU_TAX_all))),c = c(rep(10,nrow(OTU_TAX_all))))
 head(ste5)
 ste5$c = as.factor(ste5$c)
 
-
+# 保存文件
 ste_all = rbind(ste1,ste2,ste3,ste4,ste5)
 head(ste_all)
-setwd("E:/")
 # 保存统计结果，有waring正常
-write.table(ste_all, "annon2.txt", append = T, quote = F, sep="\t", eol = "\n", na = "NA", dec = ".", row.names = F, col.names = F)
+write.table(ste_all, "annot2.txt", append = F, quote = F, sep="\t", eol = "\n", na = "NA", dec = ".", row.names = F, col.names = F)
 ```
 
-#### 构建四列注释文件，主要是环注释
+## 构建四列注释文件，主要是环注释
 
-```
-###构建样品丰度衍射映射文件
+```{r}
+# 构建单样品丰度映射文件，共12列
+# 提取之前按丰度构建的颜色矩阵
 anno1 = OTU_TAX_all[22:33]
 head(anno1)
+# 设置样本对应环编号
 colnames(anno1 ) = c(1:3,7:12,4:6)
 anno1$id = row.names(anno1)
 library("reshape2")
+# 构建3列文件，ID，环编号，对应颜色
 anno11 = melt(anno1,id.vars = "id",variable.name = "ring",value.name = "color")
+# 添加第4列，类型
 anno11$ringcolor = c(rep("ring_color",nrow(anno11)))
+# 调整列的序列，前两列为ID和类型，其它在后面
 anno11 = select(anno11,id,ringcolor,everything())
 head(anno11)
+```
 
-
+```{r}
 ##构建平均丰度标志映射文件
 anno2 = data.frame(OTU_TAX_all$LL,OTU_TAX_all$HH,row.names = row.names(OTU_TAX_all))
+head(anno2)
+# 位置为13/14圈
 colnames(anno2 ) = c(13,14)
 anno2$id = row.names(anno2)
-library("reshape2")
 anno22 = melt(anno2,id.vars = "id",variable.name = "ring",value.name = "shape")
 anno22$ringshape = c(rep("ring_shape",nrow(anno22)))
 anno22 = select(anno22,id,ringshape,everything())
-anno222<- anno22[anno22$shape%in%c("^","v"),]
+# 只保留有差异，即有形状标记的行
+anno222 = anno22[anno22$shape %in% c("^","v"),]
 head(anno222)
+```
 
-
+```{r}
 ##构建差异分析颜色标记文件
 anno3 = data.frame(id = row.names(OTU_TAX_all),
                    ringcolor = c(rep("ring_color",nrow(OTU_TAX_all))),
                    ring =c(rep(15,nrow(OTU_TAX_all))),color = OTU_TAX_all$level )
 anno3$ring = as.factor(anno3$ring)
 head(anno3)
-anno33<- anno3[anno3$color%in%c("#D95F02","#1B9E77"),]
+anno33 = anno3[anno3$color %in% c("#D95F02","#1B9E77"),]
+```
+
+```{r}
+# 合并1，3批的颜色注释
 head(anno11);dim(anno11)
 ann_all = rbind(anno11,anno33)
+# 第二批为形状，需改列名再合并
 colnames(anno222) = colnames(ann_all)
 ann_all2 = rbind(ann_all,anno222)
 head(ann_all2)
+```
 
-##添加物种丰度总体特征
-norm$mean=apply(norm,1,mean)
+```{r}
+# 添加物种丰度总体特征
+# 计算所有样品的均值
+norm$mean = apply(norm,1,mean)
 head(norm)
+# 计算平方根，标准化数据更均匀
 norm$mean = sqrt(norm$mean)
 norm$mean = sqrt(norm$mean)
 
+# 第16列行高度展示丰度的4次方根
 ste6 = data.frame(a = ano4$V1,b = c(rep("ring_height",nrow(OTU_TAX_all))),c = c(rep(16,nrow(OTU_TAX_all))),d = norm$mean)
 head(ste6)
 ste6$c = as.factor(ste6$c)
+```
+
+```{r}
+# 统一列名，并合并
 colnames(ste6) = colnames(ann_all2)
 ann_all3 = rbind(ann_all2,ste6)
 head(ann_all3)
-setwd("E:/")
-write.table(ann_all3, "annon3.txt", append = T, quote = F, sep="\t", eol = "\n", na = "NA", dec = ".", row.names = F, col.names = F)
+# 保存文件
+write.table(ann_all3, "annot3.txt", append = F, quote = F, sep="\t", eol = "\n", na = "NA", dec = ".", row.names = F, col.names = F)
 
 ```
