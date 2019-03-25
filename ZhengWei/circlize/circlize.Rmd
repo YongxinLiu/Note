@@ -1,0 +1,125 @@
+---
+title: "circlize"
+author: "ZhengWei / Yong-Xin Liu"
+date: "2019年3月25日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### 载入R语言包
+
+```{r}
+# 两个包自己用Rstudio直接安装就好
+library(statnet)
+library(circlize) 
+```
+
+### 数据导入
+
+```{r}
+# setwd（...）# 自己设定工作环境，随自己喜好
+# Rmd无需设置工作目录，默认为文件所有目录
+data<-read.csv("SC.csv",header=T,row=1) 
+my.data<-as.matrix(data) # 矩阵化
+# 手动设置行列名（可选）
+rownames(my.data) <-c("CCK", "CNPK", "GCCK", "GCNPK")
+colnames(my.data) <-c("Alphaproteobacteria","Betaproteobacteria","Gammaproteobacteria",
+                      "Deltaproteobacteria","Acidobacteria","Actinobacteria",
+                      "Bacteroidetes","Chloroflexi","Firmicutes",  
+                      "Gemmatimonadetes","Planctomycetes","Thaumarchaeota" ,
+                      "Verrucomicrobia","Ascomycota",  "Basidiomycota", 
+                       "Zygomycota") 
+# 行和列的命名,这里本人习惯手动命名，如果觉得麻烦的话也可以直接根据输入的文档中的名字自己编辑好
+```
+
+### 颜色设定
+
+```{r}
+grid.col = NULL
+
+# 定义处理的颜色，这里随便选取了4个颜色，大家可以根据自己的喜好制定好看的配色
+grid.col[c("CCK", "CNPK", "GCCK", "GCNPK")] = c("blue", "black", "orange", "chocolate") 
+
+# 定义微生物各个门的颜色，
+grid.col[colnames(my.data)] = c("lavender", "khaki","mistyrose", 
+                                "sienna1", "skyblue", "brown1", 
+                                "gold", "maroon", "salmon", "moccasin",
+                                "wheat","black","green","cyan","pink","orange") 
+```
+
+### 画图
+
+```{r}
+# 参数设置
+circos.par(gap.degree = c(rep(2, nrow(my.data)-1), 10, rep(2, ncol(my.data)-1), 10),
+           start.degree = 180)
+
+# 出图，本人这里只用了少部分参数，所有参数见此包的help文档，或者看下文
+chordDiagram(my.data,
+             directional = TRUE,
+             diffHeight = 0.06,
+             grid.col = grid.col, 
+             transparency = 0.5) 
+
+# 图例制作
+legend("right",pch=20,legend=colnames(my.data),
+       col=grid.col[colnames(my.data)],bty="n",
+       cex=1,pt.cex=3,border="black") # 设定图例
+```
+
+初期画出来的图如下，此图类似于柱状图，区域面积越大表示相对丰度越高，上面四个为处理，下面的为微生物各个门的相对丰度：
+
+![image](http://bailab.genetics.ac.cn/Note/ZhengWei/circlize/2.png)
+
+我们目前预预览的图，图例和图区严重重叠。是因为绘图区空间的限制。我们只需在图片输出时调置图片宽大于长即可解决。
+
+### 保存以上图片
+
+使用pdf函数保存以上图片。
+
+```{r}
+# 设置图片文件名、长宽和字体大小
+pdf(file="circlize.pdf", width=8, height=5, pointsize=8)
+# 上方绘图和图例代码
+chordDiagram(my.data,directional = TRUE,diffHeight = 0.06,grid.col = grid.col, transparency = 0.5) 
+legend("right",pch=20,legend=colnames(my.data),col=grid.col[colnames(my.data)],bty="n",cex=1,pt.cex=3,border="black") 
+# 绘图结束后写入文件
+dev.off()
+```
+![image](http://bailab.genetics.ac.cn/Note/ZhengWei/circlize/3.png)
+
+现在图例和文件不再重叠。有些门的文字重叠。可以在AI排版软件中手动调整或删除一些丰度小的类别名称。
+
+
+### Circlize包的所有参数(个性化设置)
+
+大家也可以根据自己的喜好调整，整个图的代码还有好多，大家可以根据自己的喜好调整，`circlize`包给出的所有参数代码如下：具体使用命令`?chordDiagram`查看
+
+```
+chordDiagram(x, grid.col = NULL, grid.border = NA, transparency = 0.5,
+    col = NULL, row.col = NULL, column.col = NULL,
+    order = NULL, directional = 0, xmax = NULL,
+    symmetric = FALSE, keep.diagonal = FALSE,
+    direction.type = "diffHeight", diffHeight = convert_height(2, "mm"),
+    reduce = 1e-5, self.link = 2,
+    preAllocateTracks = NULL,
+    annotationTrack = c("name", "grid", "axis"),
+    annotationTrackHeight = convert_height(c(3, 2), "mm"),
+    link.border = NA, link.lwd = par("lwd"), link.lty = par("lty"),
+    link.sort = FALSE, link.decreasing = TRUE,
+    link.arr.length = ifelse(link.arr.type == "big.arrow", 0.02, 0.4),
+    link.arr.width = link.arr.length/2,
+    link.arr.type = "triangle", link.arr.lty = par("lty"),
+    link.arr.lwd = par("lwd"), link.arr.col = par("col"),
+    link.largest.ontop = FALSE, link.visible = TRUE,
+    link.rank = NULL, ...)
+```
+
+## 笔者个性化弦图
+
+大家可以自由发挥根据自己的喜好出图，下面是本人通过个性化代码配合AI等其他软件出的例图：
+
+![image](http://bailab.genetics.ac.cn/Note/ZhengWei/circlize/4.png)
