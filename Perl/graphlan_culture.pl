@@ -48,7 +48,7 @@ while ($opts{h}>0) { #filter header
 	<INPUT>;
 	$opts{h}--;
 }
-print OUTPUT "OTU_ID\trecovered\tkindom\tphylum\tclass\torder\tfamily\tgenus\tspecies\n";
+print OUTPUT "OTU_ID\trecovered\tkingdom\tphylum\tclass\torder\tfamily\tgenus\tspecies\n";
 while (<INPUT>) {
 	chomp;
 	my @tmp=split/\t/;
