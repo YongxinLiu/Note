@@ -1,0 +1,82 @@
+---
+title: '箱线图添加图基检验字母显著标记'
+author: "Yong-Xin Liu"
+date: "2019/5/27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 图基检验
+
+**Tukey’s test**
+
+图基检验（Tukey’s test）是一个单步多重比较方法和统计检验法。它属于事后(post-hoc)分析，意味着它与方差分析(ANOVA)结合使用。它允许找出一个因子的平均值，并将所有可能的平均值对采用t检验类似的方法进行比较，以找出两个因子之间存在显著差异。如果您想了解此检验的具体过程，可以阅读[《One-Way Analysis of Variance for Independent Samples》](http://vassarstats.net/textbook/ch14pt2.html)。
+
+结果通常绘制在箱线图中。相互之间没有显著差异的水平用同一个字母表示。
+
+图基检验同义词：Tukey’s range test / Tukey method / Tukey’s honest significance test / Tukey’s HSD (honest significant difference) test / Tukey–Kramer method
+
+```{r boxplotA}
+# 加载多重比较统计包
+library(multcompView)
+
+# 创建测试数据，包括A-E共5组group，每组20个样本
+group = c(rep("A", 30) , rep("B", 30) , rep("C", 30), rep("D", 30) , rep("E", 30))
+set.seed(1)
+value = c(sample(3:9, 30 , replace=T) , sample(6:10, 30 , replace=T), sample(3:7, 30 , replace=T), sample(4:8, 30 , replace=T) , sample(5:9, 30 , replace=T) )
+data = data.frame(group,value)
+
+# 按组group对value值进行方差分析
+model = lm(data$value ~ data$group )
+ANOVA = aov(model)
+
+# 图基检验组间两两比较，95%置信区间
+TUKEY = TukeyHSD(x = ANOVA, 'data$group', conf.level=0.95)
+
+# 组间差异和置信区间可视化
+plot(TUKEY , las=1 , col="brown" )
+
+
+# 将Tukey检验结果P值转换为显著字母分组
+generate_label_df = function(TUKEY, variable){
+  # 转换P值为字母分组
+  ## 提取图基检验中分组子表的第4列P adjust值
+  Tukey.levels = TUKEY[[variable]][,4]
+  ## multcompLetters函数将两两p值转换为字母，data.frame并生成列名为Letters的数据框
+  Tukey.labels = data.frame(multcompLetters(Tukey.levels)['Letters'])
+  
+  # 按分组名字母顺序
+  ## 提取字母分组行名为group组名
+  Tukey.labels$group = rownames(Tukey.labels)
+  # 按组名的字线顺序排列，默认的Levels
+  Tukey.labels=Tukey.labels[order(Tukey.labels$group) , ]
+  return(Tukey.labels)
+}
+
+# Apply the function on my dataset
+LABELS = generate_label_df(TUKEY , "data$group")
+
+
+# 设置颜色主题，用于箱线和文字颜色选择和保持一致
+my_colors = c(rgb(143,199,74,maxColorValue = 255), rgb(242,104,34,maxColorValue = 255), 
+              rgb(111,145,202,maxColorValue = 255), rgb(254,188,18,maxColorValue = 255),
+              rgb(74,132,54,maxColorValue = 255),rgb(236,33,39,maxColorValue = 255),
+              rgb(165,103,40,maxColorValue = 255))
+
+# 使用base绘制箱线图，y轴范围为最小至最大1.05倍(放显著标记字母)，按显著性水平着色
+a = boxplot(data$value ~ data$group , ylim = c(min(data$value) , 1.05*max(data$value)) , 
+            col = my_colors[as.numeric(LABELS[,1])] , ylab="value" , main="")
+
+# 计算Y最大值，a$stats是箱线图统计值，最后一行为最大值，再取最大值，*0.05为偏移量
+over=0.05*max(a$stats[nrow(a$stats),])
+
+# 指定坐标x, y, 字符和颜色添加标签
+text( c(1:nlevels(data$group)) , a$stats[nrow(a$stats),]+over , LABELS[,1] , col=my_colors[as.numeric(LABELS[,1])] )
+```
+
+## Reference
+
+> #84 TUKEY TEST http://www.r-graph-gallery.com/84-tukey-test/
