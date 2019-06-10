@@ -1,0 +1,569 @@
+---
+title: "单因素差异分析完整解决方法"
+author: "Tao Wen, double-check by Yong-Xin Liu"
+date: "2019年6月10日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+```
+
+## 单因素差异分析流程
+
+本函数提供一套单因素差异分析的完整流程
+
+记得从2016年入学以来，老板叫做的第一个分析便是单因素方差分析，也就是做一个aov，单因素方差分析确实在很多情况下确实是大多数人的需求，作分析基于R语言的实现也很简单。但是做完之后便是被吐槽，没有正态性检验，没有方差齐性检验，于是我发呆一会，就做了一个简单流程，当时发布在我的个人公众号：微生信生物：[《R语言绘制带有显著性字母标记的柱状图》](https://mp.weixin.qq.com/s/AHLbbm0xvMD-0Ljtn0Ovrw)； 当时做了个QQ图，方差齐性检验，后又做了aov和多重比较。并写了个简单的循环。其实这并谈不上一个方案，今天我来的目的就是完善差异检测和可视化方案，这次可以当做一个方案了。
+
+```{r LoadPackages, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+#site="https://mirrors.tuna.tsinghua.edu.cn/CRAN"
+#install.packages("tidyverse", repo=site)
+library(tidyverse)
+library(agricolae)
+# library(car)
+library(reshape2)
+library("ggplot2")
+library("ggpubr")
+```
+
+
+```{r ImportData, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+# 读入实验设计
+data_wt = read.table("test_data.txt", header=T, sep="\t")
+head(data_wt)
+# 数据由长变宽
+data_wt = dcast(data_wt, ID + group ~ grou, value.var = "count")
+# 这里备注所需的数据格式
+# 前量列从第一列开始是ID，第二列是分组信息，剩下的列均为数据列
+head(data_wt)
+
+# 绘图类型，可选bar、box
+plot_type = "box"
+```
+
+
+
+```{r function, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+# 数据data_wt第一列为样本名，第二列为分组group，第三列起为各种数值，如各种多样指数
+for (i in 3:ncol(data_wt)) {
+  # i = 3
+  ss = data_wt[i]
+  colnames(ss) = c("count")
+  ss$group = data_wt$group
+  # 正态性检验 Shapiro-Wilk normality test，保存p-value
+  xx =  shapiro.test(ss$count)
+  p1 = xx[[2]]
+  # 方差齐性检验 Bartlett test of homogeneity of variances，保存p-value
+  xc = bartlett.test(count ~ group, data = ss)
+  p2 = xc[[3]]
+  # 方案1. 绘制柱状图
+  if ( plot_type == "bar") {
+    # 条件1. 符合正态性和方差齐性均（p-value < 0.05 不显著）
+    if (p1 > 0.05 & p2 > 0.05) {
+      # P值仅保留3位数
+      p1 = round(p1,3)
+      p2 = round(p2,3)
+      # 提取数据连，转换矩阵、向量
+      data_i = data_wt[i]
+      ee = as.matrix(data_i)
+      dd = as.vector(ee)
+      # 提取列名
+      name_i = colnames(data_wt[i])
+      # 方差分析
+      model = aov(dd ~ group, data = data_wt)
+      wtx1 = summary(model)
+      wtx2 = wtx1[[1]]
+      wtx3 = wtx2[5]
+      
+      # 条件2. anova存在显著差异分组
+      if ( wtx3$`Pr(>F)`[1]< 0.05) {
+        # 进行多重比较，不矫正P值
+        out = LSD.test(model,"group", p.adj="none")
+        # 结果显示：标记字母法，包括均值dd列，和显著分组groups列
+        aa = out$group
+        # 添加行名为分组名
+        aa$group = row.names(aa)
+        # 按组计算均值（之前dd列）、标准左
+        wen1 = as.data.frame(tapply(dd,data_wt$group,mean,na.rm=TRUE))
+        wen2 = as.data.frame(tapply(dd,data_wt$group,sd,na.rm=TRUE))
+        # 合并均值、标准差，与分组合并，整理列名
+        went = cbind(wen1,wen2)
+        wentao = merge(aa,went, by="row.names",all=F)
+        colnames(wentao) = c(colnames(wentao[1:4]),"mean" ,"SD")
+        # 数据框列操作，添加最大和最小值列
+        aa = mutate(wentao, ymin = mean - SD, ymax =  mean + SD)
+        # 均值最大值1.2倍？应该是ymax
+        a = max(aa$mean)*1.2
+        # 绘图x为组，y为均值，分组颜色；柱状图；添加分组标签；误差棒；y轴范围；坐标轴标签
+        p = ggplot(aa , aes(x = group, y = mean,colour= group)) +
+          geom_bar(aes(colour= group,fill = group),stat = "identity", width = 0.4,position = "dodge") +
+          geom_text(aes(label = groups,y=ymax, x = group,vjust = -0.3,size = 6))+
+          geom_errorbar(aes(ymin=ymin,ymax=ymax),colour="black",width=0.1,size = 1)+
+          scale_y_continuous(expand = c(0,0),limits = c(0,a))+
+          labs(x=paste(name_i,"of all group", sep = "_"),y="group",
+               title = paste("Normality test",p1,"Homogeneity of variance",p2,sep = ":"))
+        # p
+        # bw主题(默认灰改为白网格)，添加直线：如均值水平线，
+        # 以及详细的主题参数调整，如文本字体大小，图例位置或有无
+        p=p+theme_bw()+
+          geom_hline(aes(yintercept=mean(dd)), colour="black", linetype=2) +
+          geom_vline(aes(xintercept=0), colour="black", linetype="dashed") +
+          # scale_fill_manual(values = mi, guide = guide_legend(title = NULL))+
+          theme(panel.grid.major=element_blank(),
+            panel.grid.minor=element_blank(),
+            plot.title = element_text(vjust = -8.5,hjust = 0.1),
+            axis.title.y =element_text(size = 20,face = "bold",colour = "black"),
+            axis.title.x =element_text(size = 24,face = "bold",colour = "black"),
+            axis.text = element_text(size = 20,face = "bold"),
+            axis.text.x = element_text(colour = "black",size = 14),
+            axis.text.y = element_text(colour = "black",size = 14),
+            legend.text = element_text(size = 15,face = "bold"),
+            legend.position = "none"
+          )
+        # print(p)
+        # 输出PDF文件名: colnameID, aov + LSD + plot_type
+        FileName = paste0(name_i,"_aov_LSD_",plot_type, ".pdf")
+        ggsave(FileName, p, width = 8, height = 8)
+        # 如果不显著
+      }else if ( wtx3$`Pr(>F)`[1]>= 0.05)  {
+        out = LSD.test(model,"group", p.adj="none")
+        aa = out$groups
+        aa$group = row.names(aa)
+       
+        wen1 = as.data.frame(tapply(dd,data_wt$group,mean,na.rm=TRUE))
+        wen2 = as.data.frame(tapply(dd,data_wt$group,sd,na.rm=TRUE))
+        went = cbind(wen1,wen2)
+        wentao = merge(aa,went, by="row.names",all=F)
+        colnames(wentao) = c(colnames(wentao[1:4]),"mean" ,"SD")
+        aa = mutate(wentao, ymin = mean - SD, ymax =  mean + SD)
+        a = max(aa$mean)*1.2
+        ss = round(wtx3$`Pr(>F)`[1],3)
+        # mi=c("#1B9E77" ,"#D95F02", "#7570B3","#E7298A")
+        p = ggplot(aa , aes(x = group, y = mean,colour= group)) +
+          geom_bar(aes(colour= group,fill = group),stat = "identity", width = 0.4,position = "dodge") +
+          # geom_text(aes(label = groups,y=ymax, x = group,vjust = -0.3,size = 6))+
+          geom_errorbar(aes(ymin=ymin,
+                            ymax=ymax),
+                        colour="black",width=0.1,size = 1)+
+          scale_y_continuous(expand = c(0,0),limits = c(0,a))+
+          labs(x=paste(name_i,"of all group", sep = "_"),
+               y="group",
+               title = paste("Normality test",p1,"Homogeneity of variance",p2,"aov",ss,sep = ":"))
+        p
+        p=p+theme_bw()+
+          geom_hline(aes(yintercept=mean(dd)), colour="black", linetype=2) +
+          geom_vline(aes(xintercept=0), colour="black", linetype="dashed") +
+          # scale_fill_manual(values = mi, guide = guide_legend(title = NULL))+
+          theme(
+            
+            panel.grid.major=element_blank(),
+            panel.grid.minor=element_blank(),
+            
+            plot.title = element_text(vjust = -8.5,hjust = 0.1),
+            axis.title.y =element_text(size = 20,face = "bold",colour = "black"),
+            axis.title.x =element_text(size = 24,face = "bold",colour = "black"),
+            axis.text = element_text(size = 20,face = "bold"),
+            axis.text.x = element_text(colour = "black",size = 14),
+            axis.text.y = element_text(colour = "black",size = 14),
+            legend.text = element_text(size = 15,face = "bold"),
+            legend.position = "none"#是否删除图例
+            
+          )
+        p
+        FileName = paste0(name_i,"_aov_LSD_nosig_",plot_type, ".pdf")
+        ggsave(FileName, p, width = 8, height = 8)
+      }
+    # 即不正态，也不方差齐性
+    }else if (p1 <.05| p2 <.05){
+      p1 = round(p1,3)
+      p2 = round(p2,3)
+      data_i = data_wt[i]
+      ee	=as.matrix(data_i)
+      dd = as.vector(ee)
+      name_i = colnames(data_wt[i])
+      xax = data.frame(dd = dd,group = data_wt$group)
+      krusk=compare_means(dd ~ group, data=xax, method = "kruskal.test")
+      sumkrusk=as.data.frame(krusk)
+      if ( sumkrusk[3]< 0.05) {
+        out = LSD.test(model,"group", p.adj="none")#进行多重比较，不矫正P值
+        aa = out$group#结果显示：标记字母法
+        aa$group = row.names(aa)
+        out = LSD.test(model,"group", p.adj="none")#进行多重比较，不矫正P值
+        aa = out$group#结果显示：标记字母法
+        aa$group = row.names(aa)
+        
+        aa
+        wen1 = as.data.frame(tapply(dd,data_wt$group,mean,na.rm=TRUE))
+        wen2 = as.data.frame(tapply(dd,data_wt$group,sd,na.rm=TRUE))
+        went = cbind(wen1,wen2)
+        wentao = merge(aa,went, by="row.names",all=F)
+        colnames(wentao) = c(colnames(wentao[1:4]),"mean" ,"SD")
+        aa = mutate(wentao, ymin = mean - SD, ymax =  mean + SD)  
+        a = max(aa$mean)*1.2
+        # ss = round(wtx3$`Pr(>F)`[1],3)
+        # mi=c("#1B9E77" ,"#D95F02", "#7570B3","#E7298A")
+        p = ggplot(aa , aes(x = group, y = mean,colour= group)) + 
+          geom_bar(aes(colour= group,fill = group),stat = "identity", width = 0.4,position = "dodge") + 
+          # geom_text(aes(label = groups,y=ymax, x = group,vjust = -0.3,size = 6))+
+          geom_errorbar(aes(ymin=ymin,
+                            ymax=ymax),
+                        colour="black",width=0.1,size = 1)+
+          scale_y_continuous(expand = c(0,0),limits = c(0,a))+
+          labs(x=paste(name_i,"of all group", sep = "_"),
+               y="group",
+               title = paste("Normality test",p1,"Homogeneity of variance",p2,"kruskal.test",sumkrusk[3],sep = ":"))
+        p
+        p=p+theme_bw()+
+          geom_hline(aes(yintercept=mean(dd)), colour="black", linetype=2) +
+          geom_vline(aes(xintercept=0), colour="black", linetype="dashed") +
+          # scale_fill_manual(values = mi, guide = guide_legend(title = NULL))+
+          theme(
+            
+            panel.grid.major=element_blank(),
+            panel.grid.minor=element_blank(),
+            
+            plot.title = element_text(vjust = -8.5,hjust = 0.1),
+            axis.title.y =element_text(size = 20,face = "bold",colour = "black"),
+            axis.title.x =element_text(size = 24,face = "bold",colour = "black"),
+            axis.text = element_text(size = 20,face = "bold"),
+            axis.text.x = element_text(colour = "black",size = 14),
+            axis.text.y = element_text(colour = "black",size = 14),
+            legend.text = element_text(size = 15,face = "bold"),
+            legend.position = "none"#是否删除图例
+            
+          ) 
+        p
+        FileName = paste(name_i,"_kruskal.test_YES_bar", ".pdf", sep = "_")
+        ggsave(FileName, p, width = 8, height = 8)
+      }else if ( sumkrusk[3] >= 0.05)  {
+        out = LSD.test(model,"group", p.adj="none")#进行多重比较，不矫正P值
+        aa = out$group#结果显示：标记字母法
+        aa$group = row.names(aa)
+        wen1 = as.data.frame(tapply(dd,data_wt$group,mean,na.rm=TRUE))
+        wen2 = as.data.frame(tapply(dd,data_wt$group,sd,na.rm=TRUE))
+        went = cbind(wen1,wen2)
+        wentao = merge(aa,went, by="row.names",all=F)
+        colnames(wentao) = c(colnames(wentao[1:4]),"mean" ,"SD")
+        aa = mutate(wentao, ymin = mean - SD, ymax =  mean + SD)  
+        a = max(aa$mean)*1.2
+        # ss = round(wtx3$`Pr(>F)`[1],3)
+        mi=c("#1B9E77" ,"#D95F02", "#7570B3","#E7298A")
+        p = ggplot(aa , aes(x = group, y = mean,colour= group)) + 
+          geom_bar(aes(colour= group,fill = group),stat = "identity", width = 0.4,position = "dodge") + 
+          # geom_text(aes(label = groups,y=ymax, x = group,vjust = -0.3,size = 6))+
+          geom_errorbar(aes(ymin=ymin,
+                            ymax=ymax),
+                        colour="black",width=0.1,size = 1)+
+          scale_y_continuous(expand = c(0,0),limits = c(0,a))+
+          labs(x=paste(name_i,"of all group", sep = "_"),
+               y="group",
+               title = paste("Normality test",p1,"Homogeneity of variance",p2,"kruskal.test",sumkrusk[3],sep = ":"))
+        p
+        p=p+theme_bw()+
+          geom_hline(aes(yintercept=mean(mean)), colour="black", linetype=2) +
+          geom_vline(aes(xintercept=0), colour="black", linetype="dashed") +
+          # scale_fill_manual(values = mi, guide = guide_legend(title = NULL))+
+          theme(
+            
+            panel.grid.major=element_blank(),
+            panel.grid.minor=element_blank(),
+            
+            plot.title = element_text(vjust = -8.5,hjust = 0.1),
+            axis.title.y =element_text(size = 20,face = "bold",colour = "black"),
+            axis.title.x =element_text(size = 24,face = "bold",colour = "black"),
+            axis.text = element_text(size = 20,face = "bold"),
+            axis.text.x = element_text(colour = "black",size = 14),
+            axis.text.y = element_text(colour = "black",size = 14),
+            legend.text = element_text(size = 15,face = "bold"),
+            legend.position = "none"#是否删除图例
+            
+          ) 
+        p
+        FileName = paste(name_i,"_kruskal.test_nosig_bar", ".pdf", sep = "")
+        ggsave(FileName, p, width = 8, height = 8)
+      }
+      
+      
+    }
+    
+    
+  # 绘制箱线图
+  }else if( plot_type == "box") {
+    
+    
+    if (p1 >.05& p2 >.05) {
+      p1 = round(p1,3)
+      p2 = round(p2,3)
+      data_i = data_wt[i]
+      ee	=as.matrix(data_i)
+      dd = as.vector(ee)
+      name_i = colnames(data_wt[i])
+      model=aov(dd ~ group, data=data_wt)#方差分析
+      wtx1 = summary(model)
+      wtx2 = wtx1[[1]]
+      wtx3 = wtx2[5]
+      if ( wtx3$`Pr(>F)`[1]< 0.05) {
+        out = LSD.test(model,"group", p.adj="none")#进行多重比较，不矫正P值
+        aa = out$group#结果显示：标记字母法
+        aa$group = row.names(aa)
+        a = max(aa$dd)*1.2
+        
+        data_box = data_wt[c(1,2,i)]
+        colnames(data_box) = c("ID" , "group","dd" )
+        
+        # out = LSD.test(model,"group", p.adj="none") # alternative fdr
+        stat = out$groups
+        data_box$stat=stat[as.character(data_box$group),]$groups
+        max=max(data_box[,c("dd")])
+        min=min(data_box[,c("dd")])
+        x = data_box[,c("group","dd")]
+        y = x %>% group_by(group) %>% summarise_(Max=paste('max(',"dd",')',sep=""))
+        y=as.data.frame(y)
+        rownames(y)=y$group
+        data_box$y=y[as.character(data_box$group),]$Max + (max-min)*0.05
+        
+        
+        
+        # mi=c("#1B9E77" ,"#D95F02", "#7570B3","#E7298A")
+        p = ggplot(data_box, aes(x=group, y=data_box[["dd"]], color=group)) +
+          geom_boxplot(alpha=1, outlier.size=0, size=0.7, width=0.5, fill="transparent") +
+          labs(x=paste(name_i," group", sep = "_"),
+               y="group",
+               title = paste("Normality test",p1,"Homogeneity of variance",p2,sep = ":"))+
+          geom_text(data=data_box, aes(x=group, y=y, color=group, label= stat)) +
+          geom_jitter( position=position_jitter(0.17), size=1, alpha=0.7)+theme(legend.position="none")
+        p
+        p=p+theme_bw()+
+          geom_hline(aes(yintercept=mean(dd)), colour="black", linetype=2) +
+          geom_vline(aes(xintercept=0), colour="black", linetype="dashed") +
+          # scale_fill_manual(values = mi, guide = guide_legend(title = NULL))+
+          theme(
+            
+            panel.grid.major=element_blank(),
+            panel.grid.minor=element_blank(),
+            
+            plot.title = element_text(vjust = -8.5,hjust = 0.1),
+            axis.title.y =element_text(size = 20,face = "bold",colour = "black"),
+            axis.title.x =element_text(size = 24,face = "bold",colour = "black"),
+            axis.text = element_text(size = 20,face = "bold"),
+            axis.text.x = element_text(colour = "black",size = 14),
+            axis.text.y = element_text(colour = "black",size = 14),
+            legend.text = element_text(size = 15,face = "bold"),
+            legend.position = "none"#是否删除图例
+            
+          ) 
+        p
+        if (length(unique(data_box$group))>3){	p=p+theme(axis.text.x=element_text(angle=45,vjust=1, hjust=1))}
+        FileName = paste(name_i,"_aov_LSD_box", ".pdf", sep = "")
+        ggsave(FileName, p, width = 8, height = 8)
+      }else if ( wtx3$`Pr(>F)`[1]>= 0.05)  {
+        out = LSD.test(model,"group", p.adj="none")#进行多重比较，不矫正P值
+        aa = out$group#结果显示：标记字母法
+        aa$group = row.names(aa)
+        a = max(aa$dd)*1.2
+        
+        data_box = data_wt[c(1,2,i)]
+        colnames(data_box) = c("ID" , "group","dd" )
+        
+        out = LSD.test(model,"group", p.adj="none") # alternative fdr
+        stat = out$groups
+        data_box$stat=stat[as.character(data_box$group),]$groups
+        max=max(data_box[,c("dd")])
+        min=min(data_box[,c("dd")])
+        x = data_box[,c("group","dd")]
+        y = x %>% group_by(group) %>% summarise_(Max=paste('max(',"dd",')',sep=""))
+        y=as.data.frame(y)
+        rownames(y)=y$group
+        data_box$y=y[as.character(data_box$group),]$Max + (max-min)*0.05
+        
+        ss = round(wtx3$`Pr(>F)`[1],3)
+        
+        # mi=c("#1B9E77" ,"#D95F02", "#7570B3","#E7298A")
+        p = ggplot(data_box, aes(x=group, y=data_box[["dd"]], color=group)) +
+          geom_boxplot(alpha=1, outlier.size=0, size=0.7, width=0.5, fill="transparent") +
+          labs(x=paste(name_i,"box", sep = "_"),
+               y="group",
+               title = paste("Normality test",p1,"Homogeneity of variance",p2,"aov",ss,sep = ":"))+
+          # geom_text(data=data_box, aes(x=group, y=y, color=group, label= stat)) +
+          geom_jitter( position=position_jitter(0.17), size=1, alpha=0.7)+theme(legend.position="none")
+        p
+        p=p+theme_bw()+
+          geom_hline(aes(yintercept=mean(dd)), colour="black", linetype=2) +
+          geom_vline(aes(xintercept=0), colour="black", linetype="dashed") +
+          # scale_fill_manual(values = mi, guide = guide_legend(title = NULL))+
+          theme(
+            
+            panel.grid.major=element_blank(),
+            panel.grid.minor=element_blank(),
+            
+            plot.title = element_text(vjust = -8.5,hjust = 0.1),
+            axis.title.y =element_text(size = 20,face = "bold",colour = "black"),
+            axis.title.x =element_text(size = 24,face = "bold",colour = "black"),
+            axis.text = element_text(size = 20,face = "bold"),
+            axis.text.x = element_text(colour = "black",size = 14),
+            axis.text.y = element_text(colour = "black",size = 14),
+            legend.text = element_text(size = 15,face = "bold"),
+            legend.position = "none"#是否删除图例
+            
+          ) 
+        p
+        if (length(unique(data_box$group))>3){	p=p+theme(axis.text.x=element_text(angle=45,vjust=1, hjust=1))}
+        FileName = paste(name_i,"_aov_nosig_box", ".pdf", sep = "")
+        ggsave(FileName, p, width = 8, height = 8)
+      }
+      
+    }else if (p1 <.05| p2 <.05){
+      p1 = round(p1,3)
+      p2 = round(p2,3)
+      data_i = data_wt[i]
+      ee	=as.matrix(data_i)
+      dd = as.vector(ee)
+      name_i = colnames(data_wt[i])
+      xax = data.frame(dd = dd,group = data_wt$group)
+      krusk=compare_means(dd ~ group, data=xax, method = "kruskal.test")
+      sumkrusk=as.data.frame(krusk)
+      if ( sumkrusk[3]< 0.05) {
+        out = LSD.test(model,"group", p.adj="none")#进行多重比较，不矫正P值
+        aa = out$group#结果显示：标记字母法
+        aa$group = row.names(aa)
+        a = max(aa$dd)*1.2
+        
+        data_box = data_wt[c(1,2,i)]
+        colnames(data_box) = c("ID" , "group","dd" )
+        
+        out = LSD.test(model,"group", p.adj="none") # alternative fdr
+        stat = out$groups
+        data_box$stat=stat[as.character(data_box$group),]$groups
+        max=max(data_box[,c("dd")])
+        min=min(data_box[,c("dd")])
+        x = data_box[,c("group","dd")]
+        y = x %>% group_by(group) %>% summarise_(Max=paste('max(',"dd",')',sep=""))
+        y=as.data.frame(y)
+        rownames(y)=y$group
+        data_box$y=y[as.character(data_box$group),]$Max + (max-min)*0.05
+        
+        
+        
+        # mi=c("#1B9E77" ,"#D95F02", "#7570B3","#E7298A")
+        wtq = levels(data_wt$group)
+        lis = combn(levels(data_wt$group), 2)
+        x =lis
+        my_comparisons = tapply(x,rep(1:ncol(x),each=nrow(x)),function(i)i)
+        
+        p = ggplot(data_box, aes(x=group, y=data_box[["dd"]], color=group)) +
+          geom_boxplot(alpha=1, outlier.size=0, size=0.7, width=0.5, fill="transparent") +
+          labs(x=paste(name_i,"of all group", sep = "_"),
+               y="group",
+               title = paste("Normality test",p1,"Homogeneity of variance",p2,sep = ":"))+
+          # geom_text(data=data_box, aes(x=group, y=y, color=group, label= stat)) +
+          geom_jitter( position=position_jitter(0.17), size=1, alpha=0.7)+theme(legend.position="none")+
+          stat_compare_means()+
+          stat_compare_means(comparisons=my_comparisons,label = "p.signif",hide.ns = F) # Add pairwise 
+        
+        p
+        p=p+theme_bw()+
+          geom_hline(aes(yintercept=mean(dd)), colour="black", linetype=2) +
+          geom_vline(aes(xintercept=0), colour="black", linetype="dashed") +
+          # scale_fill_manual(values = mi, guide = guide_legend(title = NULL))+
+          theme(
+            
+            panel.grid.major=element_blank(),
+            panel.grid.minor=element_blank(),
+            
+            plot.title = element_text(vjust = -8.5,hjust = 0.1),
+            axis.title.y =element_text(size = 20,face = "bold",colour = "black"),
+            axis.title.x =element_text(size = 24,face = "bold",colour = "black"),
+            axis.text = element_text(size = 20,face = "bold"),
+            axis.text.x = element_text(colour = "black",size = 14),
+            axis.text.y = element_text(colour = "black",size = 14),
+            legend.text = element_text(size = 15,face = "bold"),
+            legend.position = "none"#是否删除图例
+            
+          ) 
+        p
+        if (length(unique(data_box$group))>3){	p=p+theme(axis.text.x=element_text(angle=45,vjust=1, hjust=1))}
+        FileName = paste(name_i,"_kruskal.test_wlc_box_", ".pdf", sep = "")
+        ggsave(FileName, p, width = 8, height = 8)
+      }else if ( sumkrusk[3] >= 0.05)  {
+        out = LSD.test(model,"group", p.adj="none")#进行多重比较，不矫正P值
+        aa = out$group#结果显示：标记字母法
+        aa$group = row.names(aa)
+        a = max(aa$dd)*1.2
+        
+        data_box = data_wt[c(1,2,i)]
+        colnames(data_box) = c("ID" , "group","dd" )
+        
+        out = LSD.test(model,"group", p.adj="none") # alternative fdr
+        stat = out$groups
+        data_box$stat=stat[as.character(data_box$group),]$groups
+        max=max(data_box[,c("dd")])
+        min=min(data_box[,c("dd")])
+        x = data_box[,c("group","dd")]
+        y = x %>% group_by(group) %>% summarise_(Max=paste('max(',"dd",')',sep=""))
+        y=as.data.frame(y)
+        rownames(y)=y$group
+        data_box$y=y[as.character(data_box$group),]$Max + (max-min)*0.05
+        
+        ss = round(wtx3$`Pr(>F)`[1],3)
+        
+        # mi=c("#1B9E77" ,"#D95F02", "#7570B3","#E7298A")
+        p = ggplot(data_box, aes(x=group, y=data_box[["dd"]], color=group)) +
+          geom_boxplot(alpha=1, outlier.size=0, size=0.7, width=0.5, fill="transparent") +
+          labs(x=paste(name_i,"box", sep = "_"),
+               y="group",
+               title = paste("Normality test",p1,"Homogeneity of variance",p2,"aov",ss,sep = ":"))+
+          # geom_text(data=data_box, aes(x=group, y=y, color=group, label= stat)) +
+          geom_jitter( position=position_jitter(0.17), size=1, alpha=0.7)+theme(legend.position="none")+
+          stat_compare_means()
+        p
+        p=p+theme_bw()+
+          geom_hline(aes(yintercept=mean(dd)), colour="black", linetype=2) +
+          geom_vline(aes(xintercept=0), colour="black", linetype="dashed") +
+          # scale_fill_manual(values = mi, guide = guide_legend(title = NULL))+
+          theme(
+            
+            panel.grid.major=element_blank(),
+            panel.grid.minor=element_blank(),
+            
+            plot.title = element_text(vjust = -8.5,hjust = 0.1),
+            axis.title.y =element_text(size = 20,face = "bold",colour = "black"),
+            axis.title.x =element_text(size = 24,face = "bold",colour = "black"),
+            axis.text = element_text(size = 20,face = "bold"),
+            axis.text.x = element_text(colour = "black",size = 14),
+            axis.text.y = element_text(colour = "black",size = 14),
+            legend.text = element_text(size = 15,face = "bold"),
+            legend.position = "none"#是否删除图例
+            
+          ) 
+        p
+        if (length(unique(data_box$group))>3){	p=p+theme(axis.text.x=element_text(angle=45,vjust=1, hjust=1))}
+        FileName = paste(name_i,"_kruskal.test_nosig_box", ".pdf", sep = "")
+        ggsave(FileName, p, width = 8, height = 8)
+      }
+      
+      
+    }
+    
+  }
+}
+
+```
+
+## multcomp包多重比较方法
+
+```{r Tukey, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(multcomp)
+
+model=aov(dd ~ group, data=data_wt)#方差分析
+# model=aov(total.ASA.mg.g.1FW. ~ gruop, data=data_wt)#方差分析
+summary(model)
+
+litter.mc = glht(model, linfct = mcp(group = 'Tukey'))
+summary(litter.mc)
+
+insx = cld(litter.mc)
+TUK_a = insx$mcletters$monospacedLetters
+TUK_a = as.data.frame(TUK_a)
+colnames(TUK_a) = c("value_aov")
+head(TUK_a)
+```
