@@ -1,0 +1,6 @@
+USSR	8649	275	Asia
+Canada	3852	25	North_America
+China	3705	1032	Asia
+USA	3615	237	North_America
+Brazil	3286	134	South_America
+India	1267	746	Asia
