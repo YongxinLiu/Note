@@ -55,6 +55,7 @@ while (<INPUT>) {
 	}
 }
 foreach  (keys %seq) {
+#	print $_;
 	print OUTPUT "$_$seq{$_}\n";
 }
 close OUTPUT;
