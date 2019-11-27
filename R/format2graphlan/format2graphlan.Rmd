@@ -1,0 +1,131 @@
+---
+title: "生成GraphLan绘图输入文件"
+author: "Yong-Xin Liu"
+date: "2019/11/25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 基本绘图
+
+OTU表+物种注释
+
+OTU表求均值，筛选
+
+```{r}
+summary(cars)
+```
+
+## 基本绘图+多组均值
+
+OTU表+物种注释+metadata
+
+
+### 按丰度筛选OTU表和物种注释
+```{r }
+plot(pressure)
+```
+
+### 按指定ID筛选
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+### 转换物种注释为graphlan格式
+
+```{r}
+# read taxonomy file, ID, 界-种
+tax = read.table("annotation.txt", sep="\t", header = TRUE, stringsAsFactors = F)
+# make dot seperated tree file
+tree = data.frame(tax[,c(3:7,1)], stringsAsFactors = F)
+head(tree)
+## clarify taxonomy
+tree[,1] = paste("p__",tree[,1],sep = "")
+tree[,2] = paste("c__",tree[,2],sep = "")
+tree[,3] = paste("o__",tree[,3],sep = "")
+tree[,4] = paste("f__",tree[,4],sep = "")
+tree[,5] = paste("g__",tree[,5],sep = "")
+# save tree backbone
+write.table (tree, file="1_tree_plain.txt", sep=".", col.names=F, row.names=F, quote=F)
+
+## make Family annotation files
+# 列出现在有门-背景色、纲、科
+Phylum = unique(tree[,1]) 
+Class = unique(tree[,2])
+Family = unique(tree[,4])
+
+# 筛选四大菌门中的科
+Family_pro = tree[tree[,1]=="p__Proteobacteria",4]
+Family_act = tree[tree[,1]=="p__Actinobacteria",4] 
+Family_bac = tree[tree[,1]=="p__Bacteroidetes",4]
+Family_fir = tree[tree[,1]=="p__Firmicutes",4]
+
+# 对每个科进行标签、文字旋转、按门注释背景色
+annotation_Family = data.frame(stringsAsFactors = F)
+for (element in Family)
+{
+  # element
+  annotation_Family_ind = data.frame(stringsAsFactors = F)
+  annotation_Family_ind[1,1] = element
+  annotation_Family_ind[1,2] = "annotation"
+  annotation_Family_ind[1,3] = "*"
+  # 设置文字旋转90度
+  annotation_Family_ind[2,1] = element
+  annotation_Family_ind[2,2] = "annotation_rotation"
+  annotation_Family_ind[2,3] = "90"
+  # 设置背景色，四大门各指定一种色，其它为灰色
+  annotation_Family_ind[3,1] = element
+  annotation_Family_ind[3,2] = "annotation_background_color" 
+  
+  if (element %in% Family_pro)
+  {
+      annotation_Family_ind[3,3] = "#85F29B"
+  } else if (element %in% Family_act)
+  {
+      annotation_Family_ind[3,3] = "#F58D8D"   
+  } else if (element %in% Family_fir)
+  {
+      annotation_Family_ind[3,3] = "#F7C875"  
+  } else if (element %in% Family_bac)
+  {
+      annotation_Family_ind[3,3] = "#91DBF6"   
+  } else {
+      annotation_Family_ind[3,3] = "grey"   
+  }
+  annotation_Family = rbind(annotation_Family,annotation_Family_ind)
+}
+write.table(annotation_Family, "2_annotation_Family.txt", sep = "\t", quote = F,col.names = F,row.names = F, na="")
+
+
+
+# make match anotation file
+# 添加注释符号
+
+annotation_match = data.frame(stringsAsFactors = F)
+
+for (i in 1:length(tax[,1])){
+    annotation_match_ind = data.frame(stringsAsFactors = F)
+#    print(i)
+    if (tax[i,2]=="YES"){
+        annotation_match_ind[1,1] = tax[i,1]
+        annotation_match_ind[1,2] = "ring_shape"
+        annotation_match_ind[1,3] = 1
+        annotation_match_ind[1,4] = "R"
+        annotation_match = rbind(annotation_match, annotation_match_ind)   
+    }
+    
+    
+}
+
+#length(annotation_match[,1])
+write.table (annotation_match, file="3_annotation_match.txt", sep = "\t", quote = F,col.names = F,row.names = F, na="")
+
+
+
+rm(list=ls())
+
+```
+
+
+## 基本绘图+差异比较
