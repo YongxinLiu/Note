@@ -9,123 +9,332 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 基本绘图
+# GraphLan绘制教程
 
-OTU表+物种注释
 
-OTU表求均值，筛选
+我们经常在文章中看到这样的图
+
+![image](http://210.75.224.110/Note/R/format2graphlan/example1.jpg)
+
+> Yang Bai, Daniel B. Müller, Girish Srinivas, Ruben Garrido-Oter, Eva Potthoff, Matthias Rott, Nina Dombrowski, Philipp C. Münch, Stijn Spaepen, Mitja Remus-Emsermann, Bruno Hüttel, Alice C. McHardy, Julia A. Vorholt & Paul Schulze-Lefert. Functional overlap of the Arabidopsis leaf and root microbiota. Nature. 2015, 528: 364-369. doi:10.1038/nature16192
+
+还有这样的图
+
+![image](http://210.75.224.110/Note/R/format2graphlan/example2.jpg)
+
+> Jingying Zhang, Yong-Xin Liu, Na Zhang, Bin Hu, Tao Jin, Haoran Xu, Yuan Qin, Pengxu Yan, Xiaoning Zhang, Xiaoxuan Guo, Jing Hui, Shouyun Cao, Xin Wang, Chao Wang, Hui Wang, Baoyuan Qu, Guangyi Fan, Lixing Yuan, Ruben Garrido-Oter, Chengcai Chu & Yang Bai. NRT1.1B is associated with root microbiota composition and nitrogen use in field-grown rice. Nature Biotechnology. 2019, 37: 676-684. doi:10.1038/s41587-019-0104-4
+
+**是不是很漂亮**
+
+之前公众号已经为大家介绍了GraPhlAn进化树的绘制方法，如下文：
+
+- [GraPhlAn：最美进化树或层级分类树](https://mp.weixin.qq.com/s/pR7uKYxlXad9fBp7o-vkMA)
+
+今天就带大家根据特征表、和物种注释，绘制另一类高颜值的物种树。并提供相关测试数据、代码，让你准备好输入文件，方便准备所有需文件。并可按需求组合数据和样式，达到出版要求的图片。
+
+为防止链接失效，回复graphlan关键字获取最新数据和代码下载链接。
+
+## 输入文件
+
+文件夹内要准备至少两个文件：OTU表和物种注释
+
+    # 从现在项目中复制起始数据
+    cd ~/github/Note/R/format2graphlan
+    cp ~/ehbio/amplicon/22Pipeline/result/otutab.txt ./
+    cp ~/ehbio/amplicon/22Pipeline/result/taxonomy.txt ./
+
+OTU表`otutab.txt`格式如下：行为特征OTU/ASV，列为样本名，可以为原始值或标准化的小数均可
+
+    #OTUID  KO1     KO2     KO3   
+    ASV_1   1113    1968    816   
+    ASV_2   1922    1227    2355  
+    ASV_3   568     460     899   
+
+物种注释`taxonomy.txt`：包括OTUID和7级注释，末知的补Unassigned
+
+    OTUID   Kingdom Phylum  Class   Order   Family  Genus   Species
+    ASV_1   Bacteria        Actinobacteria  Actinobacteria  Actinomycetales Thermomonosporaceae     Unassigned      Unassigned
+    ASV_2   Bacteria        Proteobacteria  Betaproteobacteria      Burkholderiales Comamonadaceae  Pelomonas       Pelomonas_puraquae
+    ASV_3   Bacteria        Proteobacteria  Gammaproteobacteria     Pseudomonadales Pseudomonadaceae        Rhizobacter     Rhizobacter_bergeniae
+
+首选我们要对原始数据进行筛选，因为结果过少或过多都不美观。如根据丰度进行筛选Top 150的特征进行展示。
+
+## 特征表求均值并按丰度筛选
+
+输入文件：OTU表+物种注释
+
+可以指定丰度或数量筛选，两者取最小部分
+
+输出文件：OTU对应均值，筛选的OTU表+物种注释
 
 ```{r}
-summary(cars)
+# 参数设置
+# 按丰度筛选，如0.01即代表0.01%，即万分之一
+abundance = 0.01
+# 按数量筛选，如150即代表最高丰度的150个特征
+number = 150
+
+# 读取输入文件
+otutab = read.table("otutab.txt", sep="\t", header = TRUE, row.names = 1, stringsAsFactors = F, comment.char = "")
+taxonomy = read.table("taxonomy.txt", sep="\t", header = TRUE, row.names = 1, stringsAsFactors = F, comment.char = "")
+
+
+# 数据筛选
+# 标准化并求均值
+norm = as.data.frame(t(t(otutab)/colSums(otutab,na=T)*100))
+# 丰度由大到小排序
+idx = order(rowMeans(norm), decreasing = T)
+norm = norm[idx,]
+# 按丰度筛选
+idx = rowMeans(norm) > abundance
+filtered_otutab = norm[idx,]
+# 按数量筛选
+filtered_otutab = head(norm, number)
+# 添加均值并保留4位小数
+filtered_otutab = round(cbind(rowMeans(filtered_otutab), filtered_otutab), digits = 4)
+colnames(filtered_otutab)[1] = "Mean"
+# 对应过滤物种注释
+idx = rownames(filtered_otutab) %in% rownames(taxonomy)
+filtered_otutab = filtered_otutab[idx,]
+filtered_taxonomy = taxonomy[rownames(filtered_otutab),]
+
+# 保存输出文件
+# 过滤的OTU表
+write.table("OTUID\t", file="filtered_otutab.txt", append = F, sep="\t", quote=F, eol = "", row.names=F, col.names=F)
+suppressWarnings(write.table(filtered_otutab, file="filtered_otutab.txt", append = T, sep="\t", quote=F, row.names=T, col.names=T))
+# 过滤的物种注释
+write.table("OTUID\t", file="filtered_taxonomy.txt", append = F, sep="\t", quote=F, eol = "", row.names=F, col.names=F)
+suppressWarnings(write.table(filtered_taxonomy, file="filtered_taxonomy.txt", append = T, sep="\t", quote=F, row.names=T, col.names=T))
 ```
 
-## 基本绘图+多组均值
+### 绘制树骨架
 
-OTU表+物种注释+metadata
-
-
-### 按丰度筛选OTU表和物种注释
-```{r }
-plot(pressure)
-```
-
-### 按指定ID筛选
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
-### 转换物种注释为graphlan格式
+输入文件为筛选后的taxonomy文件：filtered_taxonomy.txt
 
 ```{r}
-# read taxonomy file, ID, 界-种
-tax = read.table("annotation.txt", sep="\t", header = TRUE, stringsAsFactors = F)
-# make dot seperated tree file
+# 读取筛选后的文件，不设置行名
+tax = read.table("filtered_taxonomy.txt", sep="\t", header = TRUE, stringsAsFactors = F)
+# 筛选门-属5级+OTUID
 tree = data.frame(tax[,c(3:7,1)], stringsAsFactors = F)
-head(tree)
-## clarify taxonomy
+# head(tree)
+## clarify taxonomy，解决不同级别重名问题，为可识别级别，且与Greengene格式保持一致
 tree[,1] = paste("p__",tree[,1],sep = "")
 tree[,2] = paste("c__",tree[,2],sep = "")
 tree[,3] = paste("o__",tree[,3],sep = "")
-tree[,4] = paste("f__",tree[,4],sep = "")
+# tree[,4] = paste("f__",tree[,4],sep = "")
 tree[,5] = paste("g__",tree[,5],sep = "")
-# save tree backbone
-write.table (tree, file="1_tree_plain.txt", sep=".", col.names=F, row.names=F, quote=F)
+# save tree backbone, 按点分隔格式
 
-## make Family annotation files
-# 列出现在有门-背景色、纲、科
+# 解决科标签重名问题
+idx = tree[,4] %in% "Unassigned"
+# 方法1. 重名标签添加数字编号，但结果有太多Unassigned
+# tree[idx,4] = paste0(tree[idx,4], 1:length(tree[idx,4]))
+# 方法2. 过滤掉科末注释的条目，数量会减少，但图片更美观
+tree = tree[!idx,]
+# 简化一些代_的不规则科名
+tree[,4] = gsub('_\\w*',"",tree[,4])
+write.table (tree, file="tree1_backbone.txt", sep=".", col.names=F, row.names=F, quote=F)
+
+# 列出现在有门、纲、目、科、属，用于设置与门对应的背景色
 Phylum = unique(tree[,1]) 
 Class = unique(tree[,2])
+Order = unique(tree[,3])
 Family = unique(tree[,4])
+Genus = unique(tree[,5])
 
-# 筛选四大菌门中的科
-Family_pro = tree[tree[,1]=="p__Proteobacteria",4]
-Family_act = tree[tree[,1]=="p__Actinobacteria",4] 
-Family_bac = tree[tree[,1]=="p__Bacteroidetes",4]
-Family_fir = tree[tree[,1]=="p__Firmicutes",4]
+# 筛选四大菌门中的科并按门着色
+# 修改为目，则将tree的4列改为3列，Family改为Order
+pro = tree[tree[,1]=="p__Proteobacteria",4]
+act = tree[tree[,1]=="p__Actinobacteria",4] 
+bac = tree[tree[,1]=="p__Bacteroidetes",4]
+fir = tree[tree[,1]=="p__Firmicutes",4]
 
 # 对每个科进行标签、文字旋转、按门注释背景色
-annotation_Family = data.frame(stringsAsFactors = F)
+# 也可调整为其它级别，如Order, Class或Genus
+label_color = data.frame(stringsAsFactors = F)
 for (element in Family)
 {
   # element
-  annotation_Family_ind = data.frame(stringsAsFactors = F)
-  annotation_Family_ind[1,1] = element
-  annotation_Family_ind[1,2] = "annotation"
-  annotation_Family_ind[1,3] = "*"
+  anno = data.frame(stringsAsFactors = F)
+  anno[1,1] = element
+  anno[1,2] = "annotation"
+  anno[1,3] = "*"
   # 设置文字旋转90度
-  annotation_Family_ind[2,1] = element
-  annotation_Family_ind[2,2] = "annotation_rotation"
-  annotation_Family_ind[2,3] = "90"
+  anno[2,1] = element
+  anno[2,2] = "annotation_rotation"
+  anno[2,3] = "90"
   # 设置背景色，四大门各指定一种色，其它为灰色
-  annotation_Family_ind[3,1] = element
-  annotation_Family_ind[3,2] = "annotation_background_color" 
+  anno[3,1] = element
+  anno[3,2] = "annotation_background_color" 
   
-  if (element %in% Family_pro)
+  if (element %in% pro)
   {
-      annotation_Family_ind[3,3] = "#85F29B"
-  } else if (element %in% Family_act)
+      anno[3,3] = "#85F29B"
+  } else if (element %in% act)
   {
-      annotation_Family_ind[3,3] = "#F58D8D"   
-  } else if (element %in% Family_fir)
+      anno[3,3] = "#F58D8D"   
+  } else if (element %in% fir)
   {
-      annotation_Family_ind[3,3] = "#F7C875"  
-  } else if (element %in% Family_bac)
+      anno[3,3] = "#F7C875"  
+  } else if (element %in% bac)
   {
-      annotation_Family_ind[3,3] = "#91DBF6"   
+      anno[3,3] = "#91DBF6"   
   } else {
-      annotation_Family_ind[3,3] = "grey"   
+      anno[3,3] = "grey"   
   }
-  annotation_Family = rbind(annotation_Family,annotation_Family_ind)
+  label_color = rbind(label_color,anno)
 }
-write.table(annotation_Family, "2_annotation_Family.txt", sep = "\t", quote = F,col.names = F,row.names = F, na="")
-
-
-
-# make match anotation file
-# 添加注释符号
-
-annotation_match = data.frame(stringsAsFactors = F)
-
-for (i in 1:length(tax[,1])){
-    annotation_match_ind = data.frame(stringsAsFactors = F)
-#    print(i)
-    if (tax[i,2]=="YES"){
-        annotation_match_ind[1,1] = tax[i,1]
-        annotation_match_ind[1,2] = "ring_shape"
-        annotation_match_ind[1,3] = 1
-        annotation_match_ind[1,4] = "R"
-        annotation_match = rbind(annotation_match, annotation_match_ind)   
-    }
-    
-    
-}
-
-#length(annotation_match[,1])
-write.table (annotation_match, file="3_annotation_match.txt", sep = "\t", quote = F,col.names = F,row.names = F, na="")
-
-
-
-rm(list=ls())
-
+write.table(label_color, "tree2_label_color.txt", sep = "\t", quote = F,col.names = F,row.names = F, na="")
 ```
 
+## 基本树绘图
 
-## 基本绘图+差异比较
+绘制树，还需要一些参数文件，见cfg目录，可以调整更多样式。
+
+`cfg/global.cfg`设置了图型的基本样式，配色等，
+
+以下部分以bash中操作，需要在Linux上的Rstudio或Rstudio server中操作。或自己使用终端连接服务器执行
+
+```{bash}
+rm -rf track*
+# 生成树的默认参数，可手动调整更多样式
+cat cfg/global.cfg tree2_label_color.txt > track0
+# 合并所有的注释，接下来会生成更多track，使树更复杂
+cat track* > graphlan_annotate.txt
+# 注释树
+graphlan_annotate.py --annot graphlan_annotate.txt tree1_backbone.txt graphlan.xml
+# 绘图，size决定图片大小，越大字越小
+graphlan.py graphlan.xml graphlan1_tree.pdf --size 5
+```
+
+![image](http://210.75.224.110/Note/R/format2graphlan/graphlan0_tree.jpg)
+
+我们需要从树文件中获得节点名称，并添加注释数据。
+
+如获得结点的丰度，在下面很多注释都会基于丰度信息
+
+```{bash}
+# 获得最终出图的结点ID
+cut -f 6 -d '.' tree1_backbone.txt > tree1_backbone.id
+# 注释结果丰度均值
+awk 'BEGIN{OFS=FS="\t"} NR==FNR{a[$1]=$2} NR>FNR {print $1,a[$1]}' filtered_otutab.txt tree1_backbone.id > tree1_backbone.mean
+```
+
+## 形状标签有无
+
+样式1. 如筛选丰度，用紫色方块标出大于千分之5的结点
+
+```{bash}
+# 环1筛选千分之五的结果注释为方块，cfg/ring1.cfg中的m代表紫色，R代表方块
+cat cfg/ring1.cfg <(awk '$2>0.5' tree1_backbone.mean | cut -f 1 | sed 's/$/\tring_shape\t1\tR/') > track1
+
+# 绘图，加第一环矩形，展示丰度大于千万的特征
+cat track* > graphlan_annotate.txt
+graphlan_annotate.py --annot graphlan_annotate.txt tree1_backbone.txt graphlan.xml
+graphlan.py graphlan.xml graphlan1_rectangle.pdf --size 5
+```
+
+![image](http://210.75.224.110/Note/R/format2graphlan/graphlan1_rectangle.jpg)
+
+
+样式2. 如筛选丰度，用第二环位置橙色倒三角标出小于千分之5的结点
+
+注释：ring2.cfg为第二环，颜色y为yellow橙色，注释track中也为2
+
+```{bash}
+# 环1筛选千分之五的结果注释为方块，cfg/ring1.cfg中的m代表紫色，R代表方块
+cat cfg/ring2.cfg <(awk '$2<=0.5' tree1_backbone.mean | cut -f 1 | sed 's/$/\tring_shape\t2\tv/') > track2
+
+# 绘图，加第一环矩形，展示丰度大于千万的特征
+cat track* > graphlan_annotate.txt
+graphlan_annotate.py --annot graphlan_annotate.txt tree1_backbone.txt graphlan.xml
+graphlan.py graphlan.xml graphlan2_triangle.pdf --size 5
+```
+
+![image](http://210.75.224.110/Note/R/format2graphlan/graphlan2_triangle.jpg)
+
+
+## 热图展示丰度
+
+添加所有样品均值作为热图，作为第3环。
+
+本质上热图即环形条带的透明度
+
+```{bash}
+# 环1筛选千分之五的结果注释为方块，cfg/ring1.cfg中的m代表紫色，R代表方块
+cat cfg/heat3.cfg <(sed 's/\t/\tring_alpha\t3\t/g' tree1_backbone.mean) > track3
+
+# 绘图，加第一环矩形，展示丰度大于千万的特征
+cat track* > graphlan_annotate.txt
+graphlan_annotate.py --annot graphlan_annotate.txt tree1_backbone.txt graphlan.xml
+graphlan.py graphlan.xml graphlan3_heatmap.pdf --size 5
+```
+
+![image](http://210.75.224.110/Note/R/format2graphlan/graphlan3_heatmap.jpg)
+
+我们可以用同样原理，添加每个组，或每个样品的丰度热图。
+
+
+## 柱状图显示丰度
+
+```{bash}
+# 环1筛选千分之五的结果注释为方块，cfg/ring1.cfg中的m代表紫色，R代表方块
+cat cfg/bar4.cfg <(sed 's/\t/\tring_height\t4\t/g' tree1_backbone.mean) > track4
+
+# 绘图，加第一环矩形，展示丰度大于千万的特征
+cat track* > graphlan_annotate.txt
+graphlan_annotate.py --annot graphlan_annotate.txt tree1_backbone.txt graphlan.xml
+graphlan.py graphlan.xml graphlan4_bar.pdf --size 5
+```
+
+![image](http://210.75.224.110/Note/R/format2graphlan/graphlan4_bar.jpg)
+
+## 附录1. 颜色
+
+颜色有三种设置方法
+
+1. 颜色英文名称
+
+blue, green, red, cyan, magenta, yellow, black, white
+
+2. 单个字母的缩写
+
+'b' (blue), 'g' (green), 'r' (red), 'c' (cyan), 'm' (magenta), 'y' (yellow), 'k' (black), 'w' (white)
+
+3. RGB模式颜色 
+
+  #rrggbb, for example #FF0000 corresponds to (full) red
+
+## 附录2. 形状选择
+
+- '.' : 点 point marker
+- ',' : pixel marker
+- 'o' : 圈 circle marker
+- 'v' : 下三角 triangle_down marker
+- '^' : triangle_up marker
+- '<' : triangle_left marker
+- '>' : triangle_right marker
+- '1' : tri_down marker
+- '2' : tri_up marker
+- '3' : tri_left marker
+- '4' : tri_right marker
+- 's' : square marker
+- 'R' : 矩阵 rectangle marker
+- 'p' : pentagon marker
+- '*' : star marker
+- 'h' : hexagon1 marker
+- 'H' : hexagon2 marker
+- '+' : plus marker
+- 'x' : x marker
+- 'D' : diamond marker
+- 'd' : thin_diamond marker
+- '|' : vline marker
+- '_' : hline marker
+
+
+## Reference
+
+http://huttenhower.sph.harvard.edu/graphlan
+
+
+

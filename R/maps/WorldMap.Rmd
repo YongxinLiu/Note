@@ -1,0 +1,41 @@
+---
+title: "World map"
+author: "Yong-Xin Liu"
+date: "2019/11/28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 绘制世界地图的画法
+
+https://mp.weixin.qq.com/s/A3vOOfjVEi_eIzKdmXuoZA
+
+```{r world_map}
+# install.packages("maps") ## 安装R包
+# install.packages("ggplot2")
+library("ggplot2") ### 加载ggplot2
+library("maps") ### 加载地图包
+world_map <- map_data("world") ### 导入地图数据 
+head(world_map) ### 看看地图数据是啥样子
+world_map$size <- 1:dim(world_map)[1] ### 生产一些随机的数据
+
+### 画图开始 ####
+ggplot(world_map, aes(x = long, y = lat, group = group, fill = size)) +
+  geom_polygon(colour = "white",size=0.2) + scale_fill_distiller(palette = "YlGnBu",direction = 1)
+```
+
+## 地图数据与画图参数讲解
+
+world_map初始样子就是下面这个样子，有6列数据，分别是经度，维度，组别，顺序，国家，地区
+
+
+现在我们需要按照一些特性，给不同国家画上不同颜色，使地图更有意义。比如每个国家博士数量，GDP，国足进世界杯次数，SCI文章数量，搜集的小麦材料各个国家占比等等。
+
+这里我们使用一个随机的数据。world_map$size <- 1:dim(world_map)[1]数值是从1到n的数据，没啥具体的含义，就为了一个例子。
+
+
+
+我们画自己的图就只要修改这个数据，怎么修改呢？可以使用write.csv把地图数据写出来（这是个exel格式）然后用read.csv再读进去就可以了。

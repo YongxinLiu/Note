@@ -1,0 +1,98 @@
+
+
+
+## annotation_background_edge_color is default local annotation color
+annotation_background_edge_color 
+
+ring_width	2	0.35
+ring_height	2	0.45
+ring_color	2	y
+
+ASV_32	ring_shape	2	v
+ASV_34	ring_shape	2	v
+ASV_36	ring_shape	2	v
+ASV_43	ring_shape	2	v
+ASV_37	ring_shape	2	v
+ASV_52	ring_shape	2	v
+ASV_47	ring_shape	2	v
+ASV_38	ring_shape	2	v
+ASV_41	ring_shape	2	v
+ASV_46	ring_shape	2	v
+ASV_42	ring_shape	2	v
+ASV_45	ring_shape	2	v
+ASV_40	ring_shape	2	v
+ASV_48	ring_shape	2	v
+ASV_44	ring_shape	2	v
+ASV_50	ring_shape	2	v
+ASV_49	ring_shape	2	v
+ASV_53	ring_shape	2	v
+ASV_51	ring_shape	2	v
+ASV_57	ring_shape	2	v
+ASV_55	ring_shape	2	v
+ASV_56	ring_shape	2	v
+ASV_59	ring_shape	2	v
+ASV_62	ring_shape	2	v
+ASV_67	ring_shape	2	v
+ASV_61	ring_shape	2	v
+ASV_65	ring_shape	2	v
+ASV_63	ring_shape	2	v
+ASV_77	ring_shape	2	v
+ASV_66	ring_shape	2	v
+ASV_69	ring_shape	2	v
+ASV_71	ring_shape	2	v
+ASV_72	ring_shape	2	v
+ASV_70	ring_shape	2	v
+ASV_73	ring_shape	2	v
+ASV_74	ring_shape	2	v
+ASV_76	ring_shape	2	v
+ASV_75	ring_shape	2	v
+ASV_80	ring_shape	2	v
+ASV_90	ring_shape	2	v
+ASV_86	ring_shape	2	v
+ASV_78	ring_shape	2	v
+ASV_87	ring_shape	2	v
+ASV_83	ring_shape	2	v
+ASV_85	ring_shape	2	v
+ASV_89	ring_shape	2	v
+ASV_93	ring_shape	2	v
+ASV_92	ring_shape	2	v
+ASV_114	ring_shape	2	v
+ASV_100	ring_shape	2	v
+ASV_104	ring_shape	2	v
+ASV_96	ring_shape	2	v
+ASV_106	ring_shape	2	v
+ASV_109	ring_shape	2	v
+ASV_98	ring_shape	2	v
+ASV_99	ring_shape	2	v
+ASV_113	ring_shape	2	v
+ASV_108	ring_shape	2	v
+ASV_103	ring_shape	2	v
+ASV_105	ring_shape	2	v
+ASV_115	ring_shape	2	v
+ASV_111	ring_shape	2	v
+ASV_112	ring_shape	2	v
+ASV_117	ring_shape	2	v
+ASV_119	ring_shape	2	v
+ASV_126	ring_shape	2	v
+ASV_125	ring_shape	2	v
+ASV_116	ring_shape	2	v
+ASV_134	ring_shape	2	v
+ASV_118	ring_shape	2	v
+ASV_120	ring_shape	2	v
+ASV_129	ring_shape	2	v
+ASV_135	ring_shape	2	v
+ASV_123	ring_shape	2	v
+ASV_137	ring_shape	2	v
+ASV_127	ring_shape	2	v
+ASV_133	ring_shape	2	v
+ASV_156	ring_shape	2	v
+ASV_128	ring_shape	2	v
+ASV_136	ring_shape	2	v
+ASV_154	ring_shape	2	v
+ASV_141	ring_shape	2	v
+ASV_153	ring_shape	2	v
+ASV_140	ring_shape	2	v
+ASV_172	ring_shape	2	v
+ASV_144	ring_shape	2	v
+ASV_147	ring_shape	2	v
+ASV_159	ring_shape	2	v
