@@ -1,0 +1,250 @@
+---
+title: "ggcor"
+author: "Wen Tao, test by Liu Yong-Xin"
+date: "2019/12/9"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## ggcor
+
+install
+
+```{r install}
+if(!require(devtools))
+  install.packages("devtools")
+if(!require(ggcor))
+  devtools::install_github("houyunhuang/ggcor")
+```
+
+```{r}
+suppressWarnings(suppressMessages(library("ggcor")))
+corr <- cor(mtcars)
+df <- as_cor_tbl(corr)
+df ## return a tibble
+```
+
+
+```{r}
+#这里不仅仅展示了相关值，而且展示了置信区间,geom_cross用于排除不显著相关。
+ggcor(mtcars, type = "full", cor.test = TRUE) + geom_confbox()+ geom_cross()
+```
+
+```{r}
+# 这里使用方形我觉得高档一些，本人比较喜欢
+ggcor(mtcars, type = "full", cor.test = TRUE) +
+  geom_square() + geom_cross()
+```
+
+配合颜色填充和相关标注，加上显著性标签很容易整体把控指标的相关性。使用r = 这里厚哥添加的五角星，我们来了解一下。
+
+```{r}
+# 这里使用方形我觉得高档一些，本人比较喜欢
+ggcor(mtcars, type = "full", cor.test = TRUE) +
+  # geom_square() +
+  geom_star(n = 5)+
+  geom_cross()
+```
+
+NA参数去除相关值，因为颜色已经表示过相关大小了，值就省略掉吧,mark = "*"参数规范统一的显著性标签。
+
+```{r}
+#配合颜色填充和相关标注，加上显著性标签很容易整体把控指标的相关性。使用r = NA参数去除相关值，因为颜色已经表示过相关大小了，值就省略掉吧,mark = "*"参数规范统一的显著性标签。
+ggcor(mtcars, type = "full", cor.test = TRUE, cluster.type = "all") +
+  # geom_raster() +
+  geom_colour()+
+  geom_mark(r = NA,sig.thres = 0.05, size = 3, colour = "grey90")
+```
+非对称相关图形可以节省空间，很多人曾求助怎么做，其实就是将最后的出图矩阵做相应的裁剪就好了，之前我都是自己裁剪的，现在厚哥包装进去了，方便了很多。
+
+```{r}
+# 非对称相关图形可以节省空间，很多人曾求助怎么做，其实就是将最后的出图矩阵做相应的裁剪就好了，之前我都是自己裁剪的，现在厚哥包装进去了，方便了很多。
+suppressWarnings(suppressMessages(library(vegan))) # 使用vegan包所带的数据集
+data(varechem)
+data(varespec)
+df03 <- fortify_cor(x = varechem, y = varespec[ , 1:30], cluster.type = "col")
+ggcor(df03) + geom_square()
+```
+群落矩阵和环境因子相关
+
+```{r}
+corr <- fortify_cor(varechem, type = "upper", show.diag = TRUE,
+                    cor.test = TRUE, cluster.type = "all")
+mantel <- fortify_mantel(varespec, varechem,
+                                spec.select = list(spec01 = 22:25,
+                                                   spec02 = 1:4,
+                                                   spec03 = 38:43,
+                                                   spec04 = 15:20),
+                                mantel.fun = "mantel.randtest")
+ggcor(corr, xlim = c(-5, 14.5)) +
+  add_link(mantel, diag.label = TRUE) +
+  add_diaglab(angle = 45) +
+  geom_square() + remove_axis("y")
+```
+另外一种方式组合
+
+```{r}
+library(cowplot)
+
+mantel <- fortify_mantel(varespec, varechem,
+                                spec.select = list(spec01 = 22:25,
+                                                   spec02 = 1:4,
+                                                   spec03 = 38:43,
+                                                   spec04 = 15:20),
+                                mantel.fun = "mantel.randtest")
+mantel$p <- cut(mantel$p, breaks = c(0, 0.001, 0.01, 0.05, 1),
+              labels = c("< 0.001", "< 0.01", "< 0.05", ">= 0.05"),
+              right = FALSE, include.lowest = TRUE)
+p1 <- ggcor(varechem) + geom_square() + remove_axis("x")
+p2 <- ggcor(mantel, mapping = aes(fill = p), is.minimal = TRUE, keep.name = TRUE) +
+  geom_star(aes(r = 0.65), n = 5, ratio = 0.6) +
+  scale_fill_manual(values = c("darkgreen", "green", "lightgreen", "grey95"),
+                    drop = FALSE)
+plot_grid(p1, p2, ncol = 1, align = "v", labels = c('A', 'B'),
+          rel_heights = c(0.13*dim( varechem)[2], 1))
+```
+## 微生物生态学领域实战
+
+基于phloseq我开发了一系列基于扩增子的数据分析脚本，我也将再不久将这个脚本纳入，这里大家必须学习phyloseq的封装格式和基本用法。
+
+```{r}
+library("phyloseq")
+# library(microbiomeSeq)
+library("vegan")
+library("grid")
+library("gridExtra")
+library("ggplot2")
+ps = readRDS(".//ps_OTU_.rds")
+ps1 = ps
+ps1 = filter_taxa(ps1, function(x) sum(x ) > 200 , TRUE);ps1
+ps1  = transform_sample_counts(ps1, function(x) x / sum(x) );ps1
+
+```
+
+```{r}
+path = "./phyloseq_5_RDA_CCA_cor/"
+dir.create(path)
+
+vegan_otu <-  function(physeq){
+  OTU <-  otu_table(physeq)
+  if(taxa_are_rows(OTU)){
+    OTU <-  t(OTU)
+  }
+  return(as(OTU,"matrix"))
+}
+otu = as.data.frame(t(vegan_otu(ps1)))
+
+mapping = as.data.frame( sample_data(ps1))
+env.dat = mapping[,3:ncol(sample_data(ps1))]
+env.st = decostand(env.dat, method="standardize", MARGIN=2)#
+env_dat = env.st
+```
+
+```{r}
+ggcor(env_dat, type = "full", cor.test = TRUE) + geom_confbox()+ geom_cross()
+
+```
+```{r}
+# 这里使用方形我觉得高档一些，本人比较喜欢
+ggcor(env_dat, type = "full", cor.test = TRUE) +
+  geom_square() + geom_cross()
+```
+
+```{r}
+#配合颜色填充和相关标注，加上显著性标签很容易整体把控指标的相关性。使用r = NA参数去除相关值，因为颜色已经表示过相关大小了，值就省略掉吧,mark = "*"参数规范统一的显著性标签。
+ggcor(env_dat, type = "full", cor.test = TRUE, cluster.type = "all") +
+  # geom_raster() +
+  geom_colour()+
+  geom_mark(r = NA,sig.thres = 0.05, size = 3, colour = "grey90")
+```
+
+```{r}
+# 非对称相关图形可以节省空间，很多人曾求助怎么做，其实就是将最后的出图矩阵做相应的裁剪就好了，之前我都是自己裁剪的，现在厚哥包装进去了，方便了很多。
+#计算相关
+#太多OTU展示起来不太好看，这里我选择30个展示
+ss = t(otu)[,1:30]
+df03 <- fortify_cor(x = env_dat, y = ss, cluster.type = "col")
+ggcor(df03) + geom_square()
+```
+
+```{r}
+#转置otu表格，作为第一个群落
+otu2 = t(otu)
+#同样赋值为第二个群落
+otu3 = t(otu)
+#无论多少个群落，将其使用list包起来，注意设置名称
+spe = list(A = otu2,B = otu3)
+
+
+#计算环境因子相关
+corr <- fortify_cor(env_dat , type = "upper", show.diag = TRUE,
+                    cor.test = TRUE, cluster.type = "all")
+#计算环境因子和群落相关
+mantel <- fortify_mantel(spe , env_dat,
+                         # spec.select = list(A = 1:dim(otu2)[2]),
+                         mantel.fun = "mantel")
+
+#出图
+ggcor(corr, xlim = c(-5,(dim(env_dat)[2] +0.5))) +
+  add_link(mantel, diag.label = TRUE) +
+  add_diaglab(angle = 45) +
+  geom_square() + remove_axis("y")
+```
+```{r}
+#转置otu表格，作为第一个群落
+otu2 = t(otu)
+#同样赋值为第二个群落
+otu3 = t(otu)
+#无论多少个群落，将其使用list包起来，注意设置名称
+spe = list(A = otu2,B = otu3,C = otu3,D = otu3)
+
+corr <- fortify_cor(env_dat , type = "upper", show.diag = TRUE,
+                    cor.test = TRUE, cluster.type = "all")
+
+mantel <- fortify_mantel(spe , env_dat ,
+                         # spec.select = list(A = 1:dim(otu2)[2]),
+                         mantel.fun = "mantel")
+
+
+ggcor(corr, xlim = c(-5, (dim(env_dat)[2] +0.5))) +
+  add_link(mantel, diag.label = TRUE) +
+  add_diaglab(angle = 45) +
+  # geom_square() +
+  geom_star(n = 5)+
+  remove_axis("y")
+```
+
+```{r}
+library(cowplot)
+#转置otu表格，作为第一个群落
+otu2 = t(otu)
+#同样赋值为第二个群落
+otu3 = t(otu)
+#无论多少个群落，将其使用list包起来，注意设置名称
+spe = list(A = otu2,B = otu3,C = otu3,D = otu3)
+
+corr <- fortify_cor(env_dat , type = "upper", show.diag = TRUE,
+                    cor.test = TRUE, cluster.type = "all")
+
+mantel <- fortify_mantel(spe , env_dat ,
+                         # spec.select = list(A = 1:dim(otu2)[2]),
+                         mantel.fun = "mantel")
+
+mantel$p <- cut(mantel$p, breaks = c(0, 0.001, 0.01, 0.05, 1),
+              labels = c("< 0.001", "< 0.01", "< 0.05", ">= 0.05"),
+              right = FALSE, include.lowest = TRUE)
+p1 <- ggcor(env_dat) +
+  # geom_square() +
+  geom_star(n = 5)+
+  remove_axis("x")
+p2 <- ggcor(mantel, mapping = aes(fill = p), is.minimal = TRUE, keep.name = TRUE) +
+  geom_star(aes(r = 0.65), n = 5, ratio = 0.6) +
+  scale_fill_manual(values = c("darkgreen", "green", "lightgreen", "grey95"),
+                    drop = FALSE)
+plot_grid(p1, p2, ncol = 1, align = "v", labels = c('A', 'B'),
+          rel_heights = c(0.155*dim(env_dat)[2], 1))
+```
+
