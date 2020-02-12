@@ -30,25 +30,16 @@
                   <name>ASV_51</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#47B3DA</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.3273</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.3273</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_7</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#47B3DA</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">1.6109</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">1.6109</property>
                 </clade>
                 <clade>
                   <name>ASV_12</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#47B3DA</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.9574</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.9574</property>
                 </clade>
               </clade>
             </clade>
@@ -77,9 +68,6 @@
                   <name>ASV_112</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#47B3DA</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1439</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1439</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -115,17 +103,11 @@
                   <name>ASV_172</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#F7A415</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1045</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1045</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_43</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#F7A415</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.4619</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.4619</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -161,33 +143,21 @@
                   <name>ASV_8</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">1.6852</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">1.6852</property>
                 </clade>
                 <clade>
                   <name>ASV_159</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1025</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1025</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_16</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.8863</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.8863</property>
                 </clade>
                 <clade>
                   <name>ASV_106</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1621</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1621</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -206,17 +176,11 @@
                   <name>ASV_53</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.3273</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.3273</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_113</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.153</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.153</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -235,33 +199,21 @@
                   <name>ASV_109</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1593</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1593</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_154</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1106</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1106</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_19</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.6882</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.6882</property>
                 </clade>
                 <clade>
                   <name>ASV_49</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.3543</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.3543</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -272,17 +224,11 @@
                   <name>ASV_20</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.6691</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.6691</property>
                 </clade>
                 <clade>
                   <name>ASV_23</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.5354</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.5354</property>
                 </clade>
               </clade>
               <clade>
@@ -293,25 +239,16 @@
                   <name>ASV_45</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.372</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.372</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_18</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.7894</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.7894</property>
                 </clade>
                 <clade>
                   <name>ASV_42</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.4029</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.4029</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -322,17 +259,11 @@
                   <name>ASV_116</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1338</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1338</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_69</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2364</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2364</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -343,25 +274,16 @@
                   <name>ASV_25</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.5791</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.5791</property>
                 </clade>
                 <clade>
                   <name>ASV_92</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1753</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1753</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_26</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.5459</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.5459</property>
                 </clade>
               </clade>
             </clade>
@@ -380,9 +302,6 @@
                   <name>ASV_34</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.4792</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.4792</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -401,9 +320,6 @@
                   <name>ASV_86</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1977</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1977</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -414,9 +330,6 @@
                   <name>ASV_52</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.4497</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.4497</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -427,17 +340,11 @@
                   <name>ASV_9</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">1.3253</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">1.3253</property>
                 </clade>
                 <clade>
                   <name>ASV_31</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.5412</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.5412</property>
                 </clade>
               </clade>
               <clade>
@@ -448,9 +355,6 @@
                   <name>ASV_117</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1419</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1419</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -469,9 +373,6 @@
                   <name>ASV_1</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">4.104</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">4.104</property>
                 </clade>
               </clade>
               <clade>
@@ -482,9 +383,6 @@
                   <name>ASV_28</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.7265</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.7265</property>
                 </clade>
               </clade>
             </clade>
@@ -503,9 +401,6 @@
                   <name>ASV_120</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1291</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1291</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -516,9 +411,6 @@
                   <name>ASV_21</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.5732</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.5732</property>
                 </clade>
               </clade>
               <clade>
@@ -529,33 +421,21 @@
                   <name>ASV_59</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.3042</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.3042</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_137</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1224</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1224</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_87</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1896</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1896</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_126</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1362</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1362</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -574,17 +454,11 @@
                   <name>ASV_135</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1235</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1235</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_125</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#EF5656</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1358</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1358</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -620,25 +494,16 @@
                   <name>ASV_76</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2077</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2077</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_133</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1202</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1202</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_93</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1814</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1814</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -649,17 +514,11 @@
                   <name>ASV_80</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2061</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2061</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_70</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2295</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2295</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -678,41 +537,26 @@
                   <name>ASV_77</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2495</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2495</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_89</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1831</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1831</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_153</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1075</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1075</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_37</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.4608</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.4608</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_119</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1397</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1397</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -723,17 +567,11 @@
                   <name>ASV_33</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.6034</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.6034</property>
                 </clade>
                 <clade>
                   <name>ASV_46</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.4042</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.4042</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -757,17 +595,11 @@
                   <name>ASV_3</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">2.5544</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">2.5544</property>
                 </clade>
                 <clade>
                   <name>ASV_4</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">2.1439</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">2.1439</property>
                 </clade>
               </clade>
               <clade>
@@ -778,17 +610,11 @@
                   <name>ASV_67</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2776</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2776</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_90</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2029</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2029</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -817,9 +643,6 @@
                   <name>ASV_114</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1717</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1717</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -848,17 +671,11 @@
                   <name>ASV_147</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1025</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1025</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_63</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2531</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2531</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -882,9 +699,6 @@
                   <name>ASV_140</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1055</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1055</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -903,9 +717,6 @@
                   <name>ASV_71</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2343</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2343</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -916,9 +727,6 @@
                   <name>ASV_24</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.5376</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.5376</property>
                 </clade>
               </clade>
             </clade>
@@ -942,9 +750,6 @@
                   <name>ASV_66</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2421</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2421</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -968,9 +773,6 @@
                   <name>ASV_65</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2551</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2551</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -981,25 +783,16 @@
                   <name>ASV_15</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.967</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.967</property>
                 </clade>
                 <clade>
                   <name>ASV_74</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2235</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2235</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_27</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.5207</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.5207</property>
                 </clade>
               </clade>
             </clade>
@@ -1018,17 +811,11 @@
                   <name>ASV_10</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">1.1733</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">1.1733</property>
                 </clade>
                 <clade>
                   <name>ASV_129</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1261</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1261</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -1039,17 +826,11 @@
                   <name>ASV_29</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.5121</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.5121</property>
                 </clade>
                 <clade>
                   <name>ASV_108</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1506</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1506</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -1060,17 +841,11 @@
                   <name>ASV_62</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2866</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2866</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_48</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.3704</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.3704</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -1089,9 +864,6 @@
                   <name>ASV_134</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1329</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1329</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -1102,9 +874,6 @@
                   <name>ASV_103</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1491</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1491</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -1123,25 +892,16 @@
                   <name>ASV_96</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1638</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1638</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_105</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1479</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1479</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_56</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.3059</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.3059</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -1152,9 +912,6 @@
                   <name>ASV_156</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1168</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1168</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -1183,25 +940,16 @@
                   <name>ASV_50</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.3641</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.3641</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_83</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1885</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1885</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_38</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.4221</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.4221</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -1212,73 +960,46 @@
                   <name>ASV_61</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2676</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2676</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_99</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1543</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1543</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_57</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.3196</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.3196</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_115</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1478</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1478</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_36</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.4678</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.4678</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_41</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.4065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.4065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_144</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1038</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1038</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_141</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1102</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1102</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_73</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2269</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2269</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -1289,9 +1010,6 @@
                   <name>ASV_11</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">1.0611</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">1.0611</property>
                 </clade>
               </clade>
               <clade>
@@ -1302,17 +1020,11 @@
                   <name>ASV_98</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1586</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1586</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_85</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1862</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1862</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -1331,9 +1043,6 @@
                   <name>ASV_100</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1694</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1694</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -1344,49 +1053,31 @@
                   <name>ASV_75</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2075</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2075</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_47</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.4275</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.4275</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_111</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1456</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1456</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_17</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.8238</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.8238</property>
                 </clade>
                 <clade>
                   <name>ASV_13</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">1.0223</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">1.0223</property>
                 </clade>
                 <clade>
                   <name>ASV_128</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1168</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1168</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -1397,9 +1088,6 @@
                   <name>ASV_2</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">3.8206</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">3.8206</property>
                 </clade>
               </clade>
               <clade>
@@ -1410,9 +1098,6 @@
                   <name>ASV_104</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1674</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1674</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -1423,17 +1108,11 @@
                   <name>ASV_72</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.2323</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.2323</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_118</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1319</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1319</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -1444,17 +1123,11 @@
                   <name>ASV_32</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.4844</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.4844</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_44</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.3658</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.3658</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -1473,17 +1146,11 @@
                   <name>ASV_127</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1217</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1217</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_136</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1158</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1158</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -1494,9 +1161,6 @@
                   <name>ASV_123</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.123</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.123</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
               <clade>
@@ -1507,9 +1171,6 @@
                   <name>ASV_55</name>
                   <branch_length>1.0</branch_length>
                   <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2BB065</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.3154</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.3154</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -1537,16 +1198,10 @@
                 <clade>
                   <name>ASV_78</name>
                   <branch_length>1.0</branch_length>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.1955</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.1955</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
                 <clade>
                   <name>ASV_40</name>
                   <branch_length>1.0</branch_length>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">0.3711</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">0.3711</property>
-                  <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">v</property>
                 </clade>
               </clade>
             </clade>
@@ -1554,19 +1209,6 @@
         </clade>
       </clade>
     </clade>
-    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">m</property>
-    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">y</property>
-    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">green</property>
-    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__4__ring_color" ref="A:1">blue</property>
-    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__1__ring_width" ref="A:1">0.35</property>
-    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__2__ring_width" ref="A:1">0.35</property>
-    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__3__ring_width" ref="A:1">1</property>
-    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__4__ring_width" ref="A:1">0.5</property>
-    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__1__ring_shape" ref="A:1">R</property>
-    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__2__ring_shape" ref="A:1">R</property>
-    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__1__ring_height" ref="A:1">0.45</property>
-    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__2__ring_height" ref="A:1">0.45</property>
-    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__4__ring_height" ref="A:1">-1.0</property>
     <property applies_to="phylogeny" datatype="xsd:string" id_ref="annotation_background_width" ref="A:1">0.60</property>
     <property applies_to="phylogeny" datatype="xsd:string" id_ref="start_rotation" ref="A:1">-96</property>
     <property applies_to="phylogeny" datatype="xsd:string" id_ref="annotation_background_separation" ref="A:1">-0.5</property>
@@ -1574,9 +1216,6 @@
     <property applies_to="phylogeny" datatype="xsd:string" id_ref="branch_thickness" ref="A:1">0.75</property>
     <property applies_to="phylogeny" datatype="xsd:string" id_ref="total_plotted_degrees" ref="A:1">360</property>
     <property applies_to="phylogeny" datatype="xsd:string" id_ref="clade_separation" ref="A:1">0.0</property>
-    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__3__ring_alpha" ref="A:1">1.0</property>
-    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__3__ring_internal_separator_thickness" ref="A:1">0.5</property>
-    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__4__ring_internal_separator_thickness" ref="A:1">0.5</property>
     <property applies_to="phylogeny" datatype="xsd:string" id_ref="clade_marker_size" ref="A:1">16</property>
     <property applies_to="phylogeny" datatype="xsd:string" id_ref="branch_bracket_depth" ref="A:1">0.8</property>
     <property applies_to="phylogeny" datatype="xsd:string" id_ref="branch_bracket_width" ref="A:1">0.5</property>
