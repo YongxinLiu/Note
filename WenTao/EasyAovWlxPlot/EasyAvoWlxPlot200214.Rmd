@@ -1,0 +1,513 @@
+---
+title: "EasyAovWlxPlot"
+author: "Liu Yong-Xin"
+date: "2020/2/14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## 写在前面
+
+最初这份脚本是这样的：[R语言一键批量完成差异统计和可视化](https://mp.weixin.qq.com/s/IGrj81ZzfEF8aXYIMhBh7A)。当时我们发布的版本，我封装的比较简单，每个步骤不能分开跑，只能按照流程从一而终，后来我做[升级版：查看升级版本](https://mp.weixin.qq.com/s/2_4cTHnP8ojzKzjxbAbYxw)，将多重比较方法和可视化进行了丰富，再后来我发现正态分布函数错误，所以又进行了[更正：查看更正版本](https://mp.weixin.qq.com/s/SuJEyiY1nRVui6BlbYLsuQ)，最后就是咱们这篇教程了。
+
+作为宏基因组副主编，我觉得有责任将这件事情做到底。过于厚实的封装让大家无法体会到每个步骤的输入输出，所以我将整体部分分为了多个步骤，按照**数据检验--统计分析--图表展示，这三个步骤**来做，思路清晰，一目了然。将这套统计分析整理成了多个函数，提供每个模块的操作，同时又可以一体化实现统计分析，错误也修改了，大家各种需求我也添加了，所以这个R包就到可以写的时候了，前几天我完成了这个事情。目前已经可以安装了。也欢迎大家到我的GitHub上访问，说来惭愧，目前有几个都是不成熟的项目。
+
+下面这张建议的图形我在ppt里面做的，希望可以让大家明白这个R包的思路。下面我就要开始介绍这个R包的功能啦。
+
+![图0](http://210.75.224.110/Note/WenTao/20200116DIFF/0.png)
+
+
+
+## EasyAovWlxPlot 使用指南
+
+### 安装EasyAovWlxPlot包
+安装包我已经在两台win10上测试过并且在ubuuntu服务器上也可以正常安装，希望大家也安装顺利。
+```{R}
+library(devtools)
+# install_github("taowenmicro/EasyAovWlxPlot")
+```
+
+### 导入包
+```{R}
+library(EasyAovWlxPlot)
+library(ggplot2)
+#使用内置数据
+data(data_wt)
+```
+
+内置数据集介绍： 这是四个处理的土壤的化学性质指标测定的结果，前两列分别是样本名称，分组信息，第3列到第12列是不同指标
+
+```
+ ID group    AK        AP      bac    fun   micro   NH4-N   NO3-N    pH      SOM       TN
+1   CF1    CF 303.6  77.82301 12000000  72000 1668000  9.6432 70.0112 9.216 29.04867 5.076147
+2   CF2    CF 298.8  73.97303 14400000  36000 1500000  9.7314 71.6282 8.340 28.46617 5.013429
+3   CF3    CF 294.0  91.16963 10800000  36000  648000  9.2022 90.1894 8.604 28.48510 5.244267
+4   CK1    CK 242.4 112.72954 30000000  84000 1788000  9.9960 79.3604 3.600  5.11066 4.969990
+5   CK2    CK 273.6  94.07850 26400000  48000  720000  9.7902 82.2220 3.720 24.68137 4.812697
+6   CK3    CK 270.0 102.80513  7200000  48000  996000  9.6726 79.8602 3.720 25.07207 4.843911
+7  Rhi1   Rhi 330.0  91.25518 33600000 264000 2628000  9.4668 56.0756 9.108 34.30180 6.058957
+8  Rhi2   Rhi 343.2  92.88073 39600000 240000 2112000 10.0548 55.6052 9.372 33.37313 5.927957
+9  Rhi3   Rhi 344.4  87.49075 30000000 228000 2520000  9.6432 55.4386 8.784 31.50144 5.227732
+10  WT1    WT 338.4  90.57074 19200000  60000 1572000 10.0254 73.4412 8.676 31.00468 5.216963
+11  WT2    WT 356.4 101.17958 18000000  36000 1584000  9.1728 91.3262 8.604 32.59705 5.543280
+12  WT3    WT 360.0  92.45295 14400000  36000 1284000  9.0552 93.6782 7.980 32.01826 5.279473
+```
+
+
+### 基于单个指标的统计分析
+
+#### 正态检验和方差齐性分析NorNorCVTest
+
+```{R}
+?NorNorCVTest
+##使用案例
+NorCV = NorNorCVTest(data = data_wt, i= 4, method_cv = "leveneTest")
+#提取正态检验结果
+NorCV[[1]]
+#提取方差齐性检验结果
+NorCV[[2]]
+```
+
+正态检验结果：这里一共有五行，前四行是每个处理的正态检验结果，最后一列标记了是否符合正态分布，显然这里四个组数据都符合正态分布。
+
+```
+            No         Name         W   p.value norm.test
+1            1           CF 0.9077245 0.4105296      Norm
+2            2           CK 0.9986271 0.9292195      Norm
+3            3          Rhi 0.9501277 0.5698609      Norm
+4            4           WT 0.8781602 0.3190147      Norm
+5 Test Method: Shapiro-Wilk        NA        NA      <NA>
+```
+
+方差齐性结果，大于0.05，表明符合方差齐性
+
+```
+[1] 0.6944591
+```
+
+#### 方差分析(aovMcomper)
+
+- data: 输入数据框，第一列为样本编号，第二列为分组，注意分组标签必须设定为group，第三列以后就是测定或者收集的指标了;
+
+- i: 代表您想要进行统计的列，比如：第三列：i = 3;
+
+- method_Mc: 选择需要使用的多重比较方法，这里又多种方法可供选择：method_Mc == "LSD"; method_Mc == "SNK"; method_Mc == "Duncan"; method_Mc == "scheffe";
+
+```{R}
+# ?aovMcomper
+result= aovMcomper (data = data_wt, i= 5, method_Mc = "Tukey")
+# 提取多重比较结果
+result[[1]]
+#提取方差检验结果
+result[[2]]
+```
+result[[1]]结果展示：groups是多重比较结果，group是分组信息。
+
+```
+result[[1]]
+    groups group
+CF      a     CF
+CK      ab    CK
+Rhi      b   Rhi
+WT      ab    WT
+```
+result[[2]]展示反方差分析结果。
+
+```
+Call:
+   aov(formula = count ~ group, data = ss)
+
+Terms:
+                     group  Residuals
+Sum of Squares  8.0292e+14 3.6672e+14
+Deg. of Freedom          3          8
+
+Residual standard error: 6770524
+Estimated effects may be unbalanced
+```
+
+
+#### 非参数检验(KwWlx)
+
+两个参数代表的意义与方差分析的两个相同；这里窝都会重复写上，相信大家在看完这篇推送后就熟练整个R包中仅仅不到10个的参数啦。
+
+- data: 输入数据框，第一列为样本编号，第二列为分组，注意分组标签必须设定为group，第三列以后就是妮妮测定或者收集的指标了
+
+- i: 代表您想要进行统计的列，比如：第三列：i = 3
+
+
+```{R}
+# ?KwWlx
+res = KwWlx(data = data_wt, i= 4)
+# 调用非参数两两比较结果：字母标记展示
+res[[1]]
+#表格展示两两之间差异结果
+res[[2]]
+```
+res[[1]]我设置的输出和上一个函数一样，所以更方便大家解读了，第一个结果我整理成两两比对的形式，如果显著会添加* 号来标记。如果不显著则显示“ns”。
+
+res[[2]] 表格展示
+
+```
+  .y. group1 group2   p p.adj p.format p.signif   method
+1 count     CF     CK 0.1   0.6      0.1       ns Wilcoxon
+2 count     CF    Rhi 0.2   0.8      0.2       ns Wilcoxon
+3 count     CF     WT 0.2   0.8      0.2       ns Wilcoxon
+4 count     CK    Rhi 0.1   0.6      0.1       ns Wilcoxon
+5 count     CK     WT 0.2   0.8      0.2       ns Wilcoxon
+6 count    Rhi     WT 0.7   0.8      0.7       ns Wilcoxon
+> 
+```
+
+####  柱状图展示方差分析或非参数检验结果(aovMuiBarPlot)
+
+- data：输入数据框，第一列为样本编号，第二列为分组，注意分组标签必须设定为group，第三列以后就是测定或者收集的指标了
+
+- i：代表您想要进行统计的列，比如：第三列：i = 3
+
+- sig_show：代表差异展示方式；sig_show ="abc"是使用字母表示;sig_show ="line"是使用连线和星号表示；如果是NA，那么就不显示显著性结果
+
+- result：代表显著性差异分析结果，是一个数据框，第一列是显著性差异字母，第二列是分组group
+
+```{R}
+# ?aovMuiBarPlot
+###----使用方差检验结果和多重比较结果做展示：  柱状图展示
+PlotresultBar = aovMuiBarPlot(data = data_wt, i= 3, sig_show ="abc", result = result[[1]])
+```
+
+```
+#提取结果
+PlotresultBar[[1]]
+```
+
+![图1](http://210.75.224.110/Note/WenTao/20200116DIFF/1.png)
+
+```
+#提取方差分析或非参数检验结果
+PlotresultBar[[2]]
+```
+
+处理图形展示外，我们将出图数据保存到list2中，供大家调用。
+
+```
+ Row.names groups group  mean        SD
+1        CF     a     CF 298.8  4.800000
+2        CK     ab    CK 262.0 17.069271
+3       Rhi      b   Rhi 339.2  7.989994
+4        WT     ab    WT 351.6 11.572381
+```
+
+#### 箱线图展示方差分析或非参数检验结果(aovMuiBoxP)
+
+- data：输入数据框，第一列为样本编号，第二列为分组，注意分组标签必须设定为group，第三列以后就是测定或者收集的指标了；
+
+- i：代表您想要进行统计的列，比如：第三列：i = 3；
+
+- sig_show：代表差异展示方式；sig_show ="abc"是使用字母表示;sig_show ="line"是使用连线和星号表示；如果是NA，那么就不显示显著性结果；
+
+- result：代表显著性差异分析结果，是一个数据框，第一列是显著性差异字母，第二列是分组group；
+
+```{R}
+# ?aovMuiBoxP
+# #使用案例
+PlotresultBox = aovMuiBoxP(data = data_wt, i=3, sig_show ="abc", result = result[[1]])
+```
+
+```
+#提取图片
+p = PlotresultBox[[1]]
+p
+```
+
+![图2](http://210.75.224.110/Note/WenTao/20200116DIFF/2.png)
+
+```
+# 提取检验结果
+PlotresultBox[[2]]
+```
+
+除了输出箱线图外，还可以得到作图数据文件。
+
+```
+    ID group    dd stat      y
+1   CF1    CF 303.6   a  309.48
+2   CF2    CF 298.8   a  309.48
+3   CF3    CF 294.0   a  309.48
+4   CK1    CK 242.4   ab 279.48
+5   CK2    CK 273.6   ab 279.48
+6   CK3    CK 270.0   ab 279.48
+7  Rhi1   Rhi 330.0    b 350.28
+8  Rhi2   Rhi 343.2    b 350.28
+9  Rhi3   Rhi 344.4    b 350.28
+10  WT1    WT 338.4   ab 365.88
+11  WT2    WT 356.4   ab 365.88
+12  WT3    WT 360.0   ab 365.88
+```
+
+### 多指标统计分析
+
+#### 多个指标同时做正态检验和方差齐性分析(MuiNorCV)
+
+这里对多组数据进行分析，正态检验和方差齐性结果我时用T或F代表，方便阅读。
+
+- data：输入数据框，第一列为样本编号，第二列为分组，注意分组标签必须设定为group，第三列以后就是测定或者收集的指标了；
+
+- num：代表您想要进行统计的列,这里可以输入多个列，只需要指定列号即可：例如：num = c(4:6)；
+
+- method_cv：代表选择方差齐性的方法，有两种可供选择：method_cv == "bartlett.test" ;method_cv == "leveneTest"；
+
+```{R}
+dim(data_wt)
+# ?MuiNorCV
+# 使用案例
+norCv = MuiNorCV(data = data_wt,num = c(4:10),method_cv = "leveneTest")
+#展示正态检验和方差齐性结果
+norCv
+```
+
+cor列是正态检验结果，TRUE就是符合正态分布，FALSE就是不符合
+
+CV是指方差齐性分析结果，TURE为符合或者FALSE不符合。
+
+```
+    DI      cor     CV    
+[1,] "AP"    "TRUE"  "TRUE"
+[2,] "bac"   "TRUE"  "TRUE"
+[3,] "fun"   "FALSE" "TRUE"
+[4,] "micro" "TRUE"  "TRUE"
+[5,] "NH4-N" "TRUE"  "TRUE"
+[6,] "NO3-N" "TRUE"  "TRUE"
+```
+
+
+#### 多个指标方差检验(MuiaovMcomper)
+
+- data：输入数据框，第一列为样本编号，第二列为分组，注意分组标签必须设定为group，第三列以后就是你测定或者收集的指标
+
+- num：代表您想要进行统计的列,这里可以输入多个列，只需要指定列号即可：例如：num = c(4:6)
+
+- method_Mc：选择需要使用的多重比较方法，这里又多种方法可供选择：method_Mc == "LSD";method_Mc == "SNK";method_Mc == "Duncan";method_Mc == "scheffe"
+
+
+```{R}
+# ? MuiaovMcomper
+# #使用案例
+result = MuiaovMcomper(data = data_wt, num = c(4:6), method_Mc = "Tukey")
+#提取每个指标方差检验多重比较结果
+result
+```
+
+结果展示：多个指标按照列排布。
+
+```
+  AP bac fun
+CF  a   a   a 
+CK   b  ab  a 
+Rhi ab   b   b
+WT  ab  ab  a 
+```
+
+
+#### 多个指标非参数检验(MuiKwWlx)
+
+- data：输入数据框，第一列为样本编号，第二列为分组，注意分组标签必须设定为group，第三列以后就是测定或者收集的指标了
+
+- num：代表您想要进行统计的列,这里可以输入多个列，只需要指定列号即可：例如：num = c(4:6)
+
+```{R}
+# ? MuiKwWlx
+# #使用案例
+result = MuiKwWlx(data = data_wt,num = c(4:6))
+#提取每个指标非参数检验多重比较结果
+result
+```
+
+非参数检验也是类似的结果展示方式。
+
+
+#### 多组数据差异分析柱状图(MuiPlotresultBar)
+
+我让该函数自动保存每个指标的出图文件到当前文件夹中。这些文件以该指标名称命名；
+
+
+- data：输入数据框，第一列为样本编号，第二列为分组，注意分组标签必须设定为group，第三列以后就是测定或者收集的指标了
+
+- num：代表您想要进行统计的列,这里可以输入多个列，只需要指定列号即可：例如：num = c(4:6)
+
+- sig_show：代表差异展示方式；sig_show ="abc"是使用字母表示;sig_show ="line"是使用连线和星号表示；如果是NA，那么就不显示显著性结果
+
+- result：代表显著性差异分析结果，是一个数据框，每一列是显著性标记字母,MuiKwWlx
+
+```{R}
+# ?MuiPlotresultBar
+# # #使用案例
+result = MuiKwWlx(data = data_wt, num = c(4:6))
+result
+# #结果直接输出到文件夹中
+MuiPlotresultBar(data = data_wt,num = c(4:6),result = result ,sig_show ="line")
+```
+
+这个函数并不展示图表，因为是批量出图，加入你要做几千个指标，我都把图表存起来，就太可怕的，所以我会在你当前工作路径下建立一个名为Muibar的文件夹，将图表全部输出到其中。
+
+![图3](http://210.75.224.110/Note/WenTao/20200116DIFF/3.png)
+
+#### 多组数据差异分析箱线图(MuiPlotresultBox)
+
+我让该函数自动保存每个指标的出图文件到当前文件夹中。这些文件以该指标名称命名；
+
+
+- data：输入数据框，第一列为样本编号，第二列为分组，注意分组标签必须设定为group，第三列以后就是妮妮测定或者收集的指标了
+
+- num：代表您想要进行统计的列,这里可以输入多个列，只需要指定列号即可：例如：num = c(4:6)
+
+- sig_show：代表差异展示方式；sig_show ="abc"是使用字母表示;sig_show ="line"是使用连线和星号表示；如果是NA，那么就不显示显著性结果
+
+- result：代表显著性差异分析结果，是一个数据框，每一列是显著性标记字母,MuiKwWlx
+
+```{R}
+# ?MuiPlotresultBox
+#使用案例
+result = MuiKwWlx(data = data_wt,num = c(4:8))
+result
+# #直接出图到文件夹中
+MuiPlotresultBox(data = data_wt,num = c(4:8),result = result,sig_show ="abc")
+```
+
+这个函数并不展示图表，因为是批量出图，加入你要做几千个指标，我都把图表存起来，就太可怕的，所以我会在你当前工作路径下建立一个名为Muibox的文件夹，将图表全部输出到其中。
+
+![图4](http://210.75.224.110/Note/WenTao/20200116DIFF/4.png)
+
+#### 差异结果分面柱状图(FacetMuiPlotresultBar)
+
+单个图形的展示可能满足我们的要求，此时分面图形在补一刀
+
+- data：输入数据框，第一列为样本编号，第二列为分组，注意分组标签必须设定为group，第三列以后就是妮妮测定或者收集的指标了
+
+- num：代表您想要进行统计的列,这里可以输入多个列，只需要指定列号即可：例如：num = c(4:6)
+- sig_show：代表差异展示方式；sig_show ="abc"是使用字母表示;sig_show ="line"是使用连线和星号表示；如果是NA，那么就不显示显著性结果
+- result：代表显著性差异分析结果，是一个数据框，每一列是显著性标记字母,MuiKwWlx
+- ncol:代表分面展示每一行放几张图
+
+```{R}
+# ?FacetMuiPlotresultBar
+# # #使用案例
+result = MuiaovMcomper(data = data_wt,num = c(4:10),method_Mc = "Tukey")
+result
+result1 = FacetMuiPlotresultBar(data = data_wt,num = c(4:10),result = result,sig_show ="abc",ncol = 3)
+result1[[1]]
+```
+![图5](http://210.75.224.110/Note/WenTao/20200116DIFF/5.png)
+
+#### 差异分面箱线图(FacetMuiPlotresultBox)
+
+- data：输入数据框，第一列为样本编号，第二列为分组，注意分组标签必须设定为group，第三列以后就是妮妮测定或者收集的指标了
+
+- num：代表您想要进行统计的列,这里可以输入多个列，只需要指定列号即可：例如：num = c(4:6)
+
+- sig_show：代表差异展示方式；sig_show ="abc"是使用字母表示;sig_show ="line"是使用连线和星号表示；如果是NA，那么就不显示显著性结果
+
+- result：代表显著性差异分析结果，是一个数据框，每一列是显著性标记字母,MuiKwWlx
+- ncol:代表分面展示每一行放几张图
+
+```{R}
+# ?FacetMuiPlotresultBox
+# #使用案例
+result = MuiaovMcomper(data = data_wt,num = c(4:10),method_Mc = "Tukey")
+result
+#
+result1 = FacetMuiPlotresultBox(data = data_wt,num = c(4:10),result = result,sig_show ="abc",ncol = 2 )
+result1[[1]] + theme_bw()
+```
+
+![图6](http://210.75.224.110/Note/WenTao/20200116DIFF/6.png)
+
+### 单个指标一体化分析(SingleStat)
+
+这个函数可以将我们的目标列做正态检验和方差齐性，然后根据结果选择方差检验或者多重比较方法，最后选择自己需要的出图方式和显著性标记方式展示。
+
+- data：输入数据框，第一列为样本编号，第二列为分组，注意分组标签必须设定为group，第三列以后就是测定或者收集的指标了
+
+- i：代表您想要进行统计的列，比如：第三列：i = 3
+
+- method_Mc：选择需要使用的多重比较方法，这里又多种方法可供选择：method_Mc == "LSD";method_Mc == "SNK";method_Mc == "Duncan";method_Mc == "scheffe"
+
+- plot：可以选择需要的出图类型，柱状图和箱线图
+
+
+```{R}
+# ?SingleStat
+# # #使用案例
+# #输出结果第一个为图片，第二个是统计结果，第三个是统计方法
+result = SingleStat(data = data_wt,plot = "bar",method_Mc = "Tukey",i= 4,sig_show ="abc")
+# #导出图片
+p = result[[1]]
+p
+```
+
+![图7](http://210.75.224.110/Note/WenTao/20200116DIFF/7.png)
+
+### 多个指标一体化分析(MuiStat)
+
+实现了多个指标批量整体运行；这个函数可以将我们的目标列做正态检验和方差齐性，然后根据结果选择方差检验或者多重比较方法，最后选择自己需要的出图方式和显著性标记方式展示。
+
+data：输入数据框，第一列为样本编号，第二列为分组，注意分组标签必须设定为group，第三列以后就是测定或者收集的指标了
+
+num：代表您想要进行统计的列,这里可以输入多个列，只需要指定列号即可：例如：num = c(4:6)
+
+method_cv：代表选择方差齐性的方法，有两种可供选择：method_cv == "bartlett.test" ;method_cv == "leveneTest"
+
+method_Mc：选择需要使用的多重比较方法，这里又多种方法可供选择：method_Mc == "LSD";method_Mc == "SNK";method_Mc == "Duncan";method_Mc == "scheffe"
+
+plot：可以选择需要的出图类型，柱状图和箱线图
+
+sig_show：代表差异展示方式；sig_show ="abc"是使用字母表示;sig_show ="line"是使用连线和星号表示；如果是NA，那么就不显示显著性结果
+
+ncol：代表分面展示每一行放几张图
+
+plottype：输出图形是分面展示plottype =mui，还是单张展示:plottype == "single"
+
+```{R}
+# ?MuiStat
+#使用案例
+result = MuiStat(data = data_wt,num = c(4:10),method_cv = "leveneTest",method_Mc = "Tukey",sig_show  = "abc",ncol = 4,plot = "box",plottype = "mui")
+result[[1]]
+```
+
+![图8](http://210.75.224.110/Note/WenTao/20200116DIFF/8.png)
+
+作者：文涛 南京农业大学
+
+责编：刘永鑫 中科院遗传发育所
+
+## 猜你喜欢
+
+- 10000+: [菌群分析](https://mp.weixin.qq.com/s/F8Anj9djawaFEUQKkdE1lg)  
+[宝宝与猫狗](http://mp.weixin.qq.com/s/K3y3an-EaX8iaytmxdzHqA) [提DNA发Nature](http://mp.weixin.qq.com/s/lO5uiMjixJ6aYTjPX-IyaQ) [实验分析谁对结果影响大](http://mp.weixin.qq.com/s/cL_IAoPFfmelKMPMgltrfA)  [Cell微生物专刊](https://mp.weixin.qq.com/s/fN0gpD3bZJDXSp8x4ck-3Q) [肠道指挥大脑](https://mp.weixin.qq.com/s/pZO20VGl3Tf_OtFIbZ-zWw)
+- 系列教程：[微生物组入门](http://mp.weixin.qq.com/s/sQyl5EctXFB95Oxg8YIasg) [Biostar](http://mp.weixin.qq.com/s/JL-n2nD6YL8vwuRtTVmQlQ) [微生物组](http://mp.weixin.qq.com/s/li7SdZVaCEyFQF8h6MMh2A)  [宏基因组](http://mp.weixin.qq.com/s/bcyvhFrNr6niqD13rQfZeg) 
+- 专业技能：[生信宝典](http://mp.weixin.qq.com/s/2b3_8Vvv7McqCkEfUszW3A) [学术图表](http://mp.weixin.qq.com/s/SCT4oso_vI0UNIJZTaG95g) [高分文章](http://mp.weixin.qq.com/s/kD-x7K4hI5KMgGXikyLt0Q) [不可或缺的人](http://mp.weixin.qq.com/s/1nf7vwyvC3oemkTq_pu87A) 
+- 一文读懂：[宏基因组](http://mp.weixin.qq.com/s/Vsm6BJgqsSvxEenIBrGVLw) [寄生虫益处](https://mp.weixin.qq.com/s/hX0K9TOLPnrZ6f8lUoSYag) [进化树](https://mp.weixin.qq.com/s/GV8rU3FZdc8Y-x931k_yrQ)
+- 必备技能：[提问](http://mp.weixin.qq.com/s/xCif04bqZB14Z4OvesK0SQ) [搜索](http://mp.weixin.qq.com/s/wn2bqIPgT5UD-GP1qzkJFA)  [Endnote](http://mp.weixin.qq.com/s/SPblPs5ByPdb2C400kIK3w)
+- 文献阅读 [热心肠](http://mp.weixin.qq.com/s/1uBeAQ0utxuzTTtfUx_UXA) [SemanticScholar](https://mp.weixin.qq.com/s/gaQiUrRqLpfTXzjyfbua6A) [Geenmedical](https://mp.weixin.qq.com/s/hc8g64aHN7qv8YhVfrsuvQ)
+- 扩增子分析：[图表解读](http://mp.weixin.qq.com/s/oiVHO2S1JgYrKXPDU6fH2g) [分析流程](http://mp.weixin.qq.com/s/KrYyy3jjzAL0rQzVfV6h4A) [统计绘图](http://mp.weixin.qq.com/s/6tNePiaDsPPzEBZjiCXIRg) 
+- [16S功能预测](http://mp.weixin.qq.com/s/sztbvfdf9wa-3HJXc_m8TQ)   [PICRUSt](https://mp.weixin.qq.com/s/LWtiwBbUCAadMZPaKKDMag)  [FAPROTAX](http://mp.weixin.qq.com/s/J8EwJD_PTDhqRaD7kXlK1A)  [Bugbase](https://mp.weixin.qq.com/s/1WdysPZWo0H6NSYiNpcMUQ) [Tax4Fun](http://mp.weixin.qq.com/s/dzsh44ue93xnAs7gTde7wg)
+- 在线工具：[16S预测培养基](http://mp.weixin.qq.com/s/YIrDqNvDX0XMazCGxhH1Lg) [生信绘图](http://mp.weixin.qq.com/s/O0QAQyfxnrXlFLw268B7lg)
+- 科研经验：[云笔记](http://mp.weixin.qq.com/s/OnwhWlq3cTycf-W1rxgV7g)  [云协作](http://mp.weixin.qq.com/s/W5By9mZ5PI57_xFfZ_JXiw) [公众号](http://mp.weixin.qq.com/s/hd0sdBDAMqMJsXQs0pIjUg)
+- 编程模板: [Shell](http://mp.weixin.qq.com/s/YevGR79NnBAF-xtrqL8gAA)  [R](http://mp.weixin.qq.com/s/OQiE882jM6pVwqTiIjyZ1Q) [Perl](http://mp.weixin.qq.com/s/u2ZmTo-z6cbN-L6KVLYNwg) 
+- 生物科普: [肠道细菌](http://mp.weixin.qq.com/s/3T768LA6MWujF4yuzK4MKQ) [人体上的生命](http://mp.weixin.qq.com/s/_DUI6tOYTEq0Wu7K7iRTxw) [生命大跃进](http://mp.weixin.qq.com/s/O_0Il0G_v_aSwkUH_noZVA)  [细胞暗战](http://mp.weixin.qq.com/s/M35ebWAelDIK5Iqib06JzA) [人体奥秘](https://mp.weixin.qq.com/s/xlCdN8il1hcutkYK-42fAQ)  
+
+## 写在后面
+
+为鼓励读者交流、快速解决科研困难，我们建立了“宏基因组”专业讨论群，目前己有国内外5000+ 一线科研人员加入。参与讨论，获得专业解答，欢迎分享此文至朋友圈，并扫码加主编好友带你入群，务必备注“姓名-单位-研究方向-职称/年级”。技术问题寻求帮助，首先阅读[《如何优雅的提问》](http://mp.weixin.qq.com/s/H9gkepap0hy3NNskOkO44w)学习解决问题思路，仍末解决群内讨论，问题不私聊，帮助同行。
+![image](http://bailab.genetics.ac.cn/markdown/life/yongxinliu.jpg)
+
+学习扩增子、宏基因组科研思路和分析实战，关注“宏基因组”
+![image](http://bailab.genetics.ac.cn/markdown/life/metagenome.jpg)
+
+![image](http://bailab.genetics.ac.cn/markdown/train/1809/201807.jpg)
+
+点击阅读原文，跳转最新文章目录阅读
+https://mp.weixin.qq.com/s/5jQspEvH5_4Xmart22gjMA
