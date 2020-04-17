@@ -1,0 +1,13 @@
+names	group	group_num
+c1	Control	1
+c2	Control	1
+c3	Control	1
+c4	Control	1
+c5	Control	1
+c6	Control	1
+t1	Treat	2
+t2	Treat	2
+t3	Treat	2
+t4	Treat	2
+t5	Treat	2
+t6	Treat	2

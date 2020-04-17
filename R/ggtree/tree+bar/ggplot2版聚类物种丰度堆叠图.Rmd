@@ -1,0 +1,239 @@
+---
+title: "ggplot2版聚类物种丰度堆叠图"
+author: "Wen Tao"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+
+```{css include=FALSE}
+# 设置CSS样式
+ pre code,pre,code {
+ white-space:pre!important;
+ overflow-x: scroll!important; 
+} 
+```
+
+```{r setup, include=FALSE}
+# 设置全局格式
+knitr::opts_chunk$set(echo = T, warning = F, message = F,
+                      fig.width = 7, fig.height = 5, fig.align = "center")
+```
+
+## 加载依赖关系
+
+这里的ggtree需要使用19年7月以后的版本，因为这以后的版本才支持将聚类结果转化为树结构。
+
+如果你的Bioconductor版本较旧，可能一直会安装旧版ggtree。升新方法如下：
+
+```{r eval=FALSE, include=FALSE}
+## 先卸载先前的安装控制程序
+remove.packages(c("BiocInstaller", "BiocManager", "BiocVersion"))
+ 
+## 再安装新版程序
+install.packages("BiocManager")
+BiocManager::install(update=TRUE, ask=FALSE)
+```
+
+
+```{R library}
+library("ggplot2")
+library("ggdendro")
+# library(remotes)
+library(phyloseq)
+library(tidyverse)
+library(ggtree)
+library( ggstance)
+# library(amplicon)
+vegan_otu =  function(physeq){
+  OTU =  otu_table(physeq)
+  if(taxa_are_rows(OTU)){
+    OTU =  t(OTU)
+  }
+  return(as(OTU,"matrix"))
+}
+
+vegan_tax <-  function(physeq){
+  tax <-  tax_table(physeq)
+  
+  return(as(tax,"matrix"))
+}
+```
+
+## 导入数据
+
+```{R}
+# 从R数据文件中读入
+# ps = readRDS("data/ps_liu.rds")
+
+# 从文件读取
+metadata = read.table("http://210.75.224.110/github/EasyAmplicon/data/metadata.tsv", header=T, row.names=1, sep="\t", comment.char="", stringsAsFactors = F)
+otutab = read.table("http://210.75.224.110/github/EasyAmplicon/data/otutab.txt", header=T, row.names=1, sep="\t", comment.char="", stringsAsFactors = F)
+taxonomy = read.table("http://210.75.224.110/github/EasyAmplicon/data/taxonomy.txt", header=T, row.names=1, sep="\t", comment.char="", stringsAsFactors = F)
+
+# 提取两个表中共有的ID
+# Extract only those ID in common between the two tables
+idx = rownames(otutab) %in% rownames(taxonomy)
+otutab = otutab[idx,]
+taxonomy = taxonomy[rownames(otutab),]
+
+# 使用amplicon包内置数据
+# data("metadata")
+# data(otutab)
+
+# 导入phyloseq(ps)对象
+ps = phyloseq(sample_data(metadata),otu_table(as.matrix(otutab), taxa_are_rows=TRUE), tax_table(as.matrix(taxonomy)))
+```
+
+## ggtree绘制聚类树
+
+```{R}
+# 样本间距离类型：Bray-Curtis
+dist = "bray"
+# phyloseq(ps)对象标准化
+ps1_rela = transform_sample_counts(ps, function(x) x / sum(x) )
+# 导出OTU表
+otu = as.data.frame(t(vegan_otu(ps1_rela)))
+# 预览
+otu[1:3,1:3]
+#计算距离矩阵
+unif = phyloseq::distance(ps1_rela , method=dist)
+# 聚类树，method默认为complete
+hc <- hclust(unif, method = "complete")
+# 对树分组
+clus <- cutree(hc, 3)
+# 提取树中分组的标签和分组编号
+d = data.frame(label = names(clus), 
+               member = factor(clus))
+# 提取样本元数据
+map = as.data.frame(sample_data(ps))
+# 合并树信息到样本元数据
+dd = merge(d,map,by = "row.names",all = F)
+row.names(dd) = dd$Row.names 
+dd$Row.names = NULL
+dd[1:3,1:3]
+
+# ggtree绘图 #----
+p  = ggtree(hc) %<+% dd + 
+  geom_tippoint(size=5, shape=21, aes(fill=factor(Group), x=x)) + 
+  # geom_tiplab(aes(label=Group), size=3, hjust=.5) +
+  geom_tiplab(aes(color = Group,x=x*1.2), hjust=1)
+  # theme_dendrogram(plot.margin=margin(6,6,80,6))# 这是聚类图形的layout
+p
+```
+
+## 物种组成数据
+
+```{R}
+# 指定物种组成的选项
+i = ps # 指定输入数据
+j = "Phylum" # 使用门水平绘制丰度图表
+rep = 6 # 重复数量是6个
+Top = 10 # 提取丰度前十的物种注释
+tran = TRUE # 转化为相对丰度值
+```
+
+
+```{R}
+# 按照分类学门(j)合并
+psdata = i %>% tax_glom(taxrank = j)
+
+# 转化丰度值
+if (tran == TRUE) {
+  psdata = psdata%>% transform_sample_counts(function(x) {x/sum(x)} )
+}
+
+#--提取otu和物种注释表格
+otu = otu_table(psdata)
+tax = tax_table(psdata)
+tax[1:3,1:7]
+
+#--按照指定的Top数量进行筛选与合并
+for (i in 1:dim(tax)[1]) {
+  if (row.names(tax)[i] %in% names(sort(rowSums(otu), decreasing = TRUE)[1:Top])) {
+    tax[i,j] =tax[i,j]
+  } else {
+    tax[i,j]= "Other"
+  }
+}
+tax_table(psdata)= tax
+
+##转化为表格
+Taxonomies <- psdata %>% psmelt()
+# head(Taxonomies)
+Taxonomies$Abundance = Taxonomies$Abundance * 100
+```
+
+### 整理成facet需要的格式
+
+这里的格式也很简单，就是需要一列“id”，这里我们将样本名修改为id，即可
+
+```{R}
+# colnames(Taxonomies)[1] = "id"
+Taxonomies$OTU = NULL
+colnames(Taxonomies)[1] = "id"
+```
+
+### 保证颜色填充独立性
+
+因为我们颜色填充有好几种方式，所以需要对每种颜色填充保重独立性，使用ggnewscale，这也是Y叔的包。
+
+```{R}
+library(ggnewscale)
+p <- p + new_scale_fill()
+p
+```
+
+### 分面组合树和柱图
+
+```{R}
+p3 <- facet_plot(p, panel = 'Stacked Barplot', data = Taxonomies, geom = geom_barh,mapping = aes(x = Abundance, fill = as.factor(Phylum)),color = "black",stat='identity' )   
+p3
+```
+### 修改配色
+
+```{R}
+colbar <- dim(unique(dplyr::select(Taxonomies, one_of(j))))[1]
+colors = colorRampPalette(c("#CBD588", "#599861", "orange","#DA5724", "#508578", "#CD9BCD",
+                               "#AD6F3B", "#673770","#D14285", "#652926", "#C84248",
+                               "#8569D5", "#5E738F","#D1A33D", "#8A7C64","black"))(colbar)
+p3 + scale_fill_manual(values = colors) 
+```
+
+### ggtree调整布局
+
+修改layout，设置中空等。
+
+```{R}
+p = ggtree(hc,layout="fan", branch.length = "none", ladderize = FALSE) %<+% dd + 
+  geom_tippoint(size=5, shape=21, aes(fill=factor(Group), x=x)) + 
+  geom_tiplab(aes(color = Group,x=x*1.2), hjust=1)
+p = p + xlim(-4,NA)
+p
+```
+
+### 添加样本其他信息
+
+如添加样品测序量柱状图、数值标签
+
+```{R}
+p <- ggtree(hc) + theme_tree2()   
+p
+head(dd)
+dd$sequencenum = sample_sums(ps)
+dd
+data = data.frame(id = row.names(dd),sequencenum = dd$sequencenum )
+head(data)
+# p3
+#---------添加序列
+p2 <- facet_plot(p, panel = 'Number Barplot', data = dd , geom = geom_barh,mapping = aes(x = sequencenum ,fill = Group),stat='identity' )   
+p2
+facet_plot(p2, panel='Stacked Barplot',data=dd, geom=geom_text, mapping=aes(x=sequencenum+20, label=sequencenum))
+```
+
+### 树+柱+堆叠图组合
+
+```{R}
+p3 <- facet_plot(p2, panel = 'Abundance Barplot', data = Taxonomies, geom = geom_barh,mapping = aes(x = Abundance, fill = as.factor(Phylum)),color = "black",stat='identity' )   
+p3
+```

@@ -40,24 +40,28 @@
 
 
 # #清空内存
-# rm(list=ls()) 
-# load("../data/otutab.rda")
-# load("../data/metadata.rda")
-# 
-# # 
-# ## upset 我不会直接输出一个图形对象，所以这里直接运行就出结果，不知道行不行
-# #ven图可以提取出来，使用grid.draw出图。
+# rm(list=ls())
+# load("../../data/otutab.rda")
+# load("../../data/metadata.rda")
+
+#
+## upset 我不会直接输出一个图形对象，所以这里直接运行就出结果，不知道行不行
+#ven图可以提取出来，使用grid.draw出图。
 # result = VenUpset(otu = otutab,map = metadata,group = "genotype",rep = 6)
-# # ven 出图
+# ven 出图
 # grid.draw(result[[1]])
+# 
+# 
+# otu = otutab
+# map = metadata
+# group = "genotype"
+# rep = 6
+# path = ""
 
-
-
-
-
-VenUpset = function(otu = otutab,map = metadata,group = "genotype",rep = 6){
-  path = "./VenUpset/"
-  dir.create(path)
+VenUpset = function(otu = otutab,map = metadata,group = "genotype",rep = 6,path = ""){
+  path = path
+  # path = "./VenUpset/"
+  # dir.create(path)
   library("phyloseq")
   library(UpSetR)
   # library("tibble")
@@ -73,7 +77,7 @@ VenUpset = function(otu = otutab,map = metadata,group = "genotype",rep = 6){
   
   
   #导入otu表格
-  otu = otutab
+  otu = otu
   head(otu)
   otu = as.matrix(otu)
 
@@ -81,10 +85,7 @@ VenUpset = function(otu = otutab,map = metadata,group = "genotype",rep = 6){
   #导入分组文件
   map = metadata
   head(map)
-  
-  # #导入进化树
-  # tree = read.tree("./otus.tree")
-  # tree
+
   
   ps <- phyloseq(otu_table(otu, taxa_are_rows=TRUE), 
                  sample_data(map) 
@@ -147,7 +148,7 @@ VenUpset = function(otu = otutab,map = metadata,group = "genotype",rep = 6){
   
   
   if (length(names(ven3)) == 2) {
-    filename3 = paste(path,"ven_",paste(names(ven3),sep = "",collapse="-"),".pdf",sep = "",collapse="_")
+    filename3 = paste(path,"/ven_",paste(names(ven3),sep = "",collapse="-"),".pdf",sep = "",collapse="_")
     pdf(file=filename3,width = 8, height = 6)
     T<-venn.diagram(ven3,
                     filename=NULL,
@@ -168,17 +169,17 @@ VenUpset = function(otu = otutab,map = metadata,group = "genotype",rep = 6){
                     scaled     = FALSE)
     grid.draw(T)
     dev.off()
-    filename33 = paste(path,"ven",".jpg",sep = "",collapse="_")
-    jpeg(file=filename33)
-    grid.draw(T)
-    dev.off();
+    # filename33 = paste(path,"ven",".jpg",sep = "",collapse="_")
+    # jpeg(file=filename33)
+    # grid.draw(T)
+    # dev.off();
     
     
     
     
     
   } else if (length(names(ven3)) == 3) {
-    filename3 = paste(path,"ven_",paste(names(ven3),sep = "",collapse="-"),".pdf",sep = "",collapse="_")
+    filename3 = paste(path,"/ven_",paste(names(ven3),sep = "",collapse="-"),".pdf",sep = "",collapse="_")
     pdf(file=filename3,width = 12, height = 12)
     T<-venn.diagram(ven3,
                     filename=NULL,
@@ -199,13 +200,13 @@ VenUpset = function(otu = otutab,map = metadata,group = "genotype",rep = 6){
                     scaled     = FALSE)
     grid.draw(T)
     dev.off()
-    filename33 = paste(path,"ven",".jpg",sep = "",collapse="_")
-    jpeg(file=filename33)
-    grid.draw(T)
-    dev.off()
+    # filename33 = paste(path,"ven",".jpg",sep = "",collapse="_")
+    # jpeg(file=filename33)
+    # grid.draw(T)
+    # dev.off()
     grid.draw(T)
   } else if (length(names(ven3)) == 4) {
-    filename3 = paste(path,"ven_",paste(names(ven3),sep = "",collapse="-"),".pdf",sep = "",collapse="_")
+    filename3 = paste(path,"/ven_",paste(names(ven3),sep = "",collapse="-"),".pdf",sep = "",collapse="_")
     pdf(file=filename3,width = 12, height = 12)
     T<-venn.diagram(ven3,
                     filename=NULL,
@@ -226,10 +227,10 @@ VenUpset = function(otu = otutab,map = metadata,group = "genotype",rep = 6){
                     scaled     = FALSE)
     grid.draw(T)
     dev.off()
-    filename33 = paste(path,"ven",".jpg",sep = "",collapse="_")
-    jpeg(file=filename33)
-    grid.draw(T)
-    dev.off()
+    # filename33 = paste(path,"ven",".jpg",sep = "",collapse="_")
+    # jpeg(file=filename33)
+    # grid.draw(T)
+    # dev.off()
     grid.draw(T)
   }else if (length(names(ven3)) == 5) {
     filename3 = paste(path,"ven_",paste(names(ven3),sep = "",collapse="-"),".pdf",sep = "",collapse="_")
@@ -253,10 +254,10 @@ VenUpset = function(otu = otutab,map = metadata,group = "genotype",rep = 6){
                     scaled     = FALSE)
     grid.draw(T)
     dev.off()
-    filename33 = paste(path,"ven",".jpg",sep = "",collapse="_")
-    jpeg(file=filename33)
-    grid.draw(T)
-    dev.off()
+    # filename33 = paste(path,"ven",".jpg",sep = "",collapse="_")
+    # jpeg(file=filename33)
+    # grid.draw(T)
+    # dev.off()
     grid.draw(T)
   }else if (length(names(ven3)) == 6) {
     
@@ -284,16 +285,16 @@ VenUpset = function(otu = otutab,map = metadata,group = "genotype",rep = 6){
     
     dev.off()
     
-    upset(result[[2]], sets = colnames(result[[2]]),
+    upset(ven2, sets = colnames(ven2),
           number.angles = 30, point.size = 2, line.size = 1,
           mainbar.y.label = "OTU", sets.x.label = "OTU Per Treatment",
           text.scale = c(2, 2, 2,2, 2, 2),mb.ratio = c(0.7, 0.3),order.by = "freq",keep.order = TRUE,
-          queries = list(list(query = intersects, params =
-                                list(colnames(result[[2]])), color = "red", active = T),
-                         list(query = intersects, params =
-                                list(colnames(result[[2]])), color = "red", active = T),
-                         list(query = intersects, params =
-                                list(colnames(result[[2]])), color = "red", active = T)))
+          queries = list(list(query = intersects, params = 
+                                list(colnames(ven2)), color = "red", active = T),
+                         list(query = intersects, params = 
+                                list(colnames(ven2)), color = "red", active = T),
+                         list(query = intersects, params = 
+                                list(colnames(ven2)), color = "red", active = T)))
   }
  return(list(T,ven2))
 }

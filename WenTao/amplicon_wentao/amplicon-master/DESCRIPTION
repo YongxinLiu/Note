@@ -1,0 +1,43 @@
+Package: amplicon
+Type: Package
+Title: Statistics and visualization for amplicon data
+Version: 0.1.1
+Date: 2019-4-8
+Author: Yong-Xin Liu
+Maintainer: Yong-Xin Liu <metagenome@126.com>
+Description: A basic statistics and plotting pipeline for amplicon data.
+    1. Alpha boxplot with LSD.test / anova;
+    2. Alpha rarefraction curve in samples and groups with standard error;
+    3. PCoA plot with confidence ellipse and Adonis p-value;
+    4. Constrained PCoA / CCA with variant, p-value and confidence ellipse;
+    5. Taxonomy stackplot in group and sample.
+    0.1.1 add beta_cpcoa_dis.R support constrained distance matrix
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: knitr
+RoxygenNote: 7.0.2
+Roxygen: list(markdown = TRUE)
+URL: https://github.com/microbiota http://bailab.genetics.ac.cn http://www.ehbio.com/
+MailingList: metagenome <metagenome@126.com>
+BugReports: https://github.com/microbiota
+Packaged: 2018-12-09 23:59:59 UTC; windows
+Depends:
+    R (>= 3.5.0),
+    ggplot2
+Imports:
+    ggrepel,
+    agricolae,
+    vegan,
+    dplyr,
+    reshape2
+Suggests:
+    phyloseq,
+    microbiome,
+    metagenomeSeq,
+    ggpubr,
+    ggsci,
+    BiocManager,
+    Matrix,
+    knitr,
+    rmarkdown
