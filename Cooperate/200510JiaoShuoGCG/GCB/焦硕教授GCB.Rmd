@@ -1,0 +1,165 @@
+---
+title: "GCB焦硕"
+author: "wentao"
+date: "2020/5/10"
+output: html_document
+---
+
+
+```{css include=FALSE}
+ pre code,pre,code {
+ white-space:pre!important;
+ overflow-x: scroll!important; 
+} 
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      fig.width = 7,
+                      fig.height = 5,
+                      fig.align = "center",
+                      warning = FALSE,
+                      message = FALSE
+                      
+                      )
+```
+
+### 载入包设置必要参数
+
+```{R}
+library(ggtree)
+library(ggplot2)
+library(RColorBrewer)
+
+#-指定九种颜色
+col<-brewer.pal(9, "Set1")
+```
+
+
+### 进化树 + 热图
+
+```{R}
+
+#--微生物组三个文件读取：注释文件，进化树，和otu丰度文件
+tax<-read.csv("hong_otuname_abd.csv",row.names=1)
+aa<-read.tree("hong_tre_abd.tre")
+#--这里经过了处理，将OTU存在信息通过分组合并 ，并将存在与否使用1或者-1表示
+heat1<-read.csv("hong_heat1_abd.csv",row.names=1)
+
+
+
+heat<-ifelse(heat1>0,"Pos","Neg")
+heat[heat1==0]<-"NA"
+
+#--按照样本聚类
+h<-hclust(dist(t(heat1)))
+# 聚类顺序重排矩阵
+heat<-heat[,h$order]
+
+#为进化树匹配物种分类信息
+dd<-data.frame(id=aa$tip.label,tax[aa$tip.label,])
+# 对于属水平未注释的结果我们用OTU名称替代
+dd$aa<-ifelse(dd$genus=="",rownames(dd),as.vector(dd$genus))
+#-设置进化树可视化分组选项，按照门水平填充颜色
+groupInfo1 <- split(aa$tip.label, as.vector(tax[aa$tip.label,2]))
+aa<- groupOTU(aa, groupInfo1)
+
+p<-ggtree(aa,aes(color=group),branch.length='none')
+p
+
+#--许多人不知道如何配置dd文件，诀窍就是将数据框第一列设置为进化树叶节点名称，并以id命名。
+p<-p%<+%dd+geom_tippoint(size=3)+geom_tiplab(aes(label=aa),size=2,color="black")
+gheatmap(p,heat,offset=6, width=3, font.size=3, colnames_angle=90,colnames = T)+
+scale_fill_manual(values=c("white","#fdbb2d","#1E9600"))+
+scale_color_manual(values=c(col[c(3:5,8)]))
+
+```
+
+### 稀有物种按照以上重来一次
+
+```{R}
+
+#####Rare#####
+#--按照以上操作将稀有物种树重新来一遍
+tax<-read.csv("hong_otuname_ra.csv",row.names=1)
+aa<-read.tree("hong_tre_ra.tre")
+heat1<-read.csv("hong_heat1_ra.csv",row.names=1)
+heat<-ifelse(heat1>0,"Pos","Neg")
+heat[heat1==0]<-"NA"
+heat<-heat[,h$order]
+dd<-data.frame(id=aa$tip.label,tax[aa$tip.label,])
+dd$aa<-ifelse(dd$genus=="",rownames(dd),as.vector(dd$genus))
+groupInfo1 <- split(aa$tip.label, as.vector(tax[aa$tip.label,2]))
+aa<- groupOTU(aa, groupInfo1)
+
+p<-ggtree(aa,aes(color=group),branch.length='none')
+p<-p%<+%dd+geom_tippoint(size=3)+geom_tiplab(aes(label=aa),size=2)
+gheatmap(p,heat,offset=6, width=3, font.size=3, colnames_angle=90,colnames = T)+
+scale_fill_manual(values=c("white","#fdbb2d","#1E9600"))+
+scale_color_manual(values=c(col[c(3,5,7,8)]))
+```
+
+### 和弦图 绘制
+
+
+```{R}
+
+############circlize##############
+library(statnet)
+library(circlize)
+#--设定样本和物种颜色
+col1<-brewer.pal(11, "RdYlBu")[c(2,10)]
+col2<-c(brewer.pal(8,"Set1")[c(3,4,8,5,7)],"grey")
+aa<-as.matrix(read.csv("hong_phy.csv",row.names=1))
+
+
+circos.clear()
+grid.col = NULL
+grid.col[rownames(aa)] = col2[nrow(aa):1]
+grid.col[colnames(aa)] = col1
+
+##--设置不同区块间隔
+circos.par(gap.degree = c(rep(2, nrow(aa)-1), 10, rep(2, ncol(aa)-1), 10),start.degree = 0)
+
+chordDiagram(aa,directional = F,diffHeight = 0.06,grid.col = grid.col, transparency = 0.5, annotationTrack =c("grid", "axis"),
+             preAllocateTracks = 2
+) 
+
+circos.track(track.index = 1, panel.fun = function(x, y) {
+  circos.text(CELL_META$xcenter, CELL_META$ylim[1], CELL_META$sector.index, 
+              facing = "clockwise", niceFacing = TRUE, adj = c(0, 0.5))
+}, bg.border = NA) # here set bg.border to NA is important
+
+# legend("right",pch=20,legend=rownames(aa)[nrow(aa):1],col=grid.col[rownames(aa)[nrow(aa):1]],bty="n",cex=1,pt.cex=3,border="black") 
+
+
+```
+
+
+
+```{R}
+
+```
+
+
+
+```{R}
+
+```
+
+
+
+```{R}
+
+```
+
+
+
+
+
+
+
+
+
+
+
