@@ -1,0 +1,169 @@
+---
+title: "5-氨基水杨酸（5-ASA）治疗后UC患者真菌菌群的变化"
+author: "徐俊 北京大学人民医院"
+date: "`r Sys.Date()`"
+output:
+  word_document:
+    toc: yes
+    toc_depth: 5
+---
+
+```{r setup, include=F, message=F}
+knitr::opts_chunk$set(
+	echo=T, comment=NA, message=F, warning=F,
+	fig.align="center", fig.width=5, fig.height=3, dpi=300
+)
+```
+
+![](http://210.75.224.110/github/Note/Cooperate/20207003XuJunIBDFungi/head.png)
+
+# IBD：5-氨基水杨酸治疗后溃疡性结肠炎患者真菌菌群的变化
+
+**Alteration of Fungal Microbiota After 5-ASA Treatment in UC Patients**
+
+**Inflammatory bowel disease** 【**Impact Factor 4.261**】
+
+DOI：https://doi.org/10.1093/ibd/izz207 
+
+发表日期：2020-03
+
+第一作者：Xu Jun(徐俊)<sup>1,2,3</sup>
+
+通讯作者：Liu Yulan(刘玉兰 主任医师, liuyulan@pkuph.edu.cn)<sup>1,2</sup>
+
+
+主要单位：
+
+<sup>1</sup>北京大学人民医院消化内科(Department of Gastroenterology, Peking University People's Hospital, Beijing, China)
+
+<sup>2</sup>北京大学人民医院免疫介导消化疾病研究中心(Clinical Center of ImmuneMediated Digestive Diseases, Peking University People's Hospital, Beijing, China)
+
+<sup>3</sup>北京大学人民医院中心实验室(Institute of Clinical Molecular Biology & Central Laboratory, Peking University People's Hospital, Beijing, China)
+
+## 写在前面
+
+分享标题：IBD: 5-氨基水杨酸（5-ASA）治疗后UC患者真菌菌群的变化
+
+关键字：溃疡性结肠炎（UC），5-ASA，黏膜微生物，真菌菌群紊乱
+
+## 导读
+
+目前已有多项关于药物影响肠道菌群组成的研究，然而，**UC患者最常使用的临床治疗药物——5-ASA对于UC患者肠道菌群的影响未见报道。**细菌、真菌、寄生虫和病毒都是肠道微生物的重要组成部分，但在IBD的发病机制研究中，真菌菌群的作用往往处于次要地位。**本研究则是重点关注5-ASA对于UC患者肠道真菌菌群的作用。**
+
+## 背景
+
+炎症性肠病（inflammatory bowel disease, IBD），包含溃疡性结肠炎（ulcerative colitis，UC）和克罗恩病（Crohn's disease，CD）。宿主免疫与肠道微生物的相互作用的紊乱在IBD的发病过程中起到关键作用。**目前有众多研究都在探索IBD患者肠道菌群的特点；但值得注意的是，绝大多数入组的患者都有使用5-ASA、硫唑嘌呤等药物治疗；然而，药物对于菌群的肠道菌群的作用在大多数研究中都被忽视。**
+
+有研究报道柳氮磺吡啶（SASP）能重塑三硝基苯磺酸（TNBS）肠炎小鼠的肠道菌群。SASP的化学结构中含有磺酸基团具有抗微生物的作用，因此SASP理应具有影响肠道菌群结构的特点。然而，**5-ASA是UC患者最常使用的临床治疗药物，但其对UC患者肠道菌群的影响尚未见报道。本研究重点关注5-ASA对于UC患者肠道真菌菌群的作用。**
+
+
+## 结果
+
+### 受试者临床资料
+
+#### 表1 探索性研究中UC患者的人口学和临床数据特点
+
+![](http://210.75.224.110/github/Note/Cooperate/20207003XuJunIBDFungi/Table1.png)
+
+> 该部分研究属于横向研究，入组的患者根据是否使用药物治疗，被分为UC未治疗组（Treatment-Naive）和5-ASA治疗组（5-ASA-Treated）。两组患者的性别有显著性差异（将在验证性研究中予以讨论）。依据Mayo评分，患者肠黏膜病变的严重程度被分为正常和非活动，轻度，中度和重度，各类患者比例相似。依据Montreal分型 (E1, proctitis; E2, leftsided; or E3, extensive)将患者的病变部位分为E1、E2和E3型，各类型患者比例相似。
+
+#### 表2 验证性研究中UC患者在5-ASA治疗前后人口学和临床数据特点
+
+![](http://210.75.224.110/github/Note/Cooperate/20207003XuJunIBDFungi/Table2.png)
+
+> 在探索性研究中，有10名未治疗的UC患者（Treatment-Naive）接受了课题组随访并纳入验证性研究。在验证性研究中，我们对UC患者治疗前后的人口学和临床数据进行了采集和分析。5-ASA治疗后，Mayo评分显著下降。病变严重的患者比例未0%，多数患者严重程度变为中度或轻度。该数据证实了5-ASA在UC患者治疗中的有效性。
+
+### 5-ASA治疗后UC患者真菌菌群的多样性变化
+
+**Alteration of fungal diversity in UC patients after 5-ASA treatment**
+
+（1） 探索性研究中未治疗的和5-ASA治疗的UC患者之间的真菌多样性差异
+
+我们比较了20名未治疗患者和37名5-ASA治疗UC患者的真菌菌群alpha多样性，包括Shannon、Richness和Simpson指数（图1a、1b和1c）。未治疗的UC患者中，与非炎性黏膜（UN）相比，在炎性黏膜（UI）中真菌菌群具有较高的丰富性，但均匀性较低。beta多样性分析表明，UN和UI组中的样本分群明显（Adonis p=0.0002，图1d）。我们进一步分析了未治疗和5-ASA治疗UC患者炎性黏膜（UI和AI）中的真菌特点。与 UI 组相比，AI 组中的Shannon指数更高（p=0.010）。此外，真菌β多样性显示所有样品的炎性黏膜中具有治疗特异性聚类（Adonis p=0.008，图1d）。
+
+（2） 验证性研究中UC患者进行5-ASA治疗后真菌多样性的改变
+
+在验证性研究中，我们进一步分析了10名接受随访的UC患者的肠黏膜真菌多样性。与5-ASA治疗前非炎性黏膜（preN）相比，治疗前的炎症黏膜（preI）中真菌richness较高（p=0.022），但均匀性较低（尽管不显著）（图1e、1f和1g）。对β多样性的分析表明，preN和preI组样本有明显的分群（p=0.011，图1h）。这些数据表明，在治疗前，UC患者在非炎性和炎性黏膜中真菌组成有显著差异。与preI组相比，5-ASA治疗后postI组炎性黏膜的富集度降低，但postI组的均匀度增加（虽然不显著）（图1D和1E）。此外，在5-ASA治疗后，在postN和postI组的样本在PCoA中没有明显的样本聚类，这反映了5-ASA治疗后非炎性和炎性黏膜中真菌成分的相似性。
+
+#### 图1. 探索性研究与验证性研究中UC患者黏膜真菌菌群多样性
+
+![](http://210.75.224.110/github/Note/Cooperate/20207003XuJunIBDFungi/Fig1.jpg)
+
+> 图1. 探索性研究与验证性研究中UC患者黏膜真菌菌群多样性。探索性研究中UC患者真菌α多样性（a，香农指数；b，丰富度指数；c，辛普森指数）。（d）探索性研究中，基于Unifrac距离的真菌β多样性主坐标分析（PCoA）。UN，未治疗UC患者的非炎症性黏膜；UI，未治疗UC患者的炎性黏膜；AN，5-ASA治疗的UC患者的非炎症性黏膜；AI，5-ASA治疗的UC患者的炎症黏膜。验证性研究中UC患者真菌α多样性（e，香农指数；f，丰富度指数；g，辛普森指数）。（h）验证性研究中，基于Unifrac距离的真菌β多样性PCoA。preN，5-ASA治疗前UC患者的非炎性黏膜；preI，5-ASA治疗前UC患者的炎性黏膜；post-N，5-ASA治疗后UC患者的非炎性黏膜；postI，5-ASA治疗后UC患者的炎性黏膜。*p<0.05，**p<0.01，***p<0.001，***p<0.0001，无显著性（ns）。
+
+### 5-ASA治疗后UC患者真菌菌群的组成变化
+
+**Alteration of fungal composition in UC patients after 5-ASA treatment**
+
+（1） 探索性研究中未治疗的和5-ASA治疗的UC患者真菌成分的差异
+
+与已有研究报道一致，Ascomycota是被鉴定的OTUs中最主要的真菌门（图2a）。在5-ASA治疗之前，在门水平上，UI组中的 Ascomycota的丰度低于UN组。在属水平上，UI组中的*Scytalidium*、*Sporidiobolus*、*Vanrija*和*Verticillium*的丰度高于UN组（图2b）。为了研究5-ASA治疗对真菌微生物群的影响，我们分析了炎性黏膜中的真菌成分。我们比较了UI和AI组中的真菌微生物群，包括门和属水平。我们发现，在AI组中，门水平上，Ascomycota的丰度减少，而在属水平上*Mortierella*、*Scytalidium*和*Verticillium*的丰度比UI组增加（图2a/b）。
+
+（2） 在验证研究中，5-ASA治疗后UC患者真菌成分的改变
+
+在验证研究中，Ascomycota是主要的真菌门。我们发现与preN相比，preI组的Ascomycota的丰度明显下降（图2c）。在属水平，*Wickerhamomyces*是占主导地位的属（图2e）。与preN组相比，*Aspergillus*、*Morchella*、*Mortierella*、*Paecilomyces*、*Scytalidium*显著增加，但preI组中*Wickerhamomyces*显著降低（图2d，2f）。
+
+我们还评估了5-ASA治疗对真菌微生物群的影响。与5-ASA治疗前炎性黏膜（preI）相比，Ascomycota的丰度显著增加，5-ASA治疗后的炎性黏膜（postI）中Zygomycota水平下降（图2c）。在属水平，相较preI，postI组*Wickerhamomyces*丰度明显增加；此外，5-ASA治疗后*Scytalidium*、*Fusarium*、*Sporobolomyces*、*Paecilomyces*、*Morchella*和*Mortierella*在postI组显著减少（图2d，2f）。
+
+#### 图2. 探索性研究与验证性研究中的真菌菌群组成
+
+![](http://210.75.224.110/github/Note/Cooperate/20207003XuJunIBDFungi/Fig2.jpg)
+
+> 图2. 探索性研究与验证性研究中的真菌菌群组成。探索性研究中的门（a）和属（b）水平的真菌组成。UN，未治疗UC患者的非炎症性黏膜；UI，未治疗UC患者的炎性黏膜；AN，5-ASA治疗的UC患者的非炎症性黏膜；AI，5-ASA治疗的UC患者的炎症黏膜。验证性研究中门（c）和属（d）水平的真菌组成。（e）真菌系统发育树。我们挑选了100种真菌来建造系统树。可视化是在iTOL网站上进行的(https://itol.embl.de/)。内圈的颜色代表特定的真菌门。四个外圆代表四个不同的组，并且条高显示特定OTU的丰度。（f）真菌属在验证性研究中组间差异显著。preN，5-ASA治疗前UC患者的非炎性黏膜；preI，5-ASA治疗前UC患者的炎性黏膜；post-N，5-ASA治疗后UC患者的非炎性黏膜；postI，5-ASA治疗后UC患者的炎性黏膜。
+
+### 验证性研究中的组特异性真菌菌群和差异真菌菌群
+
+**Group-specific microbiota and differential fungal genus in the validation study **
+
+首先，在验证研究中分析了组特异性真菌微生物群。在我们的验证研究中，共有1344个OTU，196个OTUs由所有组共有，但不同的组也有不同的真菌微生物群。281个OTUs只存在于非炎性黏膜中，617个OTUs只存在于炎性黏膜中。515 OTUs仅存在于5-ASA治疗前的肠道黏膜中，在5-ASA治疗后有291种新OTUs定植于肠道黏膜中。这些数据表明，在炎性黏膜中定植的真菌微生物群比非炎性黏膜多;此外，在5-ASA治疗后，在非炎性和炎性黏膜中殖民的真菌微生物群较少（图3a）。
+
+我们进一步分析了四个组的组特异性真菌属，并确定了每组中的指示物种（图3b）。我们发现，以下真菌，如*Udeniomyces*, *Sarocladium*, *Rhizopus*, *Paecilomyces*, *Myrothecium*, *Lentinula* 和*Laetisaria*在治疗前的炎性黏膜中富含。治疗前，*Paecilomyces*往往是炎性黏膜的更好指示真菌属。值得注意的是，在5-ASA治疗后，很少真菌属在非炎性或炎性黏膜中被鉴定。
+
+此外，为了研究治疗前炎性黏膜中的真菌表征，我们比较了preI组和preN组中的真菌属。我们发现*Bipolaris*在preI组中显著丰富。*Humicola*,*Blumerla*,*Cryptococcus*,*Talaromyces*,*Aureobasidium*, *Eutypella*和*Schizophyllum* 在preI组中明显减少（图3c）。
+
+为了探讨5-ASA治疗对炎性黏膜真菌殖民化的影响，我们比较了5-ASA治疗之前和之后炎性黏膜中的真菌属。我们发现，*Chaetothyriales*,*Chaetomium*,*Latorua*,*Aureobasidium*和*Cryptococcus*都被富集，但*Bipolaris*在5-ASA治疗后在炎性的黏膜中缺失（图3d）。在5-ASA治疗（postI）后，这些在preI组的这些缺失的真菌属在炎性黏膜（postI）中富集。我们还将postI与postN组进行比较，以展示 5-ASA 治疗后炎性和非炎性黏膜之间的差异（图3e）。在postI组和postN组之间仅发现了少量差异真菌，这表明在5-ASA治疗后，在炎性和非炎性黏膜中，有相似的真菌定植特点。
+
+#### 图3. 验证性研究中的黏膜特异性真菌菌群
+
+![](http://210.75.224.110/github/Note/Cooperate/20207003XuJunIBDFungi/Fig3.jpg)
+
+> 图3. 验证性研究中的黏膜特异性真菌菌群。（a）集合图(Upset plot)显示每组的OTU计数。（b）各组黏膜中的指示物种。以属水平真菌丰度为指标进行分析。点的形状代表OTU在群体中的富集或缺失，点大小代表OTU的丰度。两组（c，preI vs preN；d，postI vs preI；e，postI vs postN）之间OTU丰度的比较分析。采用edgeR软件包进行对比分析。两组之间的差异用曼哈顿图表示。点状显示，与后一组相比，前者的OTU富集、下降或不显著。点大小表示OTU的丰度。FC，变化倍数（fold change）。
+
+### 验证性研究中UC患者肠道微生物的相互作用模式
+
+**Microbial interaction patterns of UC patients in the validation study **
+
+微生物相互作用（例如细菌-真菌相互作用）对于保持微生物稳态非常重要。为了探究验证性研究中的微生物相互作用网络，我们选择了丰度前50的细菌属和丰度前20的真菌属进行相关性分析。
+
+在5-ASA治疗之前，尽管preN组中的微生物相互作用较弱，但仍存在细菌-真菌相互作用。在这些相互作用模式中，少数Firmicutes细菌（包括*Enterococcus*和*Lactococcus*）与*Escherichia-Shigella*之间存在负相互作用（图4）。*Propionibacterium*是一种用于合成丙酸的细菌，与*Escherichia-Shigella*、*Roseburia*、*Bacteroides*和*Subdoligranulum*均呈负相关。在真菌菌群中，*Wickerhamomyces*与*Morchella*、*Penicillium*、*Fusarium*、*Anaerostipes*呈负相关。值得注意的是，尽管在preI组中微生物相互作用更多，但细菌-真菌相互作用被打断，但细菌和真菌属之间建立的相关模式很少。
+
+我们进一步分析了5-ASA处理后黏膜中的微生物相互作用模式。我们发现5-ASA处理后在非炎性黏膜（postN）中存在密切的细菌-真菌相互作用模式。在这种模式下，*Wickerhamomyces*与广泛地与Firmicutes 和Bacteroidetes产生了强烈的负性相互作用。此外，*Enterococcus*和*Lactococcus*与Ascomycota呈负相关。经过5-ASA处理后，在发炎的黏膜（postI）中重新建立了细菌-真菌相互作用模式。*Propionibacterium*也与*Firmicutes和Proteobacteria*广泛相关。此外，*Enterococcus*和*Lactococcus*与*Klebsiella*、*Escherichia-Shigella*、*Parabacteroides*、*Bacteroides*和*Prevotella*呈负性相互作用。这些数据表明5-ASA影响微生物相互作用模式，并且在5-ASA处理后一定程度上重建了炎性黏膜中被破坏的细菌-真菌相互作用。
+
+#### 图4. 验证性研究中的黏膜菌群的相互作用模式
+
+![](http://210.75.224.110/github/Note/Cooperate/20207003XuJunIBDFungi/Fig4.jpg)
+
+> 图4. 验证性研究中UC患者的黏膜微生物相互作用模式。细菌（前50）和真菌（前20）的丰度采用Spearman检验进行交互作用分析。只有显著的相关性（p值<0.05）显示为边缘。边缘颜色表示正（绿）或负（红）相关，这取决于Spearman的相关系数。这些节点代表微生物属，它们的颜色代表微生物门。preN，5-ASA治疗前UC患者的非炎症性黏膜；preI，5-ASA治疗前UC患者的炎症黏膜；post-N，5-ASA治疗后UC患者的非炎症性黏膜；postI，5-ASA治疗后UC患者的炎症黏膜。
+
+## 结论
+
+我们观察到，在未治疗的UC患者中，炎性黏膜中病原性真菌定植增加，细菌-真菌相关性被破坏。5-ASA处理后真菌的多样性和组成发生了变化，其特征是**炎性黏膜中真菌病原体的定植减少，被破坏细菌-真菌的相关性模式得以恢复**。
+
+## 通讯作者简介
+
+![](http://210.75.224.110/github/Note/Cooperate/20207003XuJunIBDFungi/author.jpg)
+
+刘玉兰，北京大学第二临床医学院（北京大学人民医院）消化内科**主任医师，博士生导师。现任北京大学人民医院副院长、消化科主任**。1985年毕业于哈尔滨医科大学，1993年于上海第二医科大学获博士学位，1995年在北京大学肝病研究所完成博士后的工作。1999-2000年在澳大利亚国家肝移植中心工作。30余年来一直从事消化系疾病的临床工作与基础研究。发表专业论文百余篇，主编专业论著多部，如《新编临床医学问答丛书消化系统疾病》、《整合肝肠病学-肝肠对话》等。擅长各种消化系统疑难疾病的。专业特长为复杂肝病和炎症性肠病的诊疗、脂肪肝的诊治、消化道早癌及食管狭窄的内镜下诊断及治疗。
+
+学术任职：
+中华老年医学会消化病学分会 主任委员；
+中华医学会消化学分会肝胆疾病协作组 组长；
+中华医学会消化病学分会 常委兼秘书长；
+北京医学会消化专业委员会及消化内镜专业委员会 副主任委员； 
+世界卫生组织 ICD 11 专家组成员；
+多项国家及省部级课题及科研成果 评审专家；
+中华医学杂志等多本专业杂志 副主编、编委
+
+## Reference 
+
+Xu Jun, Chen Ning, Song Yang, Wu Zhe, Wu Na, Zhang Yifan, Ren Xinhua & Liu Yulan. (2019). Alteration of Fungal Microbiota After 5-ASA Treatment in UC Patients. Inflammatory Bowel Diseases 26, 380-390, doi: https://doi.org/10.1093/ibd/izz207
