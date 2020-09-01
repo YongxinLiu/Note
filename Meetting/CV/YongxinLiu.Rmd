@@ -119,10 +119,10 @@ Google Scholar: https://scholar.google.com/citations?user=NoxNy_IAAAAJ
 
 ### 近五年五篇代表作
 
-1. **Yong-Xin Liu#\***, Yuan Qin#, Tong Chen#, Meiping Lu, Xubo Qian, Xiaoxuan Guo & Yang Bai\*. (2020). A practical guide to amplicon and metagenomic analysis of microbiome data. **Protein & Cell** 11, doi: https://doi.org/10.1007/s13238-020-00724-8 (**IF = 10.164**，封面文章)
+1. **Yong-Xin Liu#\***, Yuan Qin#, Tong Chen#, Meiping Lu, Xubo Qian, Xiaoxuan Guo & Yang Bai\*. (2020). A practical guide to amplicon and metagenomic analysis of microbiome data. **Protein & Cell** 11, doi: https://doi.org/10.1007/s13238-020-00724-8 (**IF = 10.164**)
 2. Wei Wang#, Jing Yang#, Jian Zhang, **Yong-Xin Liu**, Caiping Tian, Baoyuan Qu, Chulei Gao, Peiyong Xin, Shujing Cheng, Wenjing Zhang, Pei Miao, Lei Li, Xiaojuan Zhang, Jinfang Chu, Jianru Zuo, Jiayang Li, Yang Bai, Xiaoguang Lei\* & Jian-Min Zhou\*. (2020). An Arabidopsis secondary metabolite directly targets expression of the bacterial type III secretion system to inhibit bacterial virulence. **Cell Host & Microbe** 27, 601-613.e607, doi: https://doi.org/https://doi.org/10.1016/j.chom.2020.03.004 (**IF = 15.923**)
 3. **Yong-Xin Liu**, Yuan Qin & Yang Bai\*. (2019). Reductionist synthetic community approaches in root microbiome research. **Current Opinion in Microbiology** 49, 97-102, doi: https://doi.org/10.1016/j.mib.2019.10.010 (**IF = 8.134**)
-4. Jingying Zhang#, **Yong-Xin Liu#**, Na Zhang#, Bin Hu#, Tao Jin#, Haoran Xu, Yuan Qin, Pengxu Yan, Xiaoning Zhang, Xiaoxuan Guo, Jing Hui, Shouyun Cao, Xin Wang, Chao Wang, Hui Wang, Baoyuan Qu, Guangyi Fan, Lixing Yuan, Ruben Garrido-Oter, Chengcai Chu\* & Yang Bai\*. (2019). *NRT1.1B* is associated with root microbiota composition and nitrogen use in field-grown rice. **Nature Biotechnology** 37, 676-684, doi: https://doi.org/10.1038/s41587-019-0104-4 (**IF = 36.558**)
+4. Jingying Zhang#, **Yong-Xin Liu#**, Na Zhang#, Bin Hu#, Tao Jin#, Haoran Xu, Yuan Qin, Pengxu Yan, Xiaoning Zhang, Xiaoxuan Guo, Jing Hui, Shouyun Cao, Xin Wang, Chao Wang, Hui Wang, Baoyuan Qu, Guangyi Fan, Lixing Yuan, Ruben Garrido-Oter, Chengcai Chu\* & Yang Bai\*. (2019). *NRT1.1B* is associated with root microbiota composition and nitrogen use in field-grown rice. **Nature Biotechnology** 37, 676-684, doi: https://doi.org/10.1038/s41587-019-0104-4 (**IF = 36.558**，封面文章)
 5. Ancheng C. Huang#, Ting Jiang#, **Yong-Xin Liu**, Yue-Chen Bai, James Reed, Baoyuan Qu, Alain Goossens, Hans-Wilhelm Nützmann, Yang Bai\* & Anne Osbourn\*. (2019). A specialized metabolic network selectively modulates Arabidopsis root microbiota. **Science** 364, eaau6389, doi: https://doi.org/10.1126/science.aau6389 (**IF = 41.845**)
 
 ### 近五年其他文章
@@ -190,6 +190,43 @@ eBook主题为微生物组(Microbiome)，包括培养组、扩增子、宏基因
 Analysis and visualization methods for amplicon and metagenomic data of microbiome 专刊征稿主页：https://www.jove.com/methods-collections/426/analysis-visualization-methods-for-amplicon-metagenomic-data
 
 ---
+
+## 科研项目
+
+类别                                   |名称                                                                          |编号            |参与类型    |开始时间    |结束时间    |合同经费（万元）
+:--------------------------------------|:-----------------------------------------------------------------------------|:---------------|:-----------|:-----------|:-----------|:-----------------------
+国家自然科学基金-青年项目              |玉米新着丝粒DNA甲基化研究                                                     |31500992        |主持        |2016.1      |2018.12     |20
+中科院前沿科学重点研究项目             |农作物根际微生物群体结构及功能研究                                            |QYZDB-SSW-SMC021|参加        |2017.1      |2020.12     |250
+战略性先导科技专项B类                  |根系微生物组在农作物抗病、营养高效中的功能                                    |XDB11020700     |参加        |2017.1      |2019.12     |135
+国家自然科学基金-面上项目              |203个水稻核心品种产量相关性状与根系微生物组的关联分析                         |31772400        |参加        |2018.1      |2021.12     |60
+中国科学院重点部署项目                 |盐生植物根系微生物组结构及功能分析                                            |KFZD-SW-112     |参加        |2018.1      |2019.12     |75
+
+
+## 学术会议
+
+报告时间    |地点                       |名称                                                                                           |报告题目                                                                                 |类型
+:-----------|:--------------------------|:----------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------|:-----------
+2018/11/12  |浙江杭州                   |中国科协第370次青年科学家论坛：作物-微生物-昆虫三者互作与生态安全                              |Root microbiome and plant interactions revealed by metagenomic sequencing and cultivation|专题报告
+2019/5/25   |北京人民大学               |第12届中国R会议(北京)可视化专场                                                                |R语言在宏基因组数据统计分析及可视化中的应用                                              |专题报告
+2019/6/30   |在线                       |投必得                                                                                         |高水平组学文章的分析和可视化套路                                                         |特邀报告
+2019/7/18   |北京环球贸易中心           |肠道演讲                                                                                       |微生物组分析入门指南                                                                     |特邀报告
+2019/9/5    |在线                       |百迈客                                                                                         |高水平微生物组项目的分析和可视化                                                         |特邀报告
+2019/12/7   |北京中科院微生物所         |中国微生物组研究现状与对策研讨会邀请函                                                         |微生物组分析方法、应用与科学传播                                                         |特邀报告
+2019/12/14  |河北石家庄                 |河北省第五届植物生理学与粮食安全专家论坛                                                       |植物微生组研究方法与应用                                                                 |特邀报告
+2020/6/17   |在线                       |CGM在线沙龙                                                                                    |微生物组数据分析与可视化                                                                 |特邀报告
+
+## 奖励
+
+时间      |奖励名称                                     |颁发机构
+:---------|:--------------------------------------------|:--------------------------------------------------------
+2005/11/23|优秀学生干部                                 |东北农业大学
+2007/11/1 |校三好学生和综合素质二等奖学金               |东北农业大学
+2008/6/1  |黑龙江省普通高等学校优秀毕业生               |黑龙江省教育厅
+2012/12/12|黑龙江省第八届优秀硕士学位论文               |黑龙江省教育厅
+2019/8/11 |夏季青年学术论坛墙报一等奖                   |植物基因组学国家重点实验室
+2019/9/1  |工会积极分子                                 |中国科学院遗传与发育生物学所工会委员会
+2020/1/3  |2019年度优秀个人                             |中国科学院遗传与发育生物学所
+
 
 ## 专利
 
