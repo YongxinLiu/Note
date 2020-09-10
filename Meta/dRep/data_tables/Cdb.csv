@@ -1,0 +1,7 @@
+genome,secondary_cluster,threshold,cluster_method,comparison_algorithm,primary_cluster
+B4018L.2.fa,1_1,0.050000000000000044,average,ANImf,1
+K4093L.5.fa,1_1,0.050000000000000044,average,ANImf,1
+W4194L.6.fa,1_1,0.050000000000000044,average,ANImf,1
+K4096L.2.fa,2_1,0.050000000000000044,average,ANImf,2
+W4194L.3.fa,2_1,0.050000000000000044,average,ANImf,2
+L4105L.2.fa,3_0,0.050000000000000044,average,ANImf,3

@@ -1,0 +1,4 @@
+genome,score,completeness,contamination,strain_heterogeneity,size,N50,cluster,taxonomy,tax_confidence,cluster_members,closest_cluster_member,furthest_cluster_member,completeness_metric,contamination_metric
+W4194L.6.fa,74.46744895497324,86.74,3.02,26.67,2746519,11067,1_1,NA,NA,3,97.67,97.63,substantial,low
+W4194L.3.fa,35.83686836263664,50.52,3.79,66.67,2479569,3021,2_1,NA,NA,2,95.32,95.32,moderate,low
+L4105L.2.fa,52.75359833035547,50.85,0.0,0.0,2411828,6415,3_0,NA,NA,1,NA,NA,moderate,none
