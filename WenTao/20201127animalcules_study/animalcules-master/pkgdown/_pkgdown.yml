@@ -1,0 +1,79 @@
+template:
+  params:
+    bootswatch: yeti
+
+reference:
+- title: All functions
+  desc: ~
+  contents:
+  - '`alpha_div_boxplot`'
+  - '`alpha_div_test`'
+  - '`counts_to_logcpm`'
+  - '`counts_to_relabu`'
+  - '`df_char_to_factor`'
+  - '`differential_abundance`'
+  - '`dimred_pca`'
+  - '`dimred_pcoa`'
+  - '`dimred_umap`'
+  - '`dimred_tsne`'
+  - '`diversities`'
+  - '`diversities_help`'
+  - '`diversity_beta_boxplot`'
+  - '`diversity_beta_heatmap`'
+  - '`diversity_beta_test`'
+  - '`do_alpha_div_test`'
+  - '`filter_categorize`'
+  - '`filter_summary_bar_density`'
+  - '`filter_summary_pie_box`'
+  - '`find_biomarker`'
+  - '`find_taxon_mat`'
+  - '`find_taxonomy`'
+  - '`find_taxonomy_300`'
+  - '`gini_simpson`'
+  - '`grep_tid`'
+  - '`inverse_simpson`'
+  - '`is_categorical`'
+  - '`is_integer0`'
+  - '`is_integer1`'
+  - '`mae_pick_organisms`'
+  - '`mae_pick_samples`'
+  - '`pct2str`'
+  - '`percent`'
+  - '`relabu_barplot`'
+  - '`relabu_boxplot`'
+  - '`relabu_heatmap`'
+  - '`run_animalcules`'
+  - '`shannon`'
+  - '`simpson_index`'
+  - '`upsample_counts`'
+
+
+navbar:
+  title: "animalcules"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Interactive Shiny Analysis"
+      menu:
+        - text: "1: Upload"
+          href: articles/rmd/upload.html
+        - text: "2: Data Summary and Filtering"
+          href: articles/rmd/summary.html
+        - text: "3: Abundance"
+          href: articles/rmd/abundance.html
+        - text: "4: Diversity"
+          href: articles/rmd/diversity.html
+        - text: "5: Dimension Reduction"
+          href: articles/rmd/dimension.html
+        - text: "6: Differential Analysis"
+          href: articles/rmd/differential.html
+        - text: "7: Biomarker"
+          href: articles/rmd/biomarker.html
+    - text: "Command Line Analysis"
+      href: articles/animalcules.html
+    - text: "Reference"
+      href: reference/index.html
+  right:
+    - icon: fa-github
+      href: https://github.com/compbiomed/animalcules
+

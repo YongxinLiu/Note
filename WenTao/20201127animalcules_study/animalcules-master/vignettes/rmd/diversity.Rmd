@@ -1,0 +1,51 @@
+---
+title: "Diversity"
+output: html_document
+---
+
+### Alpha Diversity
+
+Users could visualize the alpha diversity boxplot comparing different levels within a selected condition by selecting taxonomy levels and target condition. In Advanced options, users could choose different alpha diversity metrics including Shannon, Inverse Simpson and Gini Simpson. 
+
+The statistical test will be performed between levels in the selected target condition. Multiple statistical test methods will be applied automatically, including T-test, Kruskal-Wallis rank sum test, and Wilcoxon rank sum test. Test p-values will be showed in the result table.
+
+Instructions:
+
+* Select taxonomy level in the menu (default is genus).
+* Select the target variable for alpha diversity comparison.
+* (Optional) Select alpha diversity metrics.
+* Click the button "Run"
+
+Running time: < 1s
+
+![](https://github.com/compbiomed/materials/blob/master/animalcules/fig_035.png?raw=true)
+
+### Beta Diversity Heatmap
+
+Users could visualize the beta diversity by selecting taxonomy levels, sample color condition. Samples could also be sorted by the selected condition. In Advanced options, users could choose different beta diversity metrics including Bray-curtis or Jaccard. 
+
+Instructions:
+
+* Select taxonomy level in the menu (default is genus).
+* Select the target variable for beta diversity comparison.
+* Select if samples will be sorted by the selected variable (default: no sorting).
+* (Optional) Select beta diversity metrics.
+* Click the button "Plot Heatmap"
+
+Running time: < 1s
+
+![](https://github.com/compbiomed/materials/blob/master/animalcules/fig_036.png?raw=true)
+
+### Beta Diversity Statistical Test
+
+To check if there is significant beta diversity difference existing between two communities, users could also perform statistical test like PERMANOVA test, Kruskal-Wallis rank sum test, and Wilcoxon rank sum test. Note that the left panel options apply to both beta diversity heatmap and statistical test. Test p-value will be showed in the "Pr(>F)" column from the result table.
+
+Instructions:
+
+* Click the tab "Boxplot" in the right panel next to the tab "Heatmap"
+* Select the test type (default is PERMANOVA). 
+* Select the target variable.
+* (Optional) Select the number of permutations if doing PERMANOVA. 
+* Click the button "Run"
+
+![](https://github.com/compbiomed/materials/blob/master/animalcules/fig_037.png?raw=true)

@@ -1,0 +1,212 @@
+---
+title: "Upload"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+There are 8 data upload methods:
+
+* Count File (Mostly used for uploading new dataset)
+* Example Data (For exploring animalcules)
+* animalcules file (Re-upload previously uploaded dataset quickly)
+* phyloseq object
+* BIOM file
+* Count file with taxonomy id (this is the option if taxonomy table is not available)
+* Pathoscope File 
+* animalcules-id file
+
+### Count File
+
+Both 16s and metagenomics generated data are supported here. The three required files are:
+
+* Counts file: each row is a species/OTU, each column is a sample name.
+* Taxonomy file: each row is a species/OTU, each column is a taxonomy level.
+* Annotation file: each row is a sample name, each column is a variable/feature name.
+
+Make sure:
+
+* The sample names in the counts file agree with the one in annotation file.
+* The microbe names in the counts file agree with the ones in the taxonomy file. 
+* All three files have the same file separator / same file type (e.g. csv).
+* All three files have the same format as seen in the example below:
+
+<img src="https://github.com/compbiomed/materials/blob/master/animalcules/count2.PNG?raw=true" width="1200">
+
+Example files:
+
+* Counts file: https://github.com/compbiomed/animalcules-docs/blob/master/example_data/count_example.csv
+* Taxonomy file: https://github.com/compbiomed/animalcules-docs/blob/master/example_data/taxonomy_table.csv
+* Annotation file: https://github.com/compbiomed/animalcules-docs/blob/master/example_data/annotation_example.csv
+
+Instructions: 
+
+* Click the "Browse..." button to upload required three files.
+* Input which column in the annotation file is the sample name (default is 1).
+* Check if the annotation file has header (default is TRUE).
+* Select the separator (default is comma AKA .csv file).
+* Click the button "Upload". 
+
+Note: 
+Each uploaded table will show up in the right panel. 
+
+Running time: < 1s
+
+<img src="https://github.com/compbiomed/materials/blob/master/animalcules/count.PNG?raw=true" width="500">
+
+### Example Data
+
+There are three example datasets available in animalcules: a synthetic toy dataset (already loaded), a TB dataset, and an asthma dataset. Users could use any dataset to try all functions and features in animalcules.
+
+Instructions: 
+
+* Use the pulldown menu to select the example dataset.
+* Click the "Upload" button.
+
+Running time: < 0.5s
+
+<img src="https://github.com/compbiomed/materials/blob/master/animalcules/example.PNG?raw=true" width="500">
+
+
+### animalcules file
+
+In animalcules, users could choose to save their dataset to a .rds file in the Tab 2 (Summary and Filter). Later, users could load this saved dataset by uploading the .rds file to animalcules easily via this animalcules file upload option.
+
+Running time: < 0.5s
+
+<img src="https://github.com/compbiomed/materials/blob/master/animalcules/animalcules_file.PNG?raw=true" width="500">
+
+
+### Phyloseq object
+
+Phyloseq object can be easily read into animalcules with the following steps. Suppose the phyloseq object in R is called 'physeq'. First, write count table, taxonomy table, and sample data table to csv files:
+
+```{r eval = FALSE}
+library(phyloseq)
+write.csv(otu_table(physeq), "count.csv")
+write.csv(tax_table(physeq), "tax.csv")
+write.csv(sample_data(physeq), "sample.csv")
+
+```
+
+Then, follow the same 'count file' upload steps as shown above with the three csv files. 
+
+To generate a phyloseq object from the animalcules MAE object is also very simple:
+
+```{r eval = FALSE}
+library("phyloseq")
+
+# Extract data
+microbe <- MAE[["MicrobeGenetics"]] 
+
+# host <- MAE[['HostGenetics']]
+tax_table <- as.matrix(as.data.frame(rowData(microbe)))  # organism x taxlev
+sam_table <- as.data.frame(colData(microbe)) # sample x condition
+counts_table <- as.matrix(as.data.frame(assays(microbe))[, rownames(sam_table)])  # organism x sample
+
+# build phyloseq objecy
+OTU = otu_table(counts_table, taxa_are_rows = TRUE)
+TAX = tax_table(tax_table)
+SAM = sample_data(sam_table)
+physeq = phyloseq(OTU, TAX, SAM)
+    
+```
+
+
+
+### Biom file
+
+Make sure:
+
+* The BIOM file must contain the sample metadata info (annotation for each sample)
+* Please check http://biom-format.org/documentation/adding_metadata.html to add sample metadate into .biom file if sample metadata is missing.
+
+
+Instructions: 
+
+* Click the "Advanced Options" checkbox and select "BIOM file"
+* Click the "Browse..." button to upload required .biom file.
+* Click the button "Upload". 
+
+Running time: < 0.5s
+
+<img src="https://github.com/compbiomed/materials/blob/master/animalcules/biom.png?raw=true" width="500">
+
+
+
+
+### Count File with Taxonomy id
+
+Both 16s and metagenomics generated data are supported here. The two required files are:
+
+* Counts file: each row is a tax id, each column is a sample name.
+* Annotation file: each row is a sample name, each column is a variable/feature name.
+
+Make sure:
+
+* The sample names in the counts file agree with the one in annotation file.
+* The first element in eaah row is the taxonomy id, e.g. ti|657314
+* Both files have the same file separator and same file type (e.g. csv).
+
+
+Instructions: 
+
+* Click the "Advanced Options" checkbox and select "Count file with tax id"
+* Click the "Browse..." button to upload required two files.
+* Input which column in the annotation file is the sample name (default is 1).
+* Check if the annotation file has header (default is TRUE).
+* Select the separator (default is comma AKA .csv file).
+* Click the button "Upload". 
+
+Note: 
+Each uploaded table will show up in the right panel. 
+
+Running time: < 1s
+
+<img src="https://github.com/compbiomed/materials/blob/master/animalcules/countTi.png?raw=true" width="500">
+
+
+
+
+
+
+### Pathoscope File
+
+To analyze pathoscope outputs, users need to upload pathoscope reports (use browser for multiple reports upload), as well as an annotation file containing metadata for each sample. Note that the sample name in the annotation file must match the non-suffix part of the pathoscope file name. For example, one pathoscope report filename is: "sample_011-sam-report.tsv", then the corresponding sample name in the annotation file must be: "sample_011". 
+
+Instructions: 
+
+* Click the "Advanced Options" checkbox and select "PathoScope file"
+* Click the "Browse..." button to upload required files.
+* Specify the pathoscope report file suffix (default is -sam-report.tsv).
+* Input which column in the annotation file is the sample name (default is 1).
+* Check if the annotation file has header (default is TRUE).
+* Select the separator (default is Tab AKA .tsv file).
+* Click the button "Upload". 
+
+Also, make sure to provide the correct column number for sample name in the annotation file, as well as the annotation file separator (tab, comma or semicolon).
+
+Note: 
+One example pathoscope eport table and the annotation table will show up in the right panel. 
+
+Running time:
+
+* Test dataset A with 30 samples: 10.8s
+* Test dataset B with 587 samples: 22.1s
+
+<img src="https://github.com/compbiomed/materials/blob/master/animalcules/pathoscope.PNG?raw=true" width="500">
+
+### animalcules-id file
+
+animalcules-id is a separate R pipeline that generates pathoscope-like outputs from fastq files. The required input is the animalcules-id generated .rds file. Here users could choose either EM count assay or Best hit assay. 
+
+* Click the "Advanced Options" checkbox and select "animalcules-id file"
+* Click the "Browse..." button to upload required files.
+* Choose EM count or best hit option
+
+Running time: < 1s
+
+<img src="https://github.com/compbiomed/materials/blob/master/animalcules/animalcules_id.PNG?raw=true" width="500">
+

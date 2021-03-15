@@ -1,0 +1,56 @@
+---
+title: "Abundance"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Relative Abundance Stacked Bar Plot
+
+The stacked bar plots are used to visualize the relative abundance of microbes at a given taxonomical level in each sample represented as a single bar.
+
+Instructions:
+
+* Select taxonomy level in the menu (default is genus)
+* (Optional) Add a color bar for one of more sample conditions
+* (Optional) Group samples and aggregate abundances by a condition
+* (Optional) Sort samples by conditions or the presence of specific organisms
+* (Optional) Isolate or discard samples
+* (Optional) Hide or show legend
+* (Optional) Adjust plot height
+* Click the button "Plot"
+
+![](https://github.com/compbiomed/materials/blob/master/animalcules/fig_047.png?raw=true)
+
+### Relative Abundance Heatmap
+
+The heatmap represents a sample by organisms matrix that can be visualized at different taxonomic levels.
+
+Instructions:
+
+* Select taxonomy level in the menu (default is genus)
+* (Optional) Add a color bar for one of more sample conditions
+* (Optional) Sort samples by conditions or the presence of specific organisms
+* (Optional) Isolate or discard samples
+* (Optional) Use raw counts or log(CPM)
+* (Optional) Adjust plot height
+* Click the button "Plot"
+
+![](https://github.com/compbiomed/materials/blob/master/animalcules/fig_048.png?raw=true)
+
+### Relative Abundance Boxplot
+
+The boxplot visualization allows users to compare the abundance of one or more organisms at multiple taxonomical levels between categorical attributes.
+
+Instructions:
+
+* Select one or more taxonomy levels in the menu (default is genus)
+* For each taxonomy level select one or more organisms to compare
+* (Optional) Separate plots when viewing multiple organisms on the same taxonomy level
+* Select a condition to compare organisms across
+* Select a datatype to use
+* Click the button "Plot"
+
+![](https://github.com/compbiomed/materials/blob/master/animalcules/fig_049.png?raw=true)

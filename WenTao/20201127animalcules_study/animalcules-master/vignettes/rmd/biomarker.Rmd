@@ -1,0 +1,48 @@
+---
+title: "Biomarker"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Run Biomarker
+
+To identify biomarkers for a specific binary classification problem, users need to specify the taxonomy level and target variable. In the Advanced Options, users could also specify the number of CV repeats, number of CV folds, and top biomarker proportion. For example, with a 3-repeats 3-fold cross validation, animalcules will randomly split the dataset into 3 fold and run CV, then this procedure is repeated 3 times (each time has different random data split). The top biomarker proportion defines the threshold for selecting biomarkers: animalcules will generate an classification model based importance score for each microbe/feature, and will choose the top 20% (suppose the proportion is 0.2 as default) features as the biomarkers.
+
+Also, users could choose binary classification models including logistic regression and random forest. After clicking the button "Run", the biomarker list will shouw up at the right-hand side.
+
+Note:
+
+* If the dataset is too small or unbalanced, cross-validation can't be applied. You will see error messages like: NA/NaN/Inf in foreign function call.
+* The target variable can not contain any special characters, otherwise there will be an error.
+
+Instructions:
+
+* Select taxonomy level in the menu (default: genus).
+* Select the target variable for biomarker identification.
+* (Optional) Select number of CV folds (default: 3).
+* (Optional) Select number of CV repeats (default: 3).
+* (Optional) Select top biomarker proportion based on importance score (default: 0.2, representing 20%).
+* (Optional) Select model (default: logistic regression).
+* Click the button "Run"
+
+Running time: 
+
+* Test dataset with 30 samples and 427 microbes: 8.5s
+* Test dataset with 587 samples and 203 microbes: 32.4s
+
+![](https://github.com/compbiomed/materials/blob/master/animalcules/fig_039.png?raw=true)
+
+### Importance Plot
+
+Ranked feature importance score plot for the identified biomarkers is showed here. The higher score is, the more important this feature (species, genus, ..) is regarding the prediction power.
+
+![](https://github.com/compbiomed/materials/blob/master/animalcules/fig_040.png?raw=true)
+
+### CV ROC Plot
+
+The identified biomarkers were used to re-train the model via a cross-validation, and ROC plot is showed automatically in this subtab. 
+
+![](https://github.com/compbiomed/materials/blob/master/animalcules/fig_041.png?raw=true)

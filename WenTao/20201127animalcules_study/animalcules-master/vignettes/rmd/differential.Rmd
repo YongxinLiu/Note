@@ -1,0 +1,25 @@
+---
+title: "Differential Analysis"
+output: html_document
+---
+
+To identify key microbes for a specific variable, users need to specify the taxonomy level and target variable (condition). In the Advanced Options, users could also add covariates to the linear model, add a minimum count cut-off (all features with average read number less than this cut-off will be filtered), and a adjusted p-value cut-off.
+
+After click the "Run" button, users would see a differential abundance analysis output table on the right-hand side. For categorical variables in DESeq2 method, we show the feature name, adjusted p-value, original p-value, log2 fold change, number of samples for each class, feature prevalance, and group size adjusted fold change. For numeric variables in DESeq2 method, number of samples for each class and group size adjusted fold change won't show up. For limma method, only adjusted p-value and original p-value will show up.
+
+Instructions:
+
+* Select either tab "DESeq2" or "limma" for the analysis (default is DESeq2).
+* Select taxonomy level in the menu (default is genus).
+* Select the target variable for differential abundance analysis.
+* (Optional) Select covariates.
+* (Optional) Select minimum total count cuf-off for microbes (default 500).
+* (Optional) Select adjusted p-value threshold (default 0.8).
+* Click the button "Run"
+
+Running time: 
+
+* Test dataset with 30 samples and 427 microbes: 2.48s
+* Test dataset with 587 samples and 203 microbes: 46.59s
+
+![](https://github.com/compbiomed/materials/blob/master/animalcules/fig_038.png?raw=true)
