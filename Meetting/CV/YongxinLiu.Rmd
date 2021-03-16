@@ -18,7 +18,7 @@ knitr::include_graphics(figs_1)
 
 单位：中国科学院遗传与发育生物学研究所
 
-职称：工程师
+职称：高级工程师
 
 联系电话：86-10-64808722
 
@@ -40,13 +40,17 @@ Google Scholar: https://scholar.google.com/citations?user=NoxNy_IAAAAJ
 
 ## 简介
 
-**刘永鑫**，博士，工程师，宏基因组公众号创始人。
+**刘永鑫**，博士，高级工程师，中科院青促会会员，宏基因组公众号创始人，QIIME 2项目参与人。
 
-2008年毕业于东北农业大学微生物学本科，2014年于中国科学院遗传与发育生物学研究所获生物信息学博士，2016年博士后出站留所任工程师。目前主要研究方向有微生物组数据分析与解读、分析方法开发与优化和科学传播。
+2008年毕业于东北农业大学微生物学本科，2014年于中国科学院大学获生物信息学博士，2016年中科院遗传发育所博士后出站留所任工程师，2021年起任高级工程师、入选中科院青促会会员。目前主要研究方向有微生物组数据分析、分析方法开发和科学传播。
 
-目前以第一作者(含共同)或微生物组数据分析负责人在[**Science**](https://mp.weixin.qq.com/s/KmMDEmptBKz8Fv7VSdz2Jg)、[**Nature Biotechnology**](https://mp.weixin.qq.com/s/s7Q1_MeodqJ0hjwDumeiXQ)、[**Cell Host & Microbe**](https://mp.weixin.qq.com/s/DgVe1VAZVqOMqCMuU3kEeQ) 等杂志发表论文20余篇，引用千余次。最广泛使用的[微生物组分析平台**QIIME 2**项目参与人](https://mp.weixin.qq.com/s/-_FHxF1XUBNF4qMV1HLPkg)。受邀以第一作者和/或通讯作者(含共同)在[**Protein & Cell**](https://mp.weixin.qq.com/s/xHe1FHLm3n0Vkxz0nNbXvQ)、[**Current Opinion in Microbiology**](https://mp.weixin.qq.com/s/-gXoRIy6ZuEmHH6txH8txA)、[**遗传**](https://mp.weixin.qq.com/s/3XFmRe4l2uZrHZexx0Ou-g) 等杂志发表微生物组研究方法综述。
+以第一作者(共同) 在[**Nature Biotechnology**](https://mp.weixin.qq.com/s/s7Q1_MeodqJ0hjwDumeiXQ)、 Nature Protocols、 Science China Life Sciences等杂志发表研究论文8篇。此外，受邀以第一作者和/或通讯作者(含共同)在[**Protein & Cell**](https://mp.weixin.qq.com/s/xHe1FHLm3n0Vkxz0nNbXvQ)、[**Current Opinion in Microbiology**](https://mp.weixin.qq.com/s/-gXoRIy6ZuEmHH6txH8txA)、[**遗传**](https://mp.weixin.qq.com/s/3XFmRe4l2uZrHZexx0Ou-g) 等杂志发表微生物组研究方法综述。以参与作者在[**Science**](https://mp.weixin.qq.com/s/KmMDEmptBKz8Fv7VSdz2Jg)、[**Nature Biotechnology**](https://mp.weixin.qq.com/s/-_FHxF1XUBNF4qMV1HLPkg)、[**Cell Host & Microbe**](https://mp.weixin.qq.com/s/DgVe1VAZVqOMqCMuU3kEeQ)等杂志发表论文14篇。累计发表文章26篇，被引用2992次(Google学术，截止2021/3/1)。
 
-2017年7月创办“宏基因组”公众号，分享本领域相关原创文章累计2000余篇，代表作品有[《微生物组图表解读、分析流程和统计绘图》](https://mp.weixin.qq.com/s/u7PQn2ilsgmA6Ayu-oP1tw)、[《QIIME2中文教程》](https://mp.weixin.qq.com/s/-_FHxF1XUBNF4qMV1HLPkg)等，关注人数9万+，累计阅读1600万+。
+主持科研项目2项，包括国家自然科学基金-青年项目，中国科学院青年创新促进会会会员项目；参与国家自然科学基金-面上项目、中国科学院战略性先导科技专项、重点部署项目项目3项。
+
+共同主编正在编写[《微生物组实验手册》——Bio-protocol](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzUzMjA4Njc1MA==&action=getalbum&album_id=1435470990129364993&scene=173&from_msgid=2247495317&from_itemidx=1&count=3#wechat_redirect)、[《微生物组数据分析》——科学出版社](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzUzMjA4Njc1MA==&action=getalbum&album_id=1370455875005317121&scene=173&from_msgid=2247490371&from_itemidx=1&count=3#wechat_redirect)专著2部。获得软件著作权1项。参与申请国内专利3项。2019/2020连续两年被选为遗传发育所“优秀个人”、植物基因组国家重点实验室墙报一等奖，和2019年“工会积极分子”。
+
+2017年7月创办“宏基因组”公众号，分享本领域相关原创文章累计2000余篇，代表作品有[《微生物组图表解读、分析流程和统计绘图》](https://mp.weixin.qq.com/s/u7PQn2ilsgmA6Ayu-oP1tw)、[《QIIME2中文教程》](https://mp.weixin.qq.com/s/-_FHxF1XUBNF4qMV1HLPkg)等，关注人数11万+，累计阅读2100万+。
 
 ---
 
@@ -71,13 +75,13 @@ Google Scholar: https://scholar.google.com/citations?user=NoxNy_IAAAAJ
 
 目前微生物组分析领域的处于高速发展阶段，方法和软件百花齐放、百家争鸣；对于绝大多数科研人员，开展分析中的主要难题不是没有软件可有，而是软件太多，不知如何选择，对软件方法的优缺点理解有限，结果准确性无法把握。
 
-我们搭建并共享了简单、易用的扩增子(EasyAmplicon)、宏基因组(EasyCulturome)、培养组(EasyCulturome)等分析流程方便同行开展数据分析(详见Github，正在投稿中)。
+我们搭建并共享了简单、易用的[扩增子(EasyAmplicon)](https://github.com/YongxinLiu/EasyAmplicon)、[宏基因组(EasyCulturome)](https://github.com/YongxinLiu/EasyMetagenome)、[培养组(Culturome，Nature Protocols)](https://github.com/YongxinLiu/Culturome)等分析流程方便同行开展数据分析(详见Github，正在投稿中)。
 
 ![](http://bailab.genetics.ac.cn/github/Note/Meetting/CV/fig/pipeline.jpg)
 
 图. 扩增子和宏基因组整合分析流程
 
-此外受邀参加QIIME 2项目的开发(Nature Biotechnology, 2019)，更好地把握国际最前沿的分析流程。参与开发植物扩增子定量方法，实现宿主植物、细菌和真菌三者间的定量，提供了绝对丰度的角度对微生物进行观察和比较(Plant Communications, 2020)。参与开发在线实现20余种常用绘图/分析工具的服务器ImageGP(http://www.ehbio.com/ImageGP/)，上线一年多已被引用过百次(正在投稿中)。
+此外受邀参加[QIIME 2项目的开发(Nature Biotechnology, 2019)](https://mp.weixin.qq.com/s/Z_MW9bWfBLaKrdPhu4XBOw)，更好地把握国际最前沿的分析流程。参与开发植物扩增子定量方法，实现宿主植物、细菌和真菌三者间的定量，提供了[绝对丰度的角度对微生物进行观察和比较(Plant Communications, 2020)](https://mp.weixin.qq.com/s/i3f4lvsrmeRLvvZQPM1Eeg)。参与开发在线实现20余种常用绘图/分析工具的服务器ImageGP(http://www.ehbio.com/ImageGP/)，上线一年多已被引用过百次(正在投稿中)。
 
 
 **下一步工作重点**
@@ -89,7 +93,7 @@ Google Scholar: https://scholar.google.com/citations?user=NoxNy_IAAAAJ
 
 ### 科学传播
 
-当前中国微生物组领域科研面临一系列困难：文章分析方法描述缺少细节无法重现；文章多如汪洋大海；英文资料较多但缺少系统整理和中文资料；缺少实例和经验分享等。因此在2017年起我发起并创立了提高数据分析可重复性、解决本领域中文资料匮乏的困境——宏基因组公众号。经过3年发展，目前分享2000+篇原创文章，300余万字，9万+同行关注，1600万+阅读量。成为本领域科研成果、技术方法分享交流的华人科研同行聚集地。
+当前中国微生物组领域科研面临一系列困难：文章分析方法描述缺少细节无法重现；文章多如汪洋大海；英文资料较多但缺少系统整理和中文资料；缺少实例和经验分享等。因此在2017年起我发起并创立了提高数据分析可重复性、解决本领域中文资料匮乏的困境——宏基因组公众号。经过近4年的发展，目前分享2000+篇原创文章，300余万字，11万+同行关注，2100万+阅读量。成为本领域科研成果、技术方法分享交流的华人科研同行聚集地。
 
 此外还受到国内外数十个杂志邀请分享分析方法。目前已经在[**Protein & Cell**](https://mp.weixin.qq.com/s/xHe1FHLm3n0Vkxz0nNbXvQ)、[**Current Opinion in Microbiology**](https://mp.weixin.qq.com/s/-gXoRIy6ZuEmHH6txH8txA)、[**Chinese Medical Journal**](https://mp.weixin.qq.com/s/hbCyBDvWAMyMDqztbdaN5Q)、[**遗传**](https://mp.weixin.qq.com/s/3XFmRe4l2uZrHZexx0Ou-g)等杂志发表分析方法学综述。
 
@@ -113,7 +117,7 @@ Google Scholar: https://scholar.google.com/citations?user=NoxNy_IAAAAJ
 
 ## 发表文章
 
-截止2020年8月1日，共发表文章24篇，被引用1385次。
+截止2021年3月1日，共发表文章26篇，被引用2992次。
 
 "#"代表共同第一作者，"\*"代表通讯作者，IF = 2019年影响因子，文章按发表年逆序排列。
 
@@ -122,7 +126,7 @@ Google Scholar: https://scholar.google.com/citations?user=NoxNy_IAAAAJ
 1. **Yong-Xin Liu#\***, Yuan Qin#, Tong Chen#, Meiping Lu, Xubo Qian, Xiaoxuan Guo & Yang Bai\*. (2020). A practical guide to amplicon and metagenomic analysis of microbiome data. **Protein & Cell** 11, doi: https://doi.org/10.1007/s13238-020-00724-8 (**IF = 10.164**)
 2. **Yong-Xin Liu**, Yuan Qin & Yang Bai\*. (2019). Reductionist synthetic community approaches in root microbiome research. **Current Opinion in Microbiology** 49, 97-102, doi: https://doi.org/10.1016/j.mib.2019.10.010 (**IF = 8.134**)
 3. Jingying Zhang#, **Yong-Xin Liu#**, Na Zhang#, Bin Hu#, Tao Jin#, Haoran Xu, Yuan Qin, Pengxu Yan, Xiaoning Zhang, Xiaoxuan Guo, Jing Hui, Shouyun Cao, Xin Wang, Chao Wang, Hui Wang, Baoyuan Qu, Guangyi Fan, Lixing Yuan, Ruben Garrido-Oter, Chengcai Chu\* & Yang Bai\*. (2019). *NRT1.1B* is associated with root microbiota composition and nitrogen use in field-grown rice. **Nature Biotechnology** 37, 676-684, doi: https://doi.org/10.1038/s41587-019-0104-4 (**IF = 36.558**，封面文章)
-4. Jingying Zhang#, **Yong-Xin Liu#**, Xiaoxuan Guo, Yuan Qin, Ruben Garrido-Oter\*, Paul Schulze-Lefert\*, Yang Bai\*. (2020). High-throughput cultivation and identification of bacteria from the plant root microbiota. **Nature Protocols** doi: In Press (**IF = 10.419**)
+4. Jingying Zhang#, **Yong-Xin Liu#**, Xiaoxuan Guo, Yuan Qin, Ruben Garrido-Oter\*, Paul Schulze-Lefert\*, Yang Bai\*. (2021). High-throughput cultivation and identification of bacteria from the plant root microbiota. **Nature Protocols** 16, 988-1012, doi: https://doi.org/10.1038/s41596-020-00444-7 (**IF = 10.419**)
 5. Ancheng C. Huang#, Ting Jiang#, **Yong-Xin Liu**, Yue-Chen Bai, James Reed, Baoyuan Qu, Alain Goossens, Hans-Wilhelm Nützmann, Yang Bai\* & Anne Osbourn\*. (2019). A specialized metabolic network selectively modulates Arabidopsis root microbiota. **Science** 364, eaau6389, doi: https://doi.org/10.1126/science.aau6389 (**IF = 41.845**)
 
 ### 近五年其他文章
@@ -140,17 +144,19 @@ Google Scholar: https://scholar.google.com/citations?user=NoxNy_IAAAAJ
 16. Jingying Zhang#, Na Zhang#, **Yong-Xin Liu#**, Xiaoning Zhang, Bin Hu, Yuan Qin, Haoran Xu, Hui Wang, Xiaoxuan Guo, Jingmei Qian, Wei Wang, Pengfan Zhang, Tao Jin\*, Chengcai Chu\* & Yang Bai\*. (2018). Root microbiota shift in rice correlates with resident time in the field and developmental stage. Science China Life Sciences 61, 613-621, doi: https://doi.org/10.1007/s11427-018-9284-4 (**IF = 4.611**，封面文章)
 17. Wei Wang#, Bin Hu#, Dingyang Yuan, Yongqiang Liu, Ronghui Che, Yingchun Hu, Shujun Ou, Zhihua Zhang, Hongru Wang, Hua Li, Zhimin Jiang, Zhengli Zhang, Xiaokai Gao, Yahong Qiu, Xiangbing Meng, **Yong-Xin Liu**, Yang Bai, Yan Liang, Yi-Qin Wang, Lianhe Zhang, Legong Li, Sodmergen Sodmergen, Hai-Chun Jing, Jiayang Li & Chengcai Chu\*. (2018). Expression of the nitrate transporter gene OsNRT1.1A/OsNPF6.3 confers high yield and early maturation in rice. **The Plant Cell** 30, 638-651, doi: https://doi.org/10.1105/tpc.17.00809 (**IF = 9.618**)
 18. Handong Su#, Yalin Liu#, **Yong‐Xin Liu**, Zhenling Lv, Hongyao Li, Shaojun Xie, Zhi Gao, Junling Pang, Xiu‐Jie Wang, Jinsheng Lai & Fangpu Han\*. (2016). Dynamic chromatin changes associated with de novo centromere formation in maize euchromatin. **The Plant journal** 1, 1-17, doi: https://doi.org/10.1111/tpj.13305 (**IF = 6.141**)
+19. Maosheng Zheng, Shishi He, Yueqi Feng, Mingyuan Wang, **Yong‐Xin Liu**, Chenyuan Dang & Jiawen Wang. (2021). Active ammonia-oxidizing bacteria and archaea in wastewater treatment systems. **Journal of Environmental Sciences** 102, 273-282, doi: https://doi.org/https://doi.org/10.1016/j.jes.2020.09.039 (**IF = 4.302**)
+20. **刘永鑫**, 刘芳, 陈同 & 白洋. (2020). 随机宏基因组测序数据质量控制和去宿主的分析流程和常见问题. **Bio-protocol**, e2003347, doi: https://doi.org/10.21769/BioProtoc.2003347
 
 ### 五年前文章
 
-19. **Yong-Xin Liu**, Meng Wang & Xiu-Jie Wang\*. (2014). Endogenous small RNA clusters in plants. **Genomics Proteomics Bioinformatics** 12, 64-71, doi: https://doi.org/10.1016/j.gpb.2014.04.003 (**IF = 7.051**)
-18. Jing Li, **Yong-Xin Liu**, Ying-peng Han, Yong-guang Li, Mao-zu Guo & Wen-bin Li\*. (2013). MicroRNA primary transcripts and promoter elements analysis in soybean (Glycine max L. Merril.). **Journal of Integrative Agriculture** 12, 1522-1529, doi: https://doi.org/http://dx.doi.org/10.1016/S2095-3119(13)60500-6 (**IF = 1.984**)
-19. **Yong-Xin Liu**, Wei Chang, Ying-peng Han, Quan Zou, Mao-zu Guo & Wen-bin Li\*. (2011). In silico detection of novel microRNAs genes in soybean genome. **Agricultural Sciences in China** 10, 1336-1345, doi: https://doi.org/https://doi.org/10.1016/S1671-2927(11)60126-0 (**IF = 1.984**)
-20. 韩英鹏\*, 李修平, 常玮, 赵雪, **刘永鑫** & 李海燕. (2011). 大豆EST-SSR多态性与EST源序列的关系分析. **作物杂志** 27, 75-79, doi: https://doi.org/10.3969/j.issn.1001-7283.2011.03.019
-21. 韩英鹏\*, 李修平, 常玮, 赵雪, **刘永鑫** & 李海燕. (2011). 与EST-SSR连锁的抗性候选基因潜在功能分析. **东北农业大学学报** 42, 114-117, doi: https://doi.org/10.3969/j.issn.1005-9369.2011.07.021
-22. **Yong-Xin Liu**, Ying-peng Han, Wei Chang, Quan Zou, Mao-zu Guo & Wen-bin Li\*. (2010). Genomic analysis of microRNA promoters and their cis-acting elements in soybean. **Agricultural Sciences in China** 9, 1561-1570, doi: https://doi.org/https://doi.org/10.1016/S1671-2927(09)60252-2 (**IF = 1.984**)
-23. **刘永鑫**, 韩英鹏, 常玮, 邹权, 郭茂祖 & 李文滨\*. (2009). 一种适合大豆MicroRNA鉴定的RT-PCR方法. **大豆科学** 28, 600-604, doi: https://doi.org/10.11861/j.issn.1000-9841.2009.04.0600
-24. 孔德勇, 许修宏\*, **刘永鑫** & 刘维智. (2008). 双孢蘑菇母种培养基的优化. **东北农业大学学报** 39, 70-73, doi: https://doi.org/10.3969/j.issn.1005-9369.2008.08.015
+21. **Yong-Xin Liu**, Meng Wang & Xiu-Jie Wang\*. (2014). Endogenous small RNA clusters in plants. **Genomics Proteomics Bioinformatics** 12, 64-71, doi: https://doi.org/10.1016/j.gpb.2014.04.003 (**IF = 7.051**)
+22. Jing Li, **Yong-Xin Liu**, Ying-peng Han, Yong-guang Li, Mao-zu Guo & Wen-bin Li\*. (2013). MicroRNA primary transcripts and promoter elements analysis in soybean (Glycine max L. Merril.). **Journal of Integrative Agriculture** 12, 1522-1529, doi: https://doi.org/http://dx.doi.org/10.1016/S2095-3119(13)60500-6 (**IF = 1.984**)
+23. **Yong-Xin Liu**, Wei Chang, Ying-peng Han, Quan Zou, Mao-zu Guo & Wen-bin Li\*. (2011). In silico detection of novel microRNAs genes in soybean genome. **Agricultural Sciences in China** 10, 1336-1345, doi: https://doi.org/https://doi.org/10.1016/S1671-2927(11)60126-0 (**IF = 1.984**)
+24. 韩英鹏\*, 李修平, 常玮, 赵雪, **刘永鑫** & 李海燕. (2011). 大豆EST-SSR多态性与EST源序列的关系分析. **作物杂志** 27, 75-79, doi: https://doi.org/10.3969/j.issn.1001-7283.2011.03.019
+25. 韩英鹏\*, 李修平, 常玮, 赵雪, **刘永鑫** & 李海燕. (2011). 与EST-SSR连锁的抗性候选基因潜在功能分析. **东北农业大学学报** 42, 114-117, doi: https://doi.org/10.3969/j.issn.1005-9369.2011.07.021
+26. **Yong-Xin Liu**, Ying-peng Han, Wei Chang, Quan Zou, Mao-zu Guo & Wen-bin Li\*. (2010). Genomic analysis of microRNA promoters and their cis-acting elements in soybean. **Agricultural Sciences in China** 9, 1561-1570, doi: https://doi.org/https://doi.org/10.1016/S1671-2927(09)60252-2 (**IF = 1.984**)
+27. **刘永鑫**, 韩英鹏, 常玮, 邹权, 郭茂祖 & 李文滨\*. (2009). 一种适合大豆MicroRNA鉴定的RT-PCR方法. **大豆科学** 28, 600-604, doi: https://doi.org/10.11861/j.issn.1000-9841.2009.04.0600
+28. 孔德勇, 许修宏\*, **刘永鑫** & 刘维智. (2008). 双孢蘑菇母种培养基的优化. **东北农业大学学报** 39, 70-73, doi: https://doi.org/10.3969/j.issn.1005-9369.2008.08.015
 
 
 ---
@@ -198,10 +204,14 @@ Analysis and visualization methods for amplicon and metagenomic data of microbio
 类别                                   |名称                                                                          |编号            |参与类型    |开始时间    |结束时间    |合同经费（万元）
 :--------------------------------------|:-----------------------------------------------------------------------------|:---------------|:-----------|:-----------|:-----------|:-----------------------
 国家自然科学基金-青年项目              |玉米新着丝粒DNA甲基化研究                                                     |31500992        |主持        |2016.1      |2018.12     |20
+中国科学院-青年创新促进会会员项目      |根系微生物组                                                                  |2021092         |主持        |2021.1      |2024.12     |80
+战略性先导科技专项A类                  |RNA介导的体细胞重编程技术                                                     |XDA01020101     |参加        |2011.5      |2021.12     |709.89
+国家自然科学基金-面上项目              |真核生物基因保守性的系统分析与功能研究                                        |Y313011         |参加        |2013.1      |2016.12     |100
 中科院前沿科学重点研究项目             |农作物根际微生物群体结构及功能研究                                            |QYZDB-SSW-SMC021|参加        |2017.1      |2020.12     |250
 战略性先导科技专项B类                  |根系微生物组在农作物抗病、营养高效中的功能                                    |XDB11020700     |参加        |2017.1      |2019.12     |135
 国家自然科学基金-面上项目              |203个水稻核心品种产量相关性状与根系微生物组的关联分析                         |31772400        |参加        |2018.1      |2021.12     |60
 中国科学院重点部署项目                 |盐生植物根系微生物组结构及功能分析                                            |KFZD-SW-112     |参加        |2018.1      |2019.12     |75
+战略性先导科技专项A类                  |跨界改良技术                                                                  |XDA24020104     |参加        |2019.1      |2024.12     |94.98
 
 
 ## 学术会议
@@ -216,6 +226,9 @@ Analysis and visualization methods for amplicon and metagenomic data of microbio
 2019/12/7   |北京中科院微生物所         |中国微生物组研究现状与对策研讨会邀请函                                                         |微生物组分析方法、应用与科学传播                                                         |特邀报告
 2019/12/14  |河北石家庄                 |河北省第五届植物生理学与粮食安全专家论坛                                                       |植物微生组研究方法与应用                                                                 |特邀报告
 2020/6/17   |在线                       |CGM在线沙龙                                                                                    |微生物组数据分析与可视化                                                                 |特邀报告
+2020/10/27  |江苏南京                   |土壤生态学前沿研讨会                                                                           |扩增子和宏基因组数据分析流程和可视化方案                                                                 |专题报告
+2020/11/29  |北京                       |肠道演讲                                                                                       |微生物组数据分析与可视化实战                                                                 |专题报告
+2020/12/8   |在线                    |中国农业大学国家农业绿色发展研究院微生物专题报告                                                  |宏基因组数据分析的机遇与挑战                                                                |专题报告
 
 ## 奖励
 
@@ -228,6 +241,8 @@ Analysis and visualization methods for amplicon and metagenomic data of microbio
 2019/8/11 |夏季青年学术论坛墙报一等奖                   |植物基因组学国家重点实验室
 2019/9/1  |工会积极分子                                 |中国科学院遗传与发育生物学所工会委员会
 2020/1/3  |2019年度优秀个人                             |中国科学院遗传与发育生物学所
+2020/11/21|冬季青年学术论坛墙报一等奖                   |植物基因组学国家重点实验室
+2021/1/3  |2019年度优秀个人                             |中国科学院遗传与发育生物学所
 
 
 ## 专利
@@ -238,8 +253,8 @@ Analysis and visualization methods for amplicon and metagenomic data of microbio
 
 ## 软件著作权
 
-目前在申请中的软件著作权3个。
+目前获得软件著作权1个，在申请2个。
 
 ---
 
-© 2020 Yong-Xin Liu
+© 2016-2021 Yong-Xin Liu
