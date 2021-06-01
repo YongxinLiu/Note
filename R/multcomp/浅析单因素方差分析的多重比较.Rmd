@@ -1,0 +1,250 @@
+---
+title: "浅析单因素方差分析中的多重比较"
+author: "许一飞,马腾飞"
+date: "2021/4/4"
+output: html_document
+---
+
+本脚本侧重于单因素方差分析中多重比较方法的运用;
+就不展示数据正态性及齐次性的运算了(默认都符合，一般理化数据是都符合的);
+有的人喜欢用Tukey检验，但会遇到一些不符合预期的问题;
+让我们抽丝剥茧的来理清这些个问题,尤其注重阅读下面的讨论说明(说不定你就遇到过这样的问题)；
+这里用的数据涉及到多个α多样性，多个的处理(若你是做基因你可以理解成多个采样地的多个基因)同时进行多重比较。
+
+```{r}
+library(ggplot2)
+library(ggprism)
+dat <- read.table('./alpha.txt',row.names = 1,header = T,stringsAsFactors = F)#读入α多样性数据
+head(dat, n = 3)
+#读入实验设计文件
+design <- read.table('./metadata.tsv',row.names = 1,header = T,stringsAsFactors = F)
+head(design, n = 3)
+dat <- merge(dat,design,by='row.names')#按照行名合并文件
+head(dat, n = 3)
+library(reshape2)
+dat <- melt(dat,id.vars = -c(2:7),variable.name = 'alpha')#宽数据变长数据
+head(dat, n = 3)
+dat$alpha <- as.factor(dat$alpha)#将α列转化成因子
+names(dat)[4] <- 'v'#给value重新赋列名
+head(dat, n = 3)
+```
+
+## 函数主题
+
+函数参数设置：
+- data就是上面整好的数据,
+- group是你的分组信息列，比如α多样性的种类(或不同的基因),
+- compare是每个α多样性要比较的不同处理(或每个gene要比较的不同处理),
+- value 值就是要比较的α多样性/gene拷贝数的数值。
+
+整体思想如下(例如本数据)：
+首先给输入数据dat，根据alpha列分成不同的小子集，每个小子集比较不同Group下v值的差异情况，最后汇总输出。
+
+```{r}
+# 1 -----------------------------------------------------------------------
+ONE_Tukey_HSD1 <- function(data,group,compare,value){
+ 
+  library(multcomp)#Tukey检验需要用到这个包来标显著性字母标记
+  
+  a <- data.frame(stringsAsFactors = F)#做一个空的数据框
+  type <- unique(data[,group])#统计需要运行多重比较的次数
+  for (i in type)#进行type次多重比较
+  {
+    g1=compare
+    sub_dat <- data[data[,group]==i,]#根据指定的i去取相应的数据集出来
+    #fit <- aov(sub_dat[,value] ~ sub_dat[,compare] )
+    names(sub_dat)[names(sub_dat)==compare] <- 'g1' ## 重命名方便后面使用
+    names(sub_dat)[names(sub_dat)==value] <- 'value' ## 重命名方便后面使用
+    sub_dat$g1 <- factor(sub_dat$g1)#将列转化成因子以进行多重比较
+    
+    fit <- aov(value ~ g1,data = sub_dat )#方差分析
+    #Tukey_HSD = TukeyHSD(fit, ordered = TRUE, conf.level = 0.95)
+    options(warn = -1)
+    tuk <- cld(glht(fit, alternative = 'two.sided', linfct = mcp(g1 = 'Tukey')), decreasing = TRUE)#Tukey检验多重比较
+    Tukey.labels <- data.frame(Letters=tuk$mcletters$Letters, stringsAsFactors = FALSE)#获取多重比较字母标注
+    Tukey.labels$compare = rownames(Tukey.labels)## 提取字母分组行名为group组名
+    Tukey.labels$type <- i
+    
+    mean_sd <- merge(aggregate(sub_dat[['value']],by=list(sub_dat[,'g1']),FUN=sd),#获取数据标准差
+    aggregate(sub_dat[['value']],by=list(sub_dat[,'g1']),FUN=mean),by="Group.1"#获取数据均值
+    )
+    names(mean_sd) <- c('compare','std','mean')#列名重命名
+    
+    a <- rbind(a,merge(mean_sd,Tukey.labels,by='compare'))#合并数据
+  }
+ 
+  names(a) <- c(compare,'std','mean','Letters',group)#列名重命名
+  return(a)
+}
+
+
+# 2 -----------------------------------------------------------------------
+
+ONE_Tukey_HSD2 <- function(data,group,compare,value){
+  library(multcompView)
+  
+  a <- data.frame(stringsAsFactors = F)
+  type <- unique(data[,group])
+  for (i in type)
+  {
+    g1=compare
+    sub_dat <- data[data[,group]==i,]
+    #fit <- aov(sub_dat[,value] ~ sub_dat[,compare] )
+    ## 重命名方便后面使用
+    names(sub_dat)[names(sub_dat)==compare] <- 'g1'
+    names(sub_dat)[names(sub_dat)==value] <- 'value'
+    sub_dat$g1 <- factor(sub_dat$g1)
+    
+    fit <- aov(value ~ g1,data = sub_dat )
+    Tukey_HSD = TukeyHSD(fit, ordered = TRUE, conf.level = 0.95)
+    options(warn = -1)
+    tuk <- multcompLetters2(value ~ g1, Tukey_HSD$g1[,"p adj"], sub_dat)
+
+    
+    #tuk <- cld(glht(fit, alternative = 'two.sided', linfct = mcp(g1 = 'Tukey')), decreasing = TRUE)
+    Tukey.labels <- data.frame(tuk['Letters'], stringsAsFactors = FALSE)
+    ## 提取字母分组行名为group组名
+    Tukey.labels$compare = rownames(Tukey.labels)
+    Tukey.labels$type <- i
+    
+    mean_sd <- merge(aggregate(sub_dat[['value']],by=list(sub_dat[,'g1']),FUN=sd),
+                     aggregate(sub_dat[['value']],by=list(sub_dat[,'g1']),FUN=mean),by="Group.1"
+    )
+    names(mean_sd) <- c('compare','std','mean')
+    
+    a <- rbind(a,merge(mean_sd,Tukey.labels,by='compare'))
+  }
+  
+  names(a) <- c(compare,'std','mean','Letters',group)
+  return(a)
+}
+```
+
+### 一、 ONE_Tukey_HSD1函数
+
+这个函数核心
+是cld(glht(fit, alternative = 'two.sided', linfct = mcp(g1 = 'Tukey')), decreasing = TRUE),
+不会出现c>b>a情况(因为decreasing = TRUE,当然有的人喜欢这样标,)和乱标字母(比如对于mean最低的点
+并不一定标记成c(a>b>c时)或并不一定标记成a(c>b>a时),其只能保证有差异的数据一定是不同字母),
+但是多重比较出现“ac”标注，没法解决。
+
+### 二、ONE_Tukey_HSD2函数
+
+而ONE_Tukey_HSD2核心是这个 multcompLetters2(value ~ g1, Tukey_HSD$g1[,"p adj"], sub_dat),
+multcompLetters2这个函数隶属于multcompView包，与 multcompLetters不同的是
+multcompLetters2可以接受formula，而multcompLetters只接受一个两两比较的p值的数据框,
+且可能多重比较时出现“ac”标注,以及出现c>b>a情况和乱标字母(比如对于mean最低的点
+并不一定标记成c(a>b>c时)或并不一定标记成a(c>b>a时),其只能保证有差异的数据一定是不同字母)。
+
+当然多重比较好多方法，不要局限于一种方法,
+例如下面的第三种可以用library(agricolae)包中的LSD检验(用的“BH”校正),
+
+当然也可以用library(agricolae)包中的
+【Duncan法】(新复极差法)(SSR);
+【SNK法】(Student-Newman-Keuls);
+【Scheffe检验】;
+
+这三种多重比较方法同LSD检验的用法一样都可以避免出现上面提到的三种情况即：
+
+1、 a、b、c的顺序不会出现c>b>a;
+
+2、不会出现乱标字母(比如对于mean最低的点并不一定标记成c(a>b>c时)或
+并不一定标记成a(c>b>a时)，其只能保证有差异的数据一定是不同字母);
+
+3、多重比较时出现“ac”标注。
+
+### ONE_LSD函数
+
+```{r}
+# 3 -----------------------------------------------------------------------
+ONE_LSD <- function(data,group,compare,value){
+  library(agricolae)
+  
+  a <- data.frame(stringsAsFactors = F)
+  type <- unique(data[,group])
+  for (i in type)
+  {
+    # sub_dat <- subset(data,group == i)
+    sub_dat <- data[data[,group]==i,]
+    # fit <- aov(value ~ compare,sub_dat)
+    fit <- aov(sub_dat[,value] ~ sub_dat[,compare] )
+    out <- LSD.test(fit,'sub_dat[, compare]',p.adj='BH')#进行了p值校正
+    #out$groups就可获取多重比较字母列表
+    out$groups$type <- i
+    out$groups$compare <- rownames(out$groups)
+    
+    a <- rbind(a,merge(out$means[,1:2], out$groups,by='sub_dat[, value]'))
+  }
+  names(a) <- c('mean','std','lsd',group,compare)
+  return(a)
+}
+```
+
+## alpha多样性在不同处理下的差别
+
+运行，这里拿alpha多样性测试，看不同alpha多样性在不同处理下的差别。
+
+```{r}
+#1
+#df1 <- ONE_Tukey_HSD1(data=dat,group='alpha',compare='Group',value='v')
+df1 <- ONE_Tukey_HSD1(dat,'alpha','Group','v')
+#在此可以查看各个α多样性下不同处理间的多重比较字母标注结果，这也是本脚本的亮点之一
+#数据量很大的情况下，可以直接查看差异情况，不用一个个的做出图再点开看，很是方便。
+head(df1,n=3)
+```
+
+```{r}
+p1 = ggplot(dat)+geom_boxplot(aes(x=Group,y=v,fill=Group))+geom_text(data=df1,aes(x=Group,y=mean+1.3*std,label=Letters))+
+  facet_wrap(.~alpha,scales = "free_y")+ labs(x='Group',y='AlphaDiv')+
+  ggprism::theme_prism()+theme(axis.text.x = element_text(angle = 45))
+# 本图一张即可包含所有数据情况，方便查看
+p1
+```
+
+```{r}
+#2
+#df2 <- ONE_Tukey_HSD2(data=dat,group='alpha',compare='Group',value='v')
+df2 <- ONE_Tukey_HSD2(dat,'alpha','Group','v')
+head(df2) 
+```
+
+```{r}
+p2 = ggplot(dat)+geom_boxplot(aes(x=Group,y=v,fill=Group))+geom_text(data=df2,aes(x=Group,y=mean+1.3*std,label=Letters))+
+  facet_wrap(.~alpha,scales = "free_y")+ labs(x='Group',y='AlphaDiv')+
+  ggprism::theme_prism()+theme(axis.text.x = element_text(angle = 45))
+p2
+```
+
+```{r}
+#3
+#df3 <- ONE_LSD(data=dat,group='alpha',compare='Group',value='v')
+df3 <- ONE_LSD(dat,'alpha','Group','v')
+head(df3)
+```
+
+```{r}
+p3 = ggplot(dat)+geom_boxplot(aes(x=Group,y=v,fill=Group))+geom_text(data=df3,aes(x=Group,y=mean+1.3*std,label=lsd))+
+  facet_wrap(.~alpha,scales = "free_y")+ labs(x='Group',y='AlphaDiv')+
+  ggprism::theme_prism()+theme(axis.text.x = element_text(angle = 45))
+p3
+```
+
+```{r}
+# Output figure width and height  
+# Letter纸图片尺寸为单栏89 mm，双栏183 mm，页面最宽为247 mm
+# 推荐比例16：10，即半版89 mm x 56 mm; 183 mm x 114 mm
+ggsave("./alpha1.pdf", p1, width = 350, height = 200, units = "mm")
+ggsave("./alpha2.pdf", p2, width = 350, height = 200, units = "mm")
+ggsave("./alpha3.pdf", p3, width = 350, height = 200, units = "mm")
+```
+
+
+### 参考资料
+
+[EasyAmplicon/script/alpha_boxplot.R](https://github.com/YongxinLiu/EasyAmplicon/blob/master/script/alpha_boxplot.R)
+
+[差异分析、显著性标记及统计作图的自动实现R代码示例
+](https://mp.weixin.qq.com/s?__biz=MzIxNzc1Mzk3NQ==&mid=2247484058&idx=1&sn=f75253399bdaed7a858bd0bd1b340af0&chksm=97f5b282a0823b944608b99fcba532dc90b949130477d5e34c32eb84d204c0eb493eafcbde2c&token=66128012&lang=zh_CN&scene=21#wechat_redirect)
+
+[multcompView: Visualizations of Paired Comparisons](https://cran.r-project.org/web/packages/multcompView/index.html)
+
