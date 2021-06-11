@@ -1,6 +1,9 @@
 ---
-title: "**刘永鑫** 博士 简介"
+title: '**刘永鑫** 博士 简介'
 output:
+  word_document:
+    toc: yes
+    toc_depth: '3'
   html_document:
     toc: yes
     toc_depth: 3
@@ -44,7 +47,7 @@ Google Scholar: https://scholar.google.com/citations?user=NoxNy_IAAAAJ
 
 2008年毕业于东北农业大学微生物学本科，2014年于中国科学院大学获生物信息学博士，2016年中科院遗传发育所博士后出站留所任工程师，2021年起任高级工程师、入选中科院青促会会员。目前主要研究方向有微生物组数据分析、分析方法开发和科学传播。
 
-以第一作者(共同) 在[**Nature Biotechnology**](https://mp.weixin.qq.com/s/s7Q1_MeodqJ0hjwDumeiXQ)、 Nature Protocols、 Science China Life Sciences等杂志发表研究论文8篇。此外，受邀以第一作者和/或通讯作者(含共同)在[**Protein & Cell**](https://mp.weixin.qq.com/s/xHe1FHLm3n0Vkxz0nNbXvQ)、[**Current Opinion in Microbiology**](https://mp.weixin.qq.com/s/-gXoRIy6ZuEmHH6txH8txA)、[**遗传**](https://mp.weixin.qq.com/s/3XFmRe4l2uZrHZexx0Ou-g) 等杂志发表微生物组研究方法综述。以参与作者在[**Science**](https://mp.weixin.qq.com/s/KmMDEmptBKz8Fv7VSdz2Jg)、[**Nature Biotechnology**](https://mp.weixin.qq.com/s/-_FHxF1XUBNF4qMV1HLPkg)、[**Cell Host & Microbe**](https://mp.weixin.qq.com/s/DgVe1VAZVqOMqCMuU3kEeQ)等杂志发表论文14篇。累计发表文章26篇，被引用2992次(Google学术，截止2021/3/1)。
+以第一作者(共同) 在[**Nature Biotechnology**](https://mp.weixin.qq.com/s/s7Q1_MeodqJ0hjwDumeiXQ)、 Nature Protocols、 Science China Life Sciences等杂志发表研究论文8篇。此外，受邀以第一作者和/或通讯作者(含共同)在[**Protein & Cell**](https://mp.weixin.qq.com/s/xHe1FHLm3n0Vkxz0nNbXvQ)、[**Current Opinion in Microbiology**](https://mp.weixin.qq.com/s/-gXoRIy6ZuEmHH6txH8txA)、[**遗传**](https://mp.weixin.qq.com/s/3XFmRe4l2uZrHZexx0Ou-g) 等杂志发表微生物组研究方法综述。以参与作者在[**Science**](https://mp.weixin.qq.com/s/KmMDEmptBKz8Fv7VSdz2Jg)、[**Nature Biotechnology**](https://mp.weixin.qq.com/s/-_FHxF1XUBNF4qMV1HLPkg)、[**Cell Host & Microbe**](https://mp.weixin.qq.com/s/DgVe1VAZVqOMqCMuU3kEeQ)等杂志发表论文14篇。累计发表文章26篇，被引用3805次(Google学术，截止2021/6/3)。
 
 主持科研项目2项，包括国家自然科学基金-青年项目，中国科学院青年创新促进会会会员项目；参与国家自然科学基金-面上项目、中国科学院战略性先导科技专项、重点部署项目项目3项。
 
