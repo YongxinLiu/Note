@@ -1,12 +1,16 @@
 ---
 title: '**刘永鑫** 博士 简介'
 output:
-  word_document:
-    toc: yes
-    toc_depth: '3'
   html_document:
+    df_print: paged
+    theme: cerulean
+    highlight: haddock
     toc: yes
     toc_depth: 3
+    toc_float:
+      collapsed: false
+      smooth_scroll: true
+    code_fold: show
 ---
 
 ## 基本信息
@@ -47,7 +51,7 @@ Google Scholar: https://scholar.google.com/citations?user=NoxNy_IAAAAJ
 
 2008年毕业于东北农业大学微生物学本科，2014年于中国科学院大学获生物信息学博士，2016年中科院遗传发育所博士后出站留所任工程师，2021年起任高级工程师、入选中科院青促会会员。目前主要研究方向有微生物组数据分析、分析方法开发和科学传播。
 
-以第一作者(共同) 在[**Nature Biotechnology**](https://mp.weixin.qq.com/s/s7Q1_MeodqJ0hjwDumeiXQ)、 Nature Protocols、 Science China Life Sciences等杂志发表研究论文8篇。此外，受邀以第一作者和/或通讯作者(含共同)在[**Protein & Cell**](https://mp.weixin.qq.com/s/xHe1FHLm3n0Vkxz0nNbXvQ)、[**Current Opinion in Microbiology**](https://mp.weixin.qq.com/s/-gXoRIy6ZuEmHH6txH8txA)、[**遗传**](https://mp.weixin.qq.com/s/3XFmRe4l2uZrHZexx0Ou-g) 等杂志发表微生物组研究方法综述。以参与作者在[**Science**](https://mp.weixin.qq.com/s/KmMDEmptBKz8Fv7VSdz2Jg)、[**Nature Biotechnology**](https://mp.weixin.qq.com/s/-_FHxF1XUBNF4qMV1HLPkg)、[**Cell Host & Microbe**](https://mp.weixin.qq.com/s/DgVe1VAZVqOMqCMuU3kEeQ)等杂志发表论文14篇。累计发表文章26篇，被引用3805次(Google学术，截止2021/6/3)。
+以第一作者和/或通讯作者(含共同)在[**Nature Biotechnology**](https://mp.weixin.qq.com/s/s7Q1_MeodqJ0hjwDumeiXQ)、 Nature Protocols、 Science China Life Sciences等杂志发表研究论文9篇。此外，受邀以第一作者和/或通讯作者(含共同)在[**Protein & Cell**](https://mp.weixin.qq.com/s/xHe1FHLm3n0Vkxz0nNbXvQ)、[**Current Opinion in Microbiology**](https://mp.weixin.qq.com/s/-gXoRIy6ZuEmHH6txH8txA)、[**遗传**](https://mp.weixin.qq.com/s/3XFmRe4l2uZrHZexx0Ou-g) 等杂志发表微生物组研究方法综述4篇。以参与作者在[**Science**](https://mp.weixin.qq.com/s/KmMDEmptBKz8Fv7VSdz2Jg)、[**Nature Biotechnology**](https://mp.weixin.qq.com/s/-_FHxF1XUBNF4qMV1HLPkg)、[**Cell Host & Microbe**](https://mp.weixin.qq.com/s/DgVe1VAZVqOMqCMuU3kEeQ)等杂志发表论文15篇。累计发表文章28篇，被引用4313次(Google学术，截止2021/8/9)。
 
 主持科研项目2项，包括国家自然科学基金-青年项目，中国科学院青年创新促进会会会员项目；参与国家自然科学基金-面上项目、中国科学院战略性先导科技专项、重点部署项目项目3项。
 
@@ -96,14 +100,14 @@ Google Scholar: https://scholar.google.com/citations?user=NoxNy_IAAAAJ
 
 ### 科学传播
 
-当前中国微生物组领域科研面临一系列困难：文章分析方法描述缺少细节无法重现；文章多如汪洋大海；英文资料较多但缺少系统整理和中文资料；缺少实例和经验分享等。因此在2017年起我发起并创立了提高数据分析可重复性、解决本领域中文资料匮乏的困境——宏基因组公众号。经过近4年的发展，目前分享2000+篇原创文章，300余万字，11万+同行关注，2100万+阅读量。成为本领域科研成果、技术方法分享交流的华人科研同行聚集地。
+当前中国微生物组领域科研面临一系列困难：文章分析方法描述缺少细节无法重现；文章多如汪洋大海；英文资料较多但缺少系统整理和中文资料；缺少实例和经验分享等。因此在2017年起我发起并创立了提高数据分析可重复性、解决本领域中文资料匮乏的困境——宏基因组公众号。经过近4年的发展，目前分享2700+篇原创文章，400余万字，12万+同行关注，2400万+阅读量。成为本领域科研成果、技术方法分享交流的华人科研同行聚集地。
 
 此外还受到国内外数十个杂志邀请分享分析方法。目前已经在[**Protein & Cell**](https://mp.weixin.qq.com/s/xHe1FHLm3n0Vkxz0nNbXvQ)、[**Current Opinion in Microbiology**](https://mp.weixin.qq.com/s/-gXoRIy6ZuEmHH6txH8txA)、[**Chinese Medical Journal**](https://mp.weixin.qq.com/s/hbCyBDvWAMyMDqztbdaN5Q)、[**遗传**](https://mp.weixin.qq.com/s/3XFmRe4l2uZrHZexx0Ou-g)等杂志发表分析方法学综述。
 
 为进一步促进本领域方法的积累和传播，与科学出版社、Bio-protocol、JoVE等出版社合作发行专著或专刊。
 
-- 2020年6月发起的[《微生物组数据分析与可视化实战》专著——科学出版社](https://mp.weixin.qq.com/s/zaHjZLZCRcRgOXDgGT-mXg)，由本领域70位华人同行共同编写，专注于数据分析部分，让大家系统学习背景知识、读懂文章、并实现自主分析。11月份投稿截止。2021年6月正式出版。
-- 2020年6月发起的[《微生物组实验手册》——Bio-protocol](https://mp.weixin.qq.com/s/ubWoIOvw7wlJoXQNR1lYGA)，由全球本领域200多位华人同行共同参与，旨在促进微生物组领域国内外华人科研团队之间的交流和合作，倡导科研团队注重实验方法的沉淀、分享与传播。10月份投稿截止。2021年1月正式线上发布。
+- 2020年6月发起的[《微生物组数据分析》专著——科学出版社](https://mp.weixin.qq.com/s/zaHjZLZCRcRgOXDgGT-mXg)，由本领域70位华人同行共同编写，专注于数据分析部分，让大家系统学习背景知识、读懂文章、并实现自主分析。
+- 2020年6月发起的[《微生物组实验手册》——Bio-protocol](https://mp.weixin.qq.com/s/ubWoIOvw7wlJoXQNR1lYGA)，由全球本领域300多位华人同行共同参与，旨在促进微生物组领域国内外华人科研团队之间的交流和合作，倡导科研团队注重实验方法的沉淀、分享与传播。2021年7月正式线上发布。
 - 2020年5月发起的[微生物组专刊征稿——JoVE](https://mp.weixin.qq.com/s/Jc0zoOFm4reTWVJBBOBTQg)，积累优质的英文实验和分析方法视频，推动中国微生物组分析方法的国际化。
 
 
@@ -126,38 +130,38 @@ Google Scholar: https://scholar.google.com/citations?user=NoxNy_IAAAAJ
 
 ### 近五年五篇代表作
 
-1. **Yong-Xin Liu#\***, Yuan Qin#, Tong Chen#, Meiping Lu, Xubo Qian, Xiaoxuan Guo & Yang Bai\*. (2020). A practical guide to amplicon and metagenomic analysis of microbiome data. **Protein & Cell** 11, doi: https://doi.org/10.1007/s13238-020-00724-8 (**IF = 10.164**)
+1. **Yong-Xin Liu#\***, Yuan Qin#, Tong Chen#, Meiping Lu, Xubo Qian, Xiaoxuan Guo & Yang Bai\*. (2021). A practical guide to amplicon and metagenomic analysis of microbiome data. **Protein & Cell** 12, 315-330, doi: https://doi.org/10.1007/s13238-020-00724-8 (**IF = 14.87**, Highly Cited)
 2. **Yong-Xin Liu**, Yuan Qin & Yang Bai\*. (2019). Reductionist synthetic community approaches in root microbiome research. **Current Opinion in Microbiology** 49, 97-102, doi: https://doi.org/10.1016/j.mib.2019.10.010 (**IF = 8.134**)
-3. Jingying Zhang#, **Yong-Xin Liu#**, Na Zhang#, Bin Hu#, Tao Jin#, Haoran Xu, Yuan Qin, Pengxu Yan, Xiaoning Zhang, Xiaoxuan Guo, Jing Hui, Shouyun Cao, Xin Wang, Chao Wang, Hui Wang, Baoyuan Qu, Guangyi Fan, Lixing Yuan, Ruben Garrido-Oter, Chengcai Chu\* & Yang Bai\*. (2019). *NRT1.1B* is associated with root microbiota composition and nitrogen use in field-grown rice. **Nature Biotechnology** 37, 676-684, doi: https://doi.org/10.1038/s41587-019-0104-4 (**IF = 36.558**，封面文章)
-4. Jingying Zhang#, **Yong-Xin Liu#**, Xiaoxuan Guo, Yuan Qin, Ruben Garrido-Oter\*, Paul Schulze-Lefert\*, Yang Bai\*. (2021). High-throughput cultivation and identification of bacteria from the plant root microbiota. **Nature Protocols** 16, 988-1012, doi: https://doi.org/10.1038/s41596-020-00444-7 (**IF = 10.419**)
-5. Ancheng C. Huang#, Ting Jiang#, **Yong-Xin Liu**, Yue-Chen Bai, James Reed, Baoyuan Qu, Alain Goossens, Hans-Wilhelm Nützmann, Yang Bai\* & Anne Osbourn\*. (2019). A specialized metabolic network selectively modulates Arabidopsis root microbiota. **Science** 364, eaau6389, doi: https://doi.org/10.1126/science.aau6389 (**IF = 41.845**)
+3. Jingying Zhang#, **Yong-Xin Liu#**, Na Zhang#, Bin Hu#, Tao Jin#, Haoran Xu, Yuan Qin, Pengxu Yan, Xiaoning Zhang, Xiaoxuan Guo, Jing Hui, Shouyun Cao, Xin Wang, Chao Wang, Hui Wang, Baoyuan Qu, Guangyi Fan, Lixing Yuan, Ruben Garrido-Oter, Chengcai Chu\* & Yang Bai\*. (2019). *NRT1.1B* is associated with root microbiota composition and nitrogen use in field-grown rice. **Nature Biotechnology** 37, 676-684, doi: https://doi.org/10.1038/s41587-019-0104-4 (**IF = 54.098**, Cover Story, Highly Cited, Hot Paper)
+4. Jingying Zhang#, **Yong-Xin Liu#**, Xiaoxuan Guo, Yuan Qin, Ruben Garrido-Oter\*, Paul Schulze-Lefert\*, Yang Bai\*. (2021). High-throughput cultivation and identification of bacteria from the plant root microbiota. **Nature Protocols** 16, 988-1012, doi: https://doi.org/10.1038/s41596-020-00444-7 (**IF = 13.491**)
+5. Ancheng C. Huang#, Ting Jiang#, **Yong-Xin Liu**, Yue-Chen Bai, James Reed, Baoyuan Qu, Alain Goossens, Hans-Wilhelm Nützmann, Yang Bai\* & Anne Osbourn\*. (2019). A specialized metabolic network selectively modulates Arabidopsis root microbiota. **Science** 364, eaau6389, doi: https://doi.org/10.1126/science.aau6389 (**IF = 47.728**, Highly Cited)
 
 ### 近五年其他文章
 
-6. Xubo Qian#, **Yong-Xin Liu#**, Xiaohong Ye, Wenjie Zheng, Shaoxia Lv, Miaojun Mo, Jinjing Lin, Wenqin Wang, Weihan Wang, Xianning Zhang & Meiping Lu\*. (2020). Gut microbiota in children with juvenile idiopathic arthritis: characteristics, biomarker identification, and usefulness in clinical prediction. **BMC Genomics** 21, 286, doi: https://doi.org/10.1186/s12864-020-6703-0 (**IF = 3.594**)
-7. Wei Wang#, Jing Yang#, Jian Zhang, **Yong-Xin Liu**, Caiping Tian, Baoyuan Qu, Chulei Gao, Peiyong Xin, Shujing Cheng, Wenjing Zhang, Pei Miao, Lei Li, Xiaojuan Zhang, Jinfang Chu, Jianru Zuo, Jiayang Li, Yang Bai, Xiaoguang Lei\* & Jian-Min Zhou\*. (2020). An Arabidopsis secondary metabolite directly targets expression of the bacterial type III secretion system to inhibit bacterial virulence. **Cell Host & Microbe** 27, 601-613.e607, doi: https://doi.org/https://doi.org/10.1016/j.chom.2020.03.004 (**IF = 15.923**)
-8. Maosheng Zheng, Shishi He, Yueqi Feng, Mingyuan Wang, **Yong-Xin Liu**, Chenyuan Dang, Jiawen Wang\*. (2021). Active ammonia-oxidizing bacteria and archaea in wastewater treatment systems. **Journal of Environmental Sciences** 102 273-282 doi: https://doi.org/10.1016/j.jes.2020.09.039 (**IF = 4.302**)
-9. Xu-Bo Qian#, Tong Chen#, Yi-Ping Xu, Lei Chen, Fu-Xiang Sun, Mei-Ping Lu\* & **Yong-Xin Liu**. (2020). A guide to human microbiome research: study design, sample collection, and bioinformatics analysis. **Chinese Medical Journal**, doi: https://doi.org/10.1097/cm9.0000000000000871 (**IF = 1.585**)
+6. Xubo Qian#, **Yong-Xin Liu#**, Xiaohong Ye, Wenjie Zheng, Shaoxia Lv, Miaojun Mo, Jinjing Lin, Wenqin Wang, Weihan Wang, Xianning Zhang & Meiping Lu\*. (2020). Gut microbiota in children with juvenile idiopathic arthritis: characteristics, biomarker identification, and usefulness in clinical prediction. **BMC Genomics** 21, 286, doi: https://doi.org/10.1186/s12864-020-6703-0 (**IF = 3.969**)
+7. Wei Wang#, Jing Yang#, Jian Zhang, **Yong-Xin Liu**, Caiping Tian, Baoyuan Qu, Chulei Gao, Peiyong Xin, Shujing Cheng, Wenjing Zhang, Pei Miao, Lei Li, Xiaojuan Zhang, Jinfang Chu, Jianru Zuo, Jiayang Li, Yang Bai, Xiaoguang Lei\* & Jian-Min Zhou\*. (2020). An Arabidopsis secondary metabolite directly targets expression of the bacterial type III secretion system to inhibit bacterial virulence. **Cell Host & Microbe** 27, 601-613.e607, doi: https://doi.org/https://doi.org/10.1016/j.chom.2020.03.004 (**IF = 21.023**)
+8. Maosheng Zheng, Shishi He, Yueqi Feng, Mingyuan Wang, **Yong-Xin Liu**, Chenyuan Dang, Jiawen Wang\*. (2021). Active ammonia-oxidizing bacteria and archaea in wastewater treatment systems. **Journal of Environmental Sciences** 102 273-282 doi: https://doi.org/10.1016/j.jes.2020.09.039 (**IF = 5.565**)
+9. Xu-Bo Qian#, Tong Chen#, Yi-Ping Xu, Lei Chen, Fu-Xiang Sun, Mei-Ping Lu\* & **Yong-Xin Liu**. (2020). A guide to human microbiome research: study design, sample collection, and bioinformatics analysis. **Chinese Medical Journal**, doi: https://doi.org/10.1097/cm9.0000000000000871 (**IF = 2.628**)
 10. Xiaoxuan Guo#, Xiaoning Zhang#, Yuan Qin#, **Yong-Xin Liu**, Jingying Zhang, Na Zhang, Kun Wu, Baoyuan Qu, Zishan He, Xin Wang, Xinjian Zhang, Stéphane Hacquard, Xiangdong Fu\* & Yang Bai\*. (2020). Host-associated quantitative abundance profiling reveals the microbial load variation of root microbiome. **Plant Communications** 1, 100003, doi: https://doi.org/https://doi.org/10.1016/j.xplc.2019.100003
 11. 胡雅丽#, 戴睿#, **刘永鑫**, 张婧赢, 胡斌, 储成才, 袁怀波\* & 白洋\*. (2020). 水稻典型品种日本晴和IR24根系微生物组的解析. **遗传** 42, 506-518, doi: https://doi.org/10.16288/j.yczz.20-070 (封面文章)
-12. Evan Bolyen#, Jai Ram Rideout#, Matthew R. Dillon#, Nicholas A. Bokulich#, Christian C. Abnet, Gabriel A. Al-Ghalith, Harriet Alexander, Eric J. Alm, Manimozhiyan Arumugam, Francesco Asnicar, Yang Bai, Jordan E. Bisanz, Kyle Bittinger, Asker Brejnrod, Colin J. Brislawn, C. Titus Brown, Benjamin J. Callahan, Andrés Mauricio Caraballo-Rodríguez, John Chase, Emily K. Cope, Ricardo Da Silva, Christian Diener, Pieter C. Dorrestein, Gavin M. Douglas, Daniel M. Durall, Claire Duvallet, Christian F. Edwardson, Madeleine Ernst, Mehrbod Estaki, Jennifer Fouquier, Julia M. Gauglitz, Sean M. Gibbons, Deanna L. Gibson, Antonio Gonzalez, Kestrel Gorlick, Jiarong Guo, Benjamin Hillmann, Susan Holmes, Hannes Holste, Curtis Huttenhower, Gavin A. Huttley, Stefan Janssen, Alan K. Jarmusch, Lingjing Jiang, Benjamin D. Kaehler, Kyo Bin Kang, Christopher R. Keefe, Paul Keim, Scott T. Kelley, Dan Knights, Irina Koester, Tomasz Kosciolek, Jorden Kreps, Morgan G. I. Langille, Joslynn Lee, Ruth Ley, **Yong-Xin Liu**, Erikka Loftfield, Catherine Lozupone, Massoud Maher, Clarisse Marotz, Bryan D. Martin, Daniel McDonald, Lauren J. McIver, Alexey V. Melnik, Jessica L. Metcalf, Sydney C. Morgan, Jamie T. Morton, Ahmad Turan Naimey, Jose A. Navas-Molina, Louis Felix Nothias, Stephanie B. Orchanian, Talima Pearson, Samuel L. Peoples, Daniel Petras, Mary Lai Preuss, Elmar Pruesse, Lasse Buur Rasmussen, Adam Rivers, Michael S. Robeson, Patrick Rosenthal, Nicola Segata, Michael Shaffer, Arron Shiffer, Rashmi Sinha, Se Jin Song, John R. Spear, Austin D. Swafford, Luke R. Thompson, Pedro J. Torres, Pauline Trinh, Anupriya Tripathi, Peter J. Turnbaugh, Sabah Ul-Hasan, Justin J. J. van der Hooft, Fernando Vargas, Yoshiki Vázquez-Baeza, Emily Vogtmann, Max von Hippel, William Walters, Yunhu Wan, Mingxun Wang, Jonathan Warren, Kyle C. Weber, Charles H. D. Williamson, Amy D. Willis, Zhenjiang Zech Xu, Jesse R. Zaneveld, Yilong Zhang, Qiyun Zhu, Rob Knight & J. Gregory Caporaso\*. (2019). Reproducible, interactive, scalable and extensible microbiome data science using QIIME 2. **Nature Biotechnology** 37, 852-857, doi: https://doi.org/10.1038/s41587-019-0209-9 (**IF = 36.558**)
-13. Maosheng Zheng, Nan Zhou, Shufeng Liu, Chenyuan Dang, **Yong-Xin Liu**, Shishi He, Yijun Zhao, Wen Liu & Xiangke Wang\*. (2019). N2O and NO emission from a biological aerated filter treating coking wastewater: Main source and microbial community. **Journal of Cleaner Production** 213, 365-374, doi: https://doi.org/10.1016/j.jclepro.2018.12.182 (**IF = 7.246**)
-14. Qingwen Chen#, Ting Jiang#, **Yong-Xin Liu**, Haili Liu, Tao Zhao, Zhixi Liu, Xiaochao Gan, Asis Hallab, Xuemei Wang, Juan He, Yihua Ma, Fengxia Zhang, Tao Jin, M.Eric Schranz, Yong Wang, Yang Bai\* & Guodong Wang\*. (2019). Recently duplicated sesterterpene (C25) gene clusters in Arabidopsis thaliana modulate root microbiota. Science China Life Sciences 62, 947-958, doi: https://doi.org/10.1007/s11427-019-9521-2 (**IF = 4.611**)
+12. Evan Bolyen#, Jai Ram Rideout#, Matthew R. Dillon#, Nicholas A. Bokulich#, Christian C. Abnet, Gabriel A. Al-Ghalith, Harriet Alexander, Eric J. Alm, Manimozhiyan Arumugam, Francesco Asnicar, Yang Bai, Jordan E. Bisanz, Kyle Bittinger, Asker Brejnrod, Colin J. Brislawn, C. Titus Brown, Benjamin J. Callahan, Andrés Mauricio Caraballo-Rodríguez, John Chase, Emily K. Cope, Ricardo Da Silva, Christian Diener, Pieter C. Dorrestein, Gavin M. Douglas, Daniel M. Durall, Claire Duvallet, Christian F. Edwardson, Madeleine Ernst, Mehrbod Estaki, Jennifer Fouquier, Julia M. Gauglitz, Sean M. Gibbons, Deanna L. Gibson, Antonio Gonzalez, Kestrel Gorlick, Jiarong Guo, Benjamin Hillmann, Susan Holmes, Hannes Holste, Curtis Huttenhower, Gavin A. Huttley, Stefan Janssen, Alan K. Jarmusch, Lingjing Jiang, Benjamin D. Kaehler, Kyo Bin Kang, Christopher R. Keefe, Paul Keim, Scott T. Kelley, Dan Knights, Irina Koester, Tomasz Kosciolek, Jorden Kreps, Morgan G. I. Langille, Joslynn Lee, Ruth Ley, **Yong-Xin Liu**, Erikka Loftfield, Catherine Lozupone, Massoud Maher, Clarisse Marotz, Bryan D. Martin, Daniel McDonald, Lauren J. McIver, Alexey V. Melnik, Jessica L. Metcalf, Sydney C. Morgan, Jamie T. Morton, Ahmad Turan Naimey, Jose A. Navas-Molina, Louis Felix Nothias, Stephanie B. Orchanian, Talima Pearson, Samuel L. Peoples, Daniel Petras, Mary Lai Preuss, Elmar Pruesse, Lasse Buur Rasmussen, Adam Rivers, Michael S. Robeson, Patrick Rosenthal, Nicola Segata, Michael Shaffer, Arron Shiffer, Rashmi Sinha, Se Jin Song, John R. Spear, Austin D. Swafford, Luke R. Thompson, Pedro J. Torres, Pauline Trinh, Anupriya Tripathi, Peter J. Turnbaugh, Sabah Ul-Hasan, Justin J. J. van der Hooft, Fernando Vargas, Yoshiki Vázquez-Baeza, Emily Vogtmann, Max von Hippel, William Walters, Yunhu Wan, Mingxun Wang, Jonathan Warren, Kyle C. Weber, Charles H. D. Williamson, Amy D. Willis, Zhenjiang Zech Xu, Jesse R. Zaneveld, Yilong Zhang, Qiyun Zhu, Rob Knight & J. Gregory Caporaso\*. (2019). Reproducible, interactive, scalable and extensible microbiome data science using QIIME 2. **Nature Biotechnology** 37, 852-857, doi: https://doi.org/10.1038/s41587-019-0209-9 (**IF = 54.908**)
+13. Maosheng Zheng, Nan Zhou, Shufeng Liu, Chenyuan Dang, **Yong-Xin Liu**, Shishi He, Yijun Zhao, Wen Liu & Xiangke Wang\*. (2019). N2O and NO emission from a biological aerated filter treating coking wastewater: Main source and microbial community. **Journal of Cleaner Production** 213, 365-374, doi: https://doi.org/10.1016/j.jclepro.2018.12.182 (**IF = 9.297**)
+14. Qingwen Chen#, Ting Jiang#, **Yong-Xin Liu**, Haili Liu, Tao Zhao, Zhixi Liu, Xiaochao Gan, Asis Hallab, Xuemei Wang, Juan He, Yihua Ma, Fengxia Zhang, Tao Jin, M.Eric Schranz, Yong Wang, Yang Bai\* & Guodong Wang\*. (2019). Recently duplicated sesterterpene (C25) gene clusters in Arabidopsis thaliana modulate root microbiota. Science China Life Sciences 62, 947-958, doi: https://doi.org/10.1007/s11427-019-9521-2 (**IF = 6.038**)
 15. **刘永鑫**, 秦媛, 郭晓璇 & 白洋\*. (2019). 微生物组数据分析方法与应用. **遗传** 41, 845-826, doi: https://doi.org/10.16288/j.yczz.19-222
-16. Jingying Zhang#, Na Zhang#, **Yong-Xin Liu#**, Xiaoning Zhang, Bin Hu, Yuan Qin, Haoran Xu, Hui Wang, Xiaoxuan Guo, Jingmei Qian, Wei Wang, Pengfan Zhang, Tao Jin\*, Chengcai Chu\* & Yang Bai\*. (2018). Root microbiota shift in rice correlates with resident time in the field and developmental stage. Science China Life Sciences 61, 613-621, doi: https://doi.org/10.1007/s11427-018-9284-4 (**IF = 4.611**，封面文章)
-17. Wei Wang#, Bin Hu#, Dingyang Yuan, Yongqiang Liu, Ronghui Che, Yingchun Hu, Shujun Ou, Zhihua Zhang, Hongru Wang, Hua Li, Zhimin Jiang, Zhengli Zhang, Xiaokai Gao, Yahong Qiu, Xiangbing Meng, **Yong-Xin Liu**, Yang Bai, Yan Liang, Yi-Qin Wang, Lianhe Zhang, Legong Li, Sodmergen Sodmergen, Hai-Chun Jing, Jiayang Li & Chengcai Chu\*. (2018). Expression of the nitrate transporter gene OsNRT1.1A/OsNPF6.3 confers high yield and early maturation in rice. **The Plant Cell** 30, 638-651, doi: https://doi.org/10.1105/tpc.17.00809 (**IF = 9.618**)
-18. Handong Su#, Yalin Liu#, **Yong‐Xin Liu**, Zhenling Lv, Hongyao Li, Shaojun Xie, Zhi Gao, Junling Pang, Xiu‐Jie Wang, Jinsheng Lai & Fangpu Han\*. (2016). Dynamic chromatin changes associated with de novo centromere formation in maize euchromatin. **The Plant journal** 1, 1-17, doi: https://doi.org/10.1111/tpj.13305 (**IF = 6.141**)
-19. Maosheng Zheng, Shishi He, Yueqi Feng, Mingyuan Wang, **Yong‐Xin Liu**, Chenyuan Dang & Jiawen Wang. (2021). Active ammonia-oxidizing bacteria and archaea in wastewater treatment systems. **Journal of Environmental Sciences** 102, 273-282, doi: https://doi.org/https://doi.org/10.1016/j.jes.2020.09.039 (**IF = 4.302**)
-20. **刘永鑫**, 刘芳, 陈同 & 白洋. (2020). 随机宏基因组测序数据质量控制和去宿主的分析流程和常见问题. **Bio-protocol**, e2003347, doi: https://doi.org/10.21769/BioProtoc.2003347
+16. Jingying Zhang#, Na Zhang#, **Yong-Xin Liu#**, Xiaoning Zhang, Bin Hu, Yuan Qin, Haoran Xu, Hui Wang, Xiaoxuan Guo, Jingmei Qian, Wei Wang, Pengfan Zhang, Tao Jin\*, Chengcai Chu\* & Yang Bai\*. (2018). Root microbiota shift in rice correlates with resident time in the field and developmental stage. Science China Life Sciences 61, 613-621, doi: https://doi.org/10.1007/s11427-018-9284-4 (**IF = 6.038**, Cover Story)
+17. Wei Wang#, Bin Hu#, Dingyang Yuan, Yongqiang Liu, Ronghui Che, Yingchun Hu, Shujun Ou, Zhihua Zhang, Hongru Wang, Hua Li, Zhimin Jiang, Zhengli Zhang, Xiaokai Gao, Yahong Qiu, Xiangbing Meng, **Yong-Xin Liu**, Yang Bai, Yan Liang, Yi-Qin Wang, Lianhe Zhang, Legong Li, Sodmergen Sodmergen, Hai-Chun Jing, Jiayang Li & Chengcai Chu\*. (2018). Expression of the nitrate transporter gene OsNRT1.1A/OsNPF6.3 confers high yield and early maturation in rice. **The Plant Cell** 30, 638-651, doi: https://doi.org/10.1105/tpc.17.00809 (**IF = 11.277**, Highly Cited)
+18. Handong Su#, Yalin Liu#, **Yong‐Xin Liu**, Zhenling Lv, Hongyao Li, Shaojun Xie, Zhi Gao, Junling Pang, Xiu‐Jie Wang, Jinsheng Lai & Fangpu Han\*. (2016). Dynamic chromatin changes associated with de novo centromere formation in maize euchromatin. **The Plant journal** 1, 1-17, doi: https://doi.org/10.1111/tpj.13305 (**IF = 6.417**)
+19. Tong Chen, Haiyan Zhang, Yu Liu, **Yong-Xin Liu**, Luqi Huang. (2021). EVenn: Easy to create repeatable and editable Venn diagrams and Venn networks online. **Journal of Genetics and Genomics**, doi: https://doi.org/10.1016/j.jgg.2021.07.007 (**IF = 5.065**)
+20. Zhiyao Lv, Rui Dai, Haoran Xu, **Yong‐Xin Liu**, Bo Bai, Ying Meng, Haiyan Li, Xiaofeng Cao, Yang Bai, Xianwei Song, Jingying Zhang. (2021). The rice histone methylation regulates hub species of the root microbiota. **Journal of Genetics and Genomics**, doi: https://doi.org/10.1016/j.jgg.2021.06.005
 
 ### 五年前文章
 
-21. **Yong-Xin Liu**, Meng Wang & Xiu-Jie Wang\*. (2014). Endogenous small RNA clusters in plants. **Genomics Proteomics Bioinformatics** 12, 64-71, doi: https://doi.org/10.1016/j.gpb.2014.04.003 (**IF = 7.051**)
-22. Jing Li, **Yong-Xin Liu**, Ying-peng Han, Yong-guang Li, Mao-zu Guo & Wen-bin Li\*. (2013). MicroRNA primary transcripts and promoter elements analysis in soybean (Glycine max L. Merril.). **Journal of Integrative Agriculture** 12, 1522-1529, doi: https://doi.org/http://dx.doi.org/10.1016/S2095-3119(13)60500-6 (**IF = 1.984**)
-23. **Yong-Xin Liu**, Wei Chang, Ying-peng Han, Quan Zou, Mao-zu Guo & Wen-bin Li\*. (2011). In silico detection of novel microRNAs genes in soybean genome. **Agricultural Sciences in China** 10, 1336-1345, doi: https://doi.org/https://doi.org/10.1016/S1671-2927(11)60126-0 (**IF = 1.984**)
+21. **Yong-Xin Liu**, Meng Wang & Xiu-Jie Wang\*. (2014). Endogenous small RNA clusters in plants. **Genomics Proteomics Bioinformatics** 12, 64-71, doi: https://doi.org/10.1016/j.gpb.2014.04.003 (**IF = 7.691**)
+22. Jing Li, **Yong-Xin Liu**, Ying-peng Han, Yong-guang Li, Mao-zu Guo & Wen-bin Li\*. (2013). MicroRNA primary transcripts and promoter elements analysis in soybean (Glycine max L. Merril.). **Journal of Integrative Agriculture** 12, 1522-1529, doi: https://doi.org/http://dx.doi.org/10.1016/S2095-3119(13)60500-6 (**IF = 2.848**)
+23. **Yong-Xin Liu**, Wei Chang, Ying-peng Han, Quan Zou, Mao-zu Guo & Wen-bin Li\*. (2011). In silico detection of novel microRNAs genes in soybean genome. **Agricultural Sciences in China** 10, 1336-1345, doi: https://doi.org/https://doi.org/10.1016/S1671-2927(11)60126-0 (**IF = 2.848**)
 24. 韩英鹏\*, 李修平, 常玮, 赵雪, **刘永鑫** & 李海燕. (2011). 大豆EST-SSR多态性与EST源序列的关系分析. **作物杂志** 27, 75-79, doi: https://doi.org/10.3969/j.issn.1001-7283.2011.03.019
 25. 韩英鹏\*, 李修平, 常玮, 赵雪, **刘永鑫** & 李海燕. (2011). 与EST-SSR连锁的抗性候选基因潜在功能分析. **东北农业大学学报** 42, 114-117, doi: https://doi.org/10.3969/j.issn.1005-9369.2011.07.021
-26. **Yong-Xin Liu**, Ying-peng Han, Wei Chang, Quan Zou, Mao-zu Guo & Wen-bin Li\*. (2010). Genomic analysis of microRNA promoters and their cis-acting elements in soybean. **Agricultural Sciences in China** 9, 1561-1570, doi: https://doi.org/https://doi.org/10.1016/S1671-2927(09)60252-2 (**IF = 1.984**)
+26. **Yong-Xin Liu**, Ying-peng Han, Wei Chang, Quan Zou, Mao-zu Guo & Wen-bin Li\*. (2010). Genomic analysis of microRNA promoters and their cis-acting elements in soybean. **Agricultural Sciences in China** 9, 1561-1570, doi: https://doi.org/https://doi.org/10.1016/S1671-2927(09)60252-2 (**IF = 2.848**)
 27. **刘永鑫**, 韩英鹏, 常玮, 邹权, 郭茂祖 & 李文滨\*. (2009). 一种适合大豆MicroRNA鉴定的RT-PCR方法. **大豆科学** 28, 600-604, doi: https://doi.org/10.11861/j.issn.1000-9841.2009.04.0600
 28. 孔德勇, 许修宏\*, **刘永鑫** & 刘维智. (2008). 双孢蘑菇母种培养基的优化. **东北农业大学学报** 39, 70-73, doi: https://doi.org/10.3969/j.issn.1005-9369.2008.08.015
 
@@ -166,17 +170,7 @@ Google Scholar: https://scholar.google.com/citations?user=NoxNy_IAAAAJ
 
 ## 专著
 
-### 《微生物组数据分析与可视化实战》——科学出版社
-
-[宏基因组公众号《微生物组数据分析与可视化实战》专辑](https://mp.weixin.qq.com/s/zaHjZLZCRcRgOXDgGT-mXg)
-
-近年来高通量测序技术的发展，开发一系列适合微生物组研究的技术，快速推动了微生物组领域的发展并积累了海量数据。而微生物组数据分析过程复杂、软件和方法的种类多样让初涉本领域的同行非常茫然。本次演讲系统概述了微生物组常用测序技术-扩增子、宏基因组等方法的优缺点，方便同行根据科学问题快速选择合适的研究手段。同时在众种的分析软件中，挑选主流软件整合的分析流程推荐给同行，方便快速实现较优的扩增子和宏基因组分析流程，对并常用软件和数据库进入介绍，方便同行选择和优化特征表。最后介绍基于特征表的微生物组下游通用统计分析和可视化方法，包括多样性、物种种组、网络分析、进化分析、机器学习、来源追溯等方法和常用可视化图表类型，帮助同行看懂图表并选择合适的方析方法和可视化方案。本文拟通过对当前微生物组主流分析方法的整理和总结，为同领域研究者更方便、灵活的开展数据分析，快速选择研究分析工具，高效挖掘数据背后的生物学意义提供参考，进一步推动微生物组研究在生物学领域的发展。
-
-![](http://bailab.genetics.ac.cn/github/Note/Meetting/CV/fig/plot.jpg)
-
-图. 微生物组数据常用可视化样式总结
-
-### 《微生物组实验手册》——Bio-protocol
+### 微生物组实验手册
 
 Bio-protocol中国编辑部联合宏基因组公众号共同发起微生物组实验方法电子书(Microbiome Protocol eBook)项目，旨在促进微生物组领域国内外华人科研团队之间的交流和合作，倡导科研团队注重实验方法的沉淀、分享与传播。希望本电子书填补微生物组领域方法空白，解决实验和分析难重复的问题，推动实验标准化，为积累标准统一的数据和未来大数据整合分析做准备，助力微生物组学研究的发展。
 
@@ -192,13 +186,18 @@ eBook主题为微生物组(Microbiome)，包括培养组、扩增子、宏基因
 
 图. 微生物组实验手册第一版封面
 
----
+### 微生物组数据分析
 
-## 专刊
+《微生物组数据分析》，于2020年6月与科学出版社签约合作，目前正在进行中！
 
-- [JoVE微生物组专刊征稿，写方法拍视频教程发SCI](https://mp.weixin.qq.com/s/Jc0zoOFm4reTWVJBBOBTQg)
+[宏基因组公众号《微生物组数据分析》专辑](https://mp.weixin.qq.com/s/zaHjZLZCRcRgOXDgGT-mXg)
 
-Analysis and visualization methods for amplicon and metagenomic data of microbiome 专刊征稿主页：https://www.jove.com/methods-collections/426/analysis-visualization-methods-for-amplicon-metagenomic-data
+近年来高通量测序技术的发展，开发一系列适合微生物组研究的技术，快速推动了微生物组领域的发展并积累了海量数据。而微生物组数据分析过程复杂、软件和方法的种类多样让初涉本领域的同行非常茫然。本次演讲系统概述了微生物组常用测序技术-扩增子、宏基因组等方法的优缺点，方便同行根据科学问题快速选择合适的研究手段。同时在众种的分析软件中，挑选主流软件整合的分析流程推荐给同行，方便快速实现较优的扩增子和宏基因组分析流程，对并常用软件和数据库进入介绍，方便同行选择和优化特征表。最后介绍基于特征表的微生物组下游通用统计分析和可视化方法，包括多样性、物种种组、网络分析、进化分析、机器学习、来源追溯等方法和常用可视化图表类型，帮助同行看懂图表并选择合适的方析方法和可视化方案。本文拟通过对当前微生物组主流分析方法的整理和总结，为同领域研究者更方便、灵活的开展数据分析，快速选择研究分析工具，高效挖掘数据背后的生物学意义提供参考，进一步推动微生物组研究在生物学领域的发展。
+
+![](http://bailab.genetics.ac.cn/github/Note/Meetting/CV/fig/plot.jpg)
+
+图. 微生物组数据常用可视化样式总结
+
 
 ---
 
@@ -233,6 +232,45 @@ Analysis and visualization methods for amplicon and metagenomic data of microbio
 2020/11/29  |北京                       |肠道演讲                                                                                       |微生物组数据分析与可视化实战                                                                 |专题报告
 2020/12/8   |在线                    |中国农业大学国家农业绿色发展研究院微生物专题报告                                                  |宏基因组数据分析的机遇与挑战                                                                |专题报告
 
+---
+
+## 期刊
+
+### 主办期刊
+
+"Metagenome" 杂志创始人兼第一任主篇。主要发表宏基因组学相关的软件、综述文章。软件要求易用性强、长期维护，综述要求针对某一主题系统总结的知识体系和未来发展方向的展望，以分享干货，为同行服务，提高科研工作效率，促进更多原创成果的产出。
+
+### 合作期刊
+
+- Genomics Proteomics & Bioinformatics —— 合作媒体
+- Journal of Genetics and Genomics —— 合作媒体
+- Jove-Journal of Visualized Experiments —— [微生物组专刊](https://mp.weixin.qq.com/s/Jc0zoOFm4reTWVJBBOBTQg):[Analysis and visualization methods for amplicon and metagenomic data of microbiome](https://www.jove.com/methods-collections/426/analysis-visualization-methods-for-amplicon-metagenomic-data)
+- Medicine in Microecology —— 合作媒体
+- Soil Ecology Letter —— 合作媒体
+- The Innovation —— 合作媒体，青年编委
+
+### 审稿人
+
+- Bio101
+- Bio-protocol
+- Bioinformatics
+- BMC Bioinformatics
+- BMC Genomics
+- Cell Host Microbe
+- Frontiers in Plant Science
+- ISME Journal
+- Journal of Genetics and Genomics
+- Journal of Integrative Plant Biology
+- Jove-Journal of Visualized Experiments
+- Medicine in Microecology
+- Microbiome
+- Nature Microbiology
+- Nature Plants
+- Soil Biology & Biochemistry
+- Scientific Reports
+
+---
+
 ## 奖励
 
 时间      |奖励名称                                     |颁发机构
@@ -247,17 +285,18 @@ Analysis and visualization methods for amplicon and metagenomic data of microbio
 2020/11/21|冬季青年学术论坛墙报一等奖                   |植物基因组学国家重点实验室
 2021/1/3  |2019年度优秀个人                             |中国科学院遗传与发育生物学所
 
+---
 
-## 专利
+## 其他成果
 
-目前在申请中的专利4项。
+### 专利
+
+目前在申请中的专利3项。
+
+### 软件著作权
+
+目前获得软件著作权1项。
 
 ---
 
-## 软件著作权
-
-目前获得软件著作权1个，在申请2个。
-
----
-
-© 2016-2021 Yong-Xin Liu
+© 2016-2021 Yong-Xin Liu (刘永鑫)
