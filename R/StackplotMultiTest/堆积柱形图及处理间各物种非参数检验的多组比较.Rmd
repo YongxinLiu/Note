@@ -1,0 +1,177 @@
+---
+title: "物种丰度排序堆积柱形图及处理间各物种丰度非参数检验多组比较的R图形可视化"
+author: "马腾飞,许一飞"
+date: "2021/6/12"
+output: html_document
+---
+
+```{r}
+rm(list=ls()) 
+library(tidyverse)#数据整理与数据转换包，用了一些更好用更易懂的函数
+library(ggprism)
+library(vegan)
+otu <- read.delim('./otutab.txt',row.names = 1)
+head(otu, n = 3)
+tax <- read.delim('./taxonomy.txt',row.names = 1)
+head(tax, n = 3)
+metadata<- read.delim('./metadata.tsv')
+head(metadata, n = 3)
+dat <- merge(x=otu,y=tax,by='row.names')
+head(dat, n = 3)
+dat =dplyr::rename(dat,OTUID = Row.names)
+head(dat, n = 3)
+##按Phylum水平分组汇总(根据自己需求更改要展示的物种水平)
+aa<-aggregate(dat[,2:ncol(otu)],by=list(dat$Phylum),FUN=sum)
+head(aa)
+```
+
+```{r}
+########################三种排序方法，任选其一
+#1
+# aa<- mutate(aa,v=apply(aa[,c(2:ncol(aa))],1,sum))
+# cc<- arrange(aa,desc(v))        
+# head(cc)
+# cc<-select(cc,-v)
+# head(cc)
+# row.names(cc)=cc$Phylum
+# head(cc)
+# cc<-select(cc,-Phylum)
+# head(cc)
+#2
+# row.names(aa)=aa$Phylum    
+# head(aa)
+# aa<-select(aa,-Phylum)
+# head(aa)
+# cc<-aa[order(rowSums(aa),decreasing=T),]   
+#3
+row.names(aa)=aa$Group.1   
+head(aa)
+aa<-dplyr::select(aa,-Group.1)
+head(aa, n = 3)
+#根据行求和结果对数据排序
+order<-sort(rowSums(aa[,2:ncol(aa)]),index.return=TRUE,decreasing=T)   
+#根据列求和结果对表格排序
+cc<-aa[order$ix,]
+head(cc, n = 3)
+##只展示排名前十的物种，之后的算作Others(根据需求改要展示的物种数)
+dd<-rbind(colSums(cc[11:as.numeric(length(rownames(cc))),]),cc[10:1,])
+head(dd, n = 3)
+rownames(dd)[1]<-"Others"
+head(dd, n = 3)
+##再与metadata合并
+bb<-merge(t(dd),dplyr::select(metadata,SampleID,Group),
+          by.x = "row.names",by.y ="SampleID")
+head(bb, n = 3)
+##宽数据变长数据
+kk<-tidyr::gather(bb,Phylum,Abundance,-c(Group,Row.names))
+#将未注释到的Unassigned也改为Others,你也可以不改，有以下两种方式
+kk$Phylum<-ifelse(kk$Phylum=='Unassigned','Others',kk$Phylum)#1      
+#kk[kk$Phylum=='Unassigned','Phylum']='Others'               #2
+##根据Group,Phylum分组运算
+hh <- kk %>%
+  group_by(Group,Phylum) %>%
+  dplyr :: summarise(Abundance=sum(Abundance))
+head(hh, n = 3)
+```
+
+```{r}
+##更改因子向量的levels
+hh$Phylum = factor(hh$Phylum,order = T,levels = row.names(dd))
+```
+
+```{r}
+yanse <-c("#999999","#F781BF","#A65628","#FFFF33","#FF7F00","#984EA3",
+                  "#4DAF4A","#377EB8","#74D944","#E41A1C","#DA5724","#CE50CA", 
+                  "#D3D93E","#C0717C","#CBD588","#D7C1B1","#5F7FC7","#673770", 
+                  "#3F4921","#CD9BCD","#38333E","#689030","#AD6F3B")#要确保颜色数够用，否则会报错
+##排序好的堆积柱形图
+p1 <- ggplot(hh,aes(x = Group,y = Abundance,fill = Phylum)) + 
+  geom_bar(position="fill",stat = "identity",width = 0.5) +
+  scale_fill_manual(values = yanse) +
+  labs(x='Group',y='Abundance(%)')+
+  scale_x_discrete(limits = c("KO","OE","WT"))+
+  guides(fill=guide_legend(reverse = TRUE))+
+  ggprism::theme_prism()+
+  scale_y_continuous(expand = c(0,0))
+p1#由于把Unassigned也算成了Others，所以只显示9个物种
+```
+
+
+```{r}
+###进行处理间各物种非参数检验的多组比较
+#数据整理与转换
+head(bb,n = 3)
+cc =dplyr::select(bb,Row.names,Group,everything(),-c(Others,Unassigned))
+head(cc,n = 3)
+dat <- gather(cc,Phylum,v,-(Row.names:Group))
+head(dat,n = 3)
+```
+
+```{r}
+##非参数检验的多组比较函数
+PMCMR_compare1 <- function(data,group,compare,value){
+  library(multcompView)
+  library(multcomp)
+  library(PMCMRplus)
+  library(PMCMR)
+  a <- data.frame(stringsAsFactors = F)
+  type <- unique(data[,group])
+  for (i in type)
+  {
+    g1=compare
+    sub_dat <- data[data[,group]==i,]
+    names(sub_dat)[names(sub_dat)==compare] <- 'g1'
+    names(sub_dat)[names(sub_dat)==value] <- 'value'
+    sub_dat$g1 <- factor(sub_dat$g1)
+    options(warn = -1)
+    
+    k <- posthoc.kruskal.nemenyi.test(value ~ g1,data=sub_dat)
+    n <- as.data.frame(k$p.value)
+    h <- n %>%
+      mutate(compare=rownames(n)) %>%
+      gather(group,p,-compare,na.rm = TRUE) %>%
+      unite(compare,group,col="G",sep="-")
+    dif <- h$p
+    names(dif) <- h$G
+    dif
+    difL <- multcompLetters(dif)
+    K.labels <- data.frame(difL['Letters'], stringsAsFactors = FALSE)
+    K.labels$compare = rownames(K.labels)
+    K.labels$type <- i
+    
+    mean_sd <- merge(aggregate(sub_dat[['value']],by=list(sub_dat[,'g1']),FUN=sd),
+                     aggregate(sub_dat[['value']],by=list(sub_dat[,'g1']),FUN=mean),by="Group.1"
+    )
+    names(mean_sd) <- c('compare','std','mean')
+    a <- rbind(a,merge(mean_sd,K.labels,by='compare'))
+  }
+  names(a) <- c(compare,'std','mean','Letters',group)
+  return(a)
+}
+```
+
+```{r}
+##################################用函数运行输入的数据
+df2 <- PMCMR_compare1(dat,'Phylum','Group','v')
+df2########字母标正着标(a>b>c)
+```
+
+```{r}
+p2 = ggplot(dat,aes(Group,v))+geom_boxplot(aes(color=Group))+
+  geom_text(data=df2,aes(x=Group,y=mean+2*std,label=Letters))+
+  geom_jitter(aes(fill=Group),position = position_jitter(0.2),shape=21,
+              size=1,color="black")+
+  facet_wrap(~Phylum,scales = "free_y")+ labs(x='Group',y='ASVs')+
+  ggprism::theme_prism()+theme(axis.text.x = element_text(angle = 45))
+p2
+
+```
+
+Output figure width and height
+Letter纸图片尺寸为单栏89 mm，双栏183 mm，页面最宽为247 mm 推荐比例16：10，
+即半版89 mm x 56 mm; 183 mm x 114 mm
+```{r}
+##################保存
+ ggsave("./p1.pdf", p1, width = 230, height = 200, units = "mm")
+ ggsave("./p2.pdf", p2, width = 230, height = 200, units = "mm")
+```
