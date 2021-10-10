@@ -125,7 +125,7 @@ PMCMR_compare1 <- function(data,group,compare,value){
     sub_dat$g1 <- factor(sub_dat$g1)
     options(warn = -1)
     
-    k <- posthoc.kruskal.nemenyi.test(value ~ g1,data=sub_dat)
+    k <- PMCMRplus::kwAllPairsNemenyiTest(value ~ g1,data=sub_dat)
     n <- as.data.frame(k$p.value)
     h <- n %>%
       mutate(compare=rownames(n)) %>%
